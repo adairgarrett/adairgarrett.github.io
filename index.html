@@ -1785,7 +1785,7 @@
             });
         }
 
-        // Ambient Transit Simulation Canvas: Simplified Curved Madrid Metro with Anti-Collision Yielding
+        // Ambient Transit Simulation Canvas: Silky-Smooth Continuous Motion Engine
         (function initTransitCanvas() {
             const canvas = document.getElementById('transit-network-canvas');
             if (!canvas) return;
@@ -1817,25 +1817,29 @@
                 'ATOCHA':  { x: 0.54, y: 0.62, name: 'Atocha Renfe', isHub: true },
                 'VALDEC':  { x: 0.62, y: 0.92, name: 'Valdecarros', isHub: false },
                 'OPERA':   { x: 0.35, y: 0.50, name: 'Ópera', isHub: true },
-                'VENTAS':  { x: 0.86, y: 0.50, name: 'Ventas', isHub: false },
-                'VILLAV':  { x: 0.44, y: 0.93, name: 'Villaverde Alto', isHub: false }
+                'VENTAS':  { x: 0.86, y: 0.50, name: 'Ventas', isHub: false }
             };
 
             function getStations(ids) {
                 return ids.map(id => ({ id, ...stations[id] }));
             }
 
-            // Build smooth curvilinear transit paths with natural rounded arcs
-            function buildCurvedRoutePoints(stationList, isLoop, samplesPerSeg = 30) {
+            // Cubic spline path generator computing exact continuous arc lengths
+            function buildContinuousPath(stationList, isLoop, samplesPerSeg = 50) {
                 const raw = stationList.map(s => ({ x: s.x, y: s.y, id: s.id, name: s.name }));
                 const n = raw.length;
-                const curvePoints = [];
+                const points = [];
+                const stationArcDistances = [];
+
+                let totalDist = 0;
 
                 for (let i = 0; i < (isLoop ? n : n - 1); i++) {
                     const pCurrent = raw[i];
                     const pNext = raw[(i + 1) % n];
                     const pPrev = raw[(i - 1 + n) % n];
                     const pNextNext = raw[(i + 2) % n];
+
+                    stationArcDistances.push(totalDist);
 
                     for (let step = 0; step < samplesPerSeg; step++) {
                         const u = step / samplesPerSeg;
@@ -1859,31 +1863,31 @@
                             cy = pCurrent.y + (pNext.y - pCurrent.y) * u;
                         }
 
-                        curvePoints.push({
-                            x: cx,
-                            y: cy,
-                            stationIndex: i,
-                            isStation: (step === 0),
-                            stationData: (step === 0 ? pCurrent : null)
-                        });
+                        if (points.length > 0) {
+                            const prev = points[points.length - 1];
+                            const dx = cx - prev.x;
+                            const dy = cy - prev.y;
+                            totalDist += Math.sqrt(dx * dx + dy * dy);
+                        }
+
+                        points.push({ x: cx, y: cy, cumDist: totalDist, stationIdx: i });
                     }
                 }
 
                 if (!isLoop) {
                     const lastSt = raw[n - 1];
-                    curvePoints.push({
-                        x: lastSt.x,
-                        y: lastSt.y,
-                        stationIndex: n - 1,
-                        isStation: true,
-                        stationData: lastSt
-                    });
+                    const prev = points[points.length - 1];
+                    const dx = lastSt.x - prev.x;
+                    const dy = lastSt.y - prev.y;
+                    totalDist += Math.sqrt(dx * dx + dy * dy);
+                    stationArcDistances.push(totalDist);
+                    points.push({ x: lastSt.x, y: lastSt.y, cumDist: totalDist, stationIdx: n - 1 });
                 }
 
-                return curvePoints;
+                return { points, totalDist, stationArcDistances, stations: raw };
             }
 
-            // 4 Simplified & Iconic Madrid Metro Lines (1 train per line = 4 calm trains total)
+            // 3 Core Madrid Lines with Naturally Phased Headways
             const lines = [
                 {
                     id: 'L6',
@@ -1892,9 +1896,7 @@
                     colorDark: '#c084fc',
                     stations: getStations(['C_CAM', 'AV_AM', 'GOYA', 'PACIF', 'LEGZP', 'P_PIO', 'MONCL']),
                     isLoop: true,
-                    trains: [
-                        { id: 'T_L6', stationIdx: 0, t: 0.15, dwelling: false, dwellTimer: 0, baseSpeed: 0.0015, dir: 1 }
-                    ]
+                    train: { dist: 0.1, baseSpeed: 0.00030, dir: 1, dwellTimer: 0, dwelling: false }
                 },
                 {
                     id: 'L1',
@@ -1903,9 +1905,7 @@
                     colorDark: '#38bdf8',
                     stations: getStations(['PL_CAST', 'C_CAM', 'TRIB', 'SOL', 'ATOCHA', 'PACIF', 'VALDEC']),
                     isLoop: false,
-                    trains: [
-                        { id: 'T_L1', stationIdx: 0, t: 0.50, dwelling: false, dwellTimer: 0, baseSpeed: 0.0016, dir: 1 }
-                    ]
+                    train: { dist: 0.55, baseSpeed: 0.00033, dir: 1, dwellTimer: 0, dwelling: false }
                 },
                 {
                     id: 'L2',
@@ -1914,29 +1914,59 @@
                     colorDark: '#f87171',
                     stations: getStations(['C_CAM', 'OPERA', 'SOL', 'GOYA', 'VENTAS']),
                     isLoop: false,
-                    trains: [
-                        { id: 'T_L2', stationIdx: 1, t: 0.30, dwelling: false, dwellTimer: 0, baseSpeed: 0.0015, dir: 1 }
-                    ]
-                },
-                {
-                    id: 'L3',
-                    name: 'Línea 3 Diagonal',
-                    color: '#d97706',
-                    colorDark: '#fbbf24',
-                    stations: getStations(['MONCL', 'OPERA', 'SOL', 'LEGZP', 'VILLAV']),
-                    isLoop: false,
-                    trains: [
-                        { id: 'T_L3', stationIdx: 0, t: 0.20, dwelling: false, dwellTimer: 0, baseSpeed: 0.0016, dir: 1 }
-                    ]
+                    train: { dist: 0.25, baseSpeed: 0.00031, dir: 1, dwellTimer: 0, dwelling: false }
                 }
             ];
 
             lines.forEach(l => {
-                l.curvePoints = buildCurvedRoutePoints(l.stations, l.isLoop);
+                l.pathData = buildContinuousPath(l.stations, l.isLoop);
             });
 
-            // Train Proximity & Station Occupancy Interlocking
-            const occupiedStations = {};
+            // Continuous Sub-Pixel Position & Rotation Interpolator
+            function getExactPointAtDist(pathData, targetDist, isLoop) {
+                const { points, totalDist } = pathData;
+                let d = targetDist;
+                if (isLoop) {
+                    d = ((d % totalDist) + totalDist) % totalDist;
+                } else {
+                    d = Math.max(0, Math.min(totalDist, d));
+                }
+
+                // Binary search for exact bounding sub-points
+                let low = 0, high = points.length - 1;
+                while (low <= high) {
+                    const mid = (low + high) >> 1;
+                    if (points[mid].cumDist < d) low = mid + 1;
+                    else high = mid - 1;
+                }
+
+                const idx0 = Math.max(0, Math.min(points.length - 1, high));
+                const idx1 = Math.min(points.length - 1, idx0 + 1);
+
+                const p0 = points[idx0];
+                const p1 = points[idx1];
+
+                let t = 0;
+                const segLen = p1.cumDist - p0.cumDist;
+                if (segLen > 0.000001) {
+                    t = (d - p0.cumDist) / segLen;
+                }
+
+                const x = p0.x + (p1.x - p0.x) * t;
+                const y = p0.y + (p1.y - p0.y) * t;
+
+                // Continuous smooth tangent angle
+                const deltaForward = 0.004;
+                let nextD = isLoop ? (d + deltaForward) % totalDist : Math.min(totalDist, d + deltaForward);
+                let prevD = isLoop ? (d - deltaForward + totalDist) % totalDist : Math.max(0, d - deltaForward);
+
+                let nextX = p1.x, nextY = p1.y;
+                let prevX = p0.x, prevY = p0.y;
+
+                const angle = Math.atan2((nextY - prevY) * height, (nextX - prevX) * width);
+
+                return { x: x * width, y: y * height, angle };
+            }
 
             // Draw Streamlined Cute Subway Train
             function drawCuteSubwayTrain(x, y, angle, color, isLight, isDwelling) {
@@ -2044,14 +2074,20 @@
                 ctx.restore();
             }
 
-            // Animation Loop
-            function animate() {
+            let lastTime = performance.now();
+
+            // Animation Loop (60fps/120fps Silky Delta-Time Stepping)
+            function animate(currentTime) {
+                const dt = Math.min(32, currentTime - lastTime);
+                lastTime = currentTime;
+
                 ctx.clearRect(0, 0, width, height);
                 const isLight = document.documentElement.classList.contains('light');
 
-                // 1. Draw Beautiful Smooth Curving Madrid Metro Lines
+                // 1. Draw Clean Curving Metro Lines
                 lines.forEach(line => {
                     const color = isLight ? line.color : line.colorDark;
+                    const pts = line.pathData.points;
 
                     ctx.beginPath();
                     ctx.strokeStyle = color;
@@ -2060,7 +2096,7 @@
                     ctx.lineCap = 'round';
                     ctx.lineJoin = 'round';
 
-                    line.curvePoints.forEach((p, idx) => {
+                    pts.forEach((p, idx) => {
                         const px = p.x * width;
                         const py = p.y * height;
                         if (idx === 0) ctx.moveTo(px, py);
@@ -2070,7 +2106,7 @@
                     ctx.stroke();
                 });
 
-                // 2. Draw Madrid Stations (Interchanges & Local Stops)
+                // 2. Draw Stations
                 Object.values(stations).forEach(st => {
                     const sx = st.x * width;
                     const sy = st.y * height;
@@ -2106,110 +2142,62 @@
                     }
                 });
 
-                // 3. Move & Render 4 Trains with Anti-Collision Interlocking & Safe Headway Separation
-                const currentTrainPos = [];
-
+                // 3. Move Trains with Continuous Floating-Point Arc Interpolation
                 lines.forEach(line => {
-                    const numStations = line.stations.length;
+                    const { totalDist, stationArcDistances } = line.pathData;
+                    const train = line.train;
 
-                    line.trains.forEach(train => {
-                        const currentStation = line.stations[train.stationIdx];
-                        const nextIdx = line.isLoop
-                            ? (train.stationIdx + 1) % numStations
-                            : (train.dir === 1 ? train.stationIdx + 1 : train.stationIdx - 1);
-                        const targetStation = line.stations[nextIdx];
+                    if (train.dwelling) {
+                        train.dwellTimer -= dt;
+                        if (train.dwellTimer <= 0) {
+                            train.dwelling = false;
+                            train.dist += train.dir * 0.002;
+                        }
+                    } else {
+                        const currentNormDist = ((train.dist % totalDist) + totalDist) % totalDist;
+                        let speedMultiplier = 1.0;
 
-                        if (train.dwelling) {
-                            occupiedStations[targetStation.id] = train.id;
-                            train.dwellTimer--;
-
-                            if (train.dwellTimer <= 0) {
-                                if (occupiedStations[targetStation.id] === train.id) {
-                                    delete occupiedStations[targetStation.id];
-                                }
-                                train.dwelling = false;
-                                train.t = 0;
-
-                                if (line.isLoop) {
-                                    train.stationIdx = (train.stationIdx + 1) % numStations;
-                                } else {
-                                    train.stationIdx = nextIdx;
-                                    if (train.stationIdx <= 0) train.dir = 1;
-                                    if (train.stationIdx >= numStations - 1) train.dir = -1;
-                                }
-                            }
-                        } else {
-                            // Check if target station is occupied by another train
-                            const isStationOccupied = occupiedStations[targetStation.id] && occupiedStations[targetStation.id] !== train.id;
-                            const legProgress = train.t;
-                            let speedFactor = 1.0;
-
-                            // Check distance to other active trains across all lines
-                            let isTooCloseToOtherTrain = false;
-                            const approxX = (currentStation.x + (targetStation.x - currentStation.x) * train.t) * width;
-                            const approxY = (currentStation.y + (targetStation.y - currentStation.y) * train.t) * height;
-
-                            for (const other of currentTrainPos) {
-                                const dist = Math.hypot(other.x - approxX, other.y - approxY);
-                                if (dist < 85) { // 85px safe distance separation
-                                    isTooCloseToOtherTrain = true;
-                                    break;
-                                }
-                            }
-
-                            if ((isStationOccupied && legProgress >= 0.85) || isTooCloseToOtherTrain) {
-                                // Slow down / hold at approach signal while the station or crossing is occupied
-                                speedFactor = 0.05;
-                            } else {
-                                // Smooth, gentle cruise between stations
-                                if (legProgress < 0.25) {
-                                    speedFactor = 0.4 + 0.6 * (legProgress / 0.25);
-                                } else if (legProgress > 0.75) {
-                                    speedFactor = 0.4 + 0.6 * ((1 - legProgress) / 0.25);
-                                }
-                                train.t += train.baseSpeed * speedFactor;
-
-                                if (train.t >= 1) {
-                                    train.t = 1;
-                                    train.dwelling = true;
-                                    train.dwellTimer = 80; // ~1.3s station dwell
-                                    occupiedStations[targetStation.id] = train.id;
-                                }
+                        for (const stDist of stationArcDistances) {
+                            const deltaSt = Math.abs(currentNormDist - stDist);
+                            if (deltaSt < 0.003 && !train.dwelling) {
+                                train.dwelling = true;
+                                train.dwellTimer = 1100; // 1.1 second calm station stop
+                                train.dist = stDist;
+                                break;
+                            } else if (deltaSt < 0.035) {
+                                speedMultiplier = Math.min(speedMultiplier, 0.4 + 0.6 * (deltaSt / 0.035));
                             }
                         }
 
-                        // Sample curved route
-                        const stepsPerSeg = 30;
-                        const fromIdx = train.dir === -1 ? nextIdx : train.stationIdx;
-                        const segStart = fromIdx * stepsPerSeg;
-                        const totalPoints = line.curvePoints.length;
+                        if (!train.dwelling) {
+                            train.dist += train.dir * train.baseSpeed * speedMultiplier * dt;
 
-                        const pointOffset = Math.floor(train.t * stepsPerSeg);
-                        const curIdx = train.dir === -1
-                            ? (segStart - pointOffset + totalPoints) % totalPoints
-                            : (segStart + pointOffset) % totalPoints;
+                            if (!line.isLoop) {
+                                if (train.dist >= totalDist) {
+                                    train.dist = totalDist;
+                                    train.dir = -1;
+                                    train.dwelling = true;
+                                    train.dwellTimer = 1200;
+                                } else if (train.dist <= 0) {
+                                    train.dist = 0;
+                                    train.dir = 1;
+                                    train.dwelling = true;
+                                    train.dwellTimer = 1200;
+                                }
+                            }
+                        }
+                    }
 
-                        const nextPointIdx = train.dir === -1
-                            ? (curIdx - 2 + totalPoints) % totalPoints
-                            : (curIdx + 2) % totalPoints;
+                    const trainState = getExactPointAtDist(line.pathData, train.dist, line.isLoop);
+                    const headingAngle = train.dir === -1 ? trainState.angle + Math.PI : trainState.angle;
 
-                        const curPt = line.curvePoints[curIdx];
-                        const nextPt = line.curvePoints[nextPointIdx];
-
-                        const curX = curPt.x * width;
-                        const curY = curPt.y * height;
-                        const angle = Math.atan2((nextPt.y - curPt.y) * height, (nextPt.x - curPt.x) * width);
-
-                        currentTrainPos.push({ id: train.id, x: curX, y: curY });
-
-                        drawCuteSubwayTrain(curX, curY, angle, line.colorDark, isLight, train.dwelling);
-                    });
+                    drawCuteSubwayTrain(trainState.x, trainState.y, headingAngle, line.colorDark, isLight, train.dwelling);
                 });
 
                 requestAnimationFrame(animate);
             }
 
-            animate();
+            requestAnimationFrame(animate);
         })();
     </script>
 </body>
