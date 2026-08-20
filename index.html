@@ -1851,7 +1851,7 @@
             updateScrollProgress();
         })();
 
-        // Ambient Transit Background Canvas: Clean Static Schematic Network
+        // Ambient Transit Background Canvas: Simplified ATL Trains Regional Rail Network (atltrains.com)
         (function initStaticTransitCanvas() {
             const canvas = document.getElementById('transit-network-canvas');
             if (!canvas) return;
@@ -1864,47 +1864,98 @@
 
                 ctx.clearRect(0, 0, width, height);
 
-                // Elegant Schematic Stations
+                // ATL Trains Regional Rail Schematic (Centered on Downtown Atlanta MMPT / The Gulch)
                 const stations = {
-                    'C_CAM':   { x: 0.44, y: 0.20, isHub: true },
-                    'AV_AM':   { x: 0.68, y: 0.28, isHub: true },
-                    'GOYA':    { x: 0.70, y: 0.50, isHub: true },
-                    'PACIF':   { x: 0.62, y: 0.72, isHub: true },
-                    'LEGZP':   { x: 0.44, y: 0.80, isHub: true },
-                    'P_PIO':   { x: 0.26, y: 0.62, isHub: true },
-                    'MONCL':   { x: 0.26, y: 0.35, isHub: true },
-                    'PL_CAST': { x: 0.44, y: 0.08, isHub: true },
-                    'TRIB':    { x: 0.44, y: 0.38, isHub: true },
-                    'SOL':     { x: 0.48, y: 0.50, isHub: true },
-                    'ATOCHA':  { x: 0.54, y: 0.62, isHub: true },
-                    'VALDEC':  { x: 0.62, y: 0.92, isHub: false },
-                    'OPERA':   { x: 0.35, y: 0.50, isHub: true },
-                    'VENTAS':  { x: 0.86, y: 0.50, isHub: false }
+                    // Central Core Hubs
+                    'MMPT':      { x: 0.48, y: 0.50, isCore: true },
+                    'MIDTOWN':   { x: 0.48, y: 0.42, isCore: true },
+                    'AIRPORT':   { x: 0.48, y: 0.64, isCore: true },
+
+                    // Northwest Corridor (Marietta / Kennesaw / Cartersville)
+                    'W_MIDTOWN': { x: 0.42, y: 0.42, isCore: false },
+                    'VININGS':   { x: 0.36, y: 0.36, isCore: false },
+                    'MARIETTA':  { x: 0.30, y: 0.28, isCore: true },
+                    'KENNESAW':  { x: 0.25, y: 0.20, isCore: false },
+                    'CARTERS':   { x: 0.19, y: 0.12, isCore: true },
+
+                    // Northeast Corridor (Chamblee / Doraville / Norcross / Gainesville)
+                    'PEACHTREE': { x: 0.53, y: 0.36, isCore: false },
+                    'CHAMBLEE':  { x: 0.59, y: 0.30, isCore: false },
+                    'DORAVILLE': { x: 0.65, y: 0.25, isCore: true },
+                    'NORCROSS':  { x: 0.71, y: 0.20, isCore: false },
+                    'SUWANEE':   { x: 0.77, y: 0.15, isCore: false },
+                    'GAINESV':   { x: 0.84, y: 0.08, isCore: true },
+
+                    // East Corridor (Decatur / Stone Mtn / Conyers / Covington / Athens)
+                    'INMAN':     { x: 0.54, y: 0.50, isCore: false },
+                    'DECATUR':   { x: 0.62, y: 0.50, isCore: true },
+                    'STONE_MTN': { x: 0.70, y: 0.47, isCore: false },
+                    'CONYERS':   { x: 0.78, y: 0.53, isCore: false },
+                    'COVINGTON': { x: 0.85, y: 0.58, isCore: true },
+                    'ATHENS':    { x: 0.92, y: 0.40, isCore: true },
+
+                    // South Corridor (Clayton / Henry / Griffin / Macon)
+                    'EAST_POINT':{ x: 0.48, y: 0.58, isCore: false },
+                    'FOREST_PK': { x: 0.52, y: 0.68, isCore: false },
+                    'JONESBORO': { x: 0.54, y: 0.76, isCore: true },
+                    'LOVEJOY':   { x: 0.56, y: 0.83, isCore: false },
+                    'GRIFFIN':   { x: 0.58, y: 0.90, isCore: false },
+                    'MACON':     { x: 0.62, y: 0.96, isCore: true },
+
+                    // Southwest Corridor (Newnan / LaGrange)
+                    'COLLEGE_PK':{ x: 0.44, y: 0.66, isCore: false },
+                    'FAIRBURN':  { x: 0.38, y: 0.73, isCore: false },
+                    'NEWNAN':    { x: 0.32, y: 0.80, isCore: true },
+                    'LAGRANGE':  { x: 0.24, y: 0.90, isCore: true },
+
+                    // West Corridor (Bankhead / Austell / Douglasville / Bremen)
+                    'BANKHEAD':  { x: 0.41, y: 0.50, isCore: false },
+                    'MABLETON':  { x: 0.33, y: 0.50, isCore: false },
+                    'AUSTELL':   { x: 0.25, y: 0.48, isCore: true },
+                    'DOUGLASV':  { x: 0.17, y: 0.52, isCore: true },
+                    'BREMEN':    { x: 0.08, y: 0.54, isCore: true },
+
+                    // BeltLine Ring
+                    'BELT_W':    { x: 0.40, y: 0.46, isCore: false },
+                    'BELT_N':    { x: 0.48, y: 0.38, isCore: false },
+                    'BELT_E':    { x: 0.56, y: 0.46, isCore: false },
+                    'BELT_S':    { x: 0.48, y: 0.55, isCore: false }
                 };
 
-                // Transit Route Segments
-                const routes = [
-                    // Line 6 Circular Belt
-                    ['C_CAM', 'AV_AM', 'GOYA', 'PACIF', 'LEGZP', 'P_PIO', 'MONCL', 'C_CAM'],
-                    // Line 1 Spine
-                    ['PL_CAST', 'C_CAM', 'TRIB', 'SOL', 'ATOCHA', 'PACIF', 'VALDEC'],
-                    // Line 2 Cross
-                    ['C_CAM', 'OPERA', 'SOL', 'GOYA', 'VENTAS']
+                // Regional Corridors
+                const corridors = [
+                    // Spine: Midtown - MMPT - Airport
+                    ['MIDTOWN', 'MMPT', 'EAST_POINT', 'AIRPORT'],
+                    // Northwest: MMPT -> Cartersville
+                    ['MMPT', 'W_MIDTOWN', 'VININGS', 'MARIETTA', 'KENNESAW', 'CARTERS'],
+                    // Northeast: Midtown -> Gainesville
+                    ['MIDTOWN', 'PEACHTREE', 'CHAMBLEE', 'DORAVILLE', 'NORCROSS', 'SUWANEE', 'GAINESV'],
+                    // East: MMPT -> Decatur -> Covington & Athens
+                    ['MMPT', 'INMAN', 'DECATUR', 'STONE_MTN', 'CONYERS', 'COVINGTON'],
+                    ['STONE_MTN', 'ATHENS'],
+                    // South: Airport -> Macon
+                    ['AIRPORT', 'FOREST_PK', 'JONESBORO', 'LOVEJOY', 'GRIFFIN', 'MACON'],
+                    // Southwest: Airport -> LaGrange
+                    ['AIRPORT', 'COLLEGE_PK', 'FAIRBURN', 'NEWNAN', 'LAGRANGE'],
+                    // West: MMPT -> Bremen
+                    ['MMPT', 'BANKHEAD', 'MABLETON', 'AUSTELL', 'DOUGLASV', 'BREMEN'],
+                    // BeltLine Loop
+                    ['BELT_W', 'BELT_N', 'BELT_E', 'BELT_S', 'BELT_W']
                 ];
 
-                // 1. Draw Clean Transit Track Lines
-                routes.forEach(route => {
+                // 1. Draw Regional Rail Track Corridors
+                corridors.forEach(line => {
                     ctx.beginPath();
-                    ctx.strokeStyle = isLight ? 'rgba(81, 98, 199, 0.16)' : 'rgba(129, 144, 220, 0.18)';
-                    ctx.lineWidth = 2.5;
+                    ctx.strokeStyle = isLight ? 'rgba(81, 98, 199, 0.16)' : 'rgba(129, 144, 220, 0.20)';
+                    ctx.lineWidth = 2.4;
                     ctx.lineCap = 'round';
                     ctx.lineJoin = 'round';
 
-                    route.forEach((stId, i) => {
+                    line.forEach((stId, idx) => {
                         const st = stations[stId];
                         const px = st.x * width;
                         const py = st.y * height;
-                        if (i === 0) ctx.moveTo(px, py);
+                        if (idx === 0) ctx.moveTo(px, py);
                         else ctx.lineTo(px, py);
                     });
                     ctx.stroke();
@@ -1915,7 +1966,7 @@
                     const sx = st.x * width;
                     const sy = st.y * height;
 
-                    if (st.isHub) {
+                    if (st.isCore) {
                         ctx.beginPath();
                         ctx.arc(sx, sy, 5.5, 0, Math.PI * 2);
                         ctx.fillStyle = isLight ? '#ffffff' : '#0c0d14';
@@ -1923,24 +1974,24 @@
 
                         ctx.strokeStyle = isLight ? '#5162c7' : '#8190dc';
                         ctx.lineWidth = 1.8;
-                        ctx.globalAlpha = 0.5;
+                        ctx.globalAlpha = 0.55;
                         ctx.stroke();
 
                         ctx.beginPath();
-                        ctx.arc(sx, sy, 2, 0, Math.PI * 2);
+                        ctx.arc(sx, sy, 2.2, 0, Math.PI * 2);
                         ctx.fillStyle = isLight ? '#5162c7' : '#8190dc';
-                        ctx.globalAlpha = 0.8;
+                        ctx.globalAlpha = 0.85;
                         ctx.fill();
                         ctx.globalAlpha = 1;
                     } else {
                         ctx.beginPath();
-                        ctx.arc(sx, sy, 3.5, 0, Math.PI * 2);
+                        ctx.arc(sx, sy, 3.2, 0, Math.PI * 2);
                         ctx.fillStyle = isLight ? '#ffffff' : '#0c0d14';
                         ctx.fill();
 
                         ctx.strokeStyle = isLight ? '#94a3b8' : '#475569';
                         ctx.lineWidth = 1.2;
-                        ctx.globalAlpha = 0.6;
+                        ctx.globalAlpha = 0.55;
                         ctx.stroke();
                         ctx.globalAlpha = 1;
                     }
