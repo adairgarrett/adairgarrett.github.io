@@ -1782,85 +1782,93 @@
                 };
             }
 
-            // Draw a Realistic Miniature Metro / Subway Car
-            function drawMetroCar(x, y, angle, color, isLead, isTail) {
+            // Draw a Realistic Single Subway / Metro Railcar
+            function drawSubwayCar(x, y, angle, color) {
                 ctx.save();
                 ctx.translate(x, y);
                 ctx.rotate(angle);
 
-                const carLen = 22;
-                const carWidth = 9;
+                const carLen = 32;       // Standard railcar length
+                const carWidth = 9;      // Track gauge / car width
                 const halfL = carLen / 2;
                 const halfW = carWidth / 2;
 
-                // Subtle car shadow
-                ctx.shadowColor = color;
-                ctx.shadowBlur = 8;
-                ctx.fillStyle = '#0b1329'; // Dark sleek metallic subway chassis
+                // 1. Focused Forward Headlight Beam on Track (Realistic straight rail beam)
+                const beamGrad = ctx.createLinearGradient(halfL, 0, halfL + 30, 0);
+                beamGrad.addColorStop(0, 'rgba(255, 255, 255, 0.45)');
+                beamGrad.addColorStop(0.3, 'rgba(56, 189, 248, 0.20)');
+                beamGrad.addColorStop(1, 'rgba(56, 189, 248, 0)');
+
+                ctx.fillStyle = beamGrad;
                 ctx.beginPath();
-                ctx.roundRect(-halfL, -halfW, carLen, carWidth, 3);
+                ctx.moveTo(halfL, -3.5);
+                ctx.lineTo(halfL + 28, -6.5);
+                ctx.lineTo(halfL + 28, 6.5);
+                ctx.lineTo(halfL, 3.5);
+                ctx.closePath();
+                ctx.fill();
+
+                // 2. Underbody Chassis & Wheel Trucks (Bogies)
+                ctx.fillStyle = '#020617';
+                ctx.fillRect(-halfL + 3, -halfW - 0.8, 6, carWidth + 1.6); // Rear bogie
+                ctx.fillRect(halfL - 9, -halfW - 0.8, 6, carWidth + 1.6);  // Front bogie
+
+                // 3. Main Subway Car Body (Stainless steel / dark metallic finish)
+                ctx.shadowColor = color;
+                ctx.shadowBlur = 6;
+                ctx.fillStyle = '#111c30'; // Dark transit carbody
+                ctx.beginPath();
+                ctx.roundRect(-halfL, -halfW, carLen, carWidth, 2);
                 ctx.fill();
                 ctx.shadowBlur = 0;
 
-                // Subway Car Body Border
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.45)';
-                ctx.lineWidth = 0.9;
+                // Metallic Car Outer Rim
+                ctx.strokeStyle = '#94a3b8';
+                ctx.lineWidth = 0.8;
                 ctx.stroke();
 
-                // Colored Transit Line Roof Stripe
+                // 4. Colored Transit Line Roof Band (Distinct Subway Line Indicator)
                 ctx.fillStyle = color;
-                ctx.globalAlpha = 0.95;
-                ctx.fillRect(-halfL + 2.5, -1.2, carLen - 5, 2.4);
+                ctx.globalAlpha = 0.9;
+                ctx.fillRect(-halfL + 4, -1.2, carLen - 8, 2.4);
 
-                // Passenger Windows (Illuminated warm interior)
+                // Rooftop Equipment / HVAC Pods
+                ctx.fillStyle = '#334155';
+                ctx.globalAlpha = 0.85;
+                ctx.fillRect(-6, -1.8, 5, 3.6);
+                ctx.fillRect(3, -1.8, 5, 3.6);
+
+                // 5. Passenger Side Windows (Evenly spaced rectangular subway windows)
                 ctx.fillStyle = '#ffffff';
                 ctx.globalAlpha = 0.85;
-                [-5.5, 0, 5.5].forEach(wx => {
-                    ctx.fillRect(wx - 1.2, -halfW + 0.9, 2.4, 1.2);
-                    ctx.fillRect(wx - 1.2, halfW - 2.1, 2.4, 1.2);
+                [-10, -3, 4, 10].forEach(wx => {
+                    // Top and bottom row windows
+                    ctx.fillRect(wx - 1.5, -halfW + 0.8, 3, 1.2);
+                    ctx.fillRect(wx - 1.5, halfW - 2.0, 3, 1.2);
                 });
 
-                if (isLead) {
-                    // Front Cab Windshield
-                    ctx.fillStyle = '#38bdf8';
-                    ctx.globalAlpha = 0.95;
-                    ctx.beginPath();
-                    ctx.roundRect(halfL - 5, -halfW + 1.2, 4, carWidth - 2.4, 1.2);
-                    ctx.fill();
+                // 6. Front Cab Windshield (Curved glass)
+                ctx.fillStyle = '#38bdf8';
+                ctx.globalAlpha = 0.95;
+                ctx.beginPath();
+                ctx.roundRect(halfL - 4.5, -halfW + 1.4, 3.5, carWidth - 2.8, 1);
+                ctx.fill();
 
-                    // Dual Bright LED Headlights
-                    ctx.fillStyle = '#ffffff';
-                    ctx.shadowColor = '#ffffff';
-                    ctx.shadowBlur = 8;
-                    ctx.fillRect(halfL - 0.5, -halfW + 1.2, 1.2, 1.6);
-                    ctx.fillRect(halfL - 0.5, halfW - 2.8, 1.2, 1.6);
-                    ctx.shadowBlur = 0;
+                // 7. Dual Front Headlights
+                ctx.fillStyle = '#ffffff';
+                ctx.shadowColor = '#ffffff';
+                ctx.shadowBlur = 6;
+                ctx.fillRect(halfL - 0.5, -halfW + 1.2, 1.0, 1.4);
+                ctx.fillRect(halfL - 0.5, halfW - 2.6, 1.0, 1.4);
+                ctx.shadowBlur = 0;
 
-                    // Forward Headlight Beam Cone
-                    const beamGrad = ctx.createRadialGradient(halfL + 4, 0, 1, halfL + 34, 0, 24);
-                    beamGrad.addColorStop(0, 'rgba(255, 255, 255, 0.5)');
-                    beamGrad.addColorStop(0.35, 'rgba(56, 189, 248, 0.22)');
-                    beamGrad.addColorStop(1, 'rgba(56, 189, 248, 0)');
-
-                    ctx.fillStyle = beamGrad;
-                    ctx.beginPath();
-                    ctx.moveTo(halfL, -2.5);
-                    ctx.lineTo(halfL + 36, -14);
-                    ctx.lineTo(halfL + 36, 14);
-                    ctx.lineTo(halfL, 2.5);
-                    ctx.closePath();
-                    ctx.fill();
-                }
-
-                if (isTail) {
-                    // Red Taillights on Rear
-                    ctx.fillStyle = '#ef4444';
-                    ctx.shadowColor = '#ef4444';
-                    ctx.shadowBlur = 6;
-                    ctx.fillRect(-halfL - 0.8, -halfW + 1.2, 1.2, 1.5);
-                    ctx.fillRect(-halfL - 0.8, halfW - 2.7, 1.2, 1.5);
-                    ctx.shadowBlur = 0;
-                }
+                // 8. Rear Red Marker Lights (Taillights)
+                ctx.fillStyle = '#ef4444';
+                ctx.shadowColor = '#ef4444';
+                ctx.shadowBlur = 5;
+                ctx.fillRect(-halfL - 0.6, -halfW + 1.2, 0.8, 1.4);
+                ctx.fillRect(-halfL - 0.6, halfW - 2.6, 0.8, 1.4);
+                ctx.shadowBlur = 0;
 
                 ctx.restore();
             }
@@ -1951,37 +1959,19 @@
                     }
                 });
 
-                // 3. Draw Moving Little Metro / Subway Cars along Routes
+                // 3. Draw Moving Single Subway Cars along Routes
                 lines.forEach(line => {
                     line.trains.forEach(train => {
                         train.pos = (train.pos + train.speed) % 1;
 
-                        // Calculate Lead Car position & heading angle
+                        // Calculate Car position & heading angle
                         const headPos = train.pos;
                         const pHead = getPointAtT(line.points, headPos);
                         const pAhead = getPointAtT(line.points, (headPos + 0.005) % 1);
-                        const leadAngle = Math.atan2(pAhead.y - pHead.y, pAhead.x - pHead.x);
+                        const angle = Math.atan2(pAhead.y - pHead.y, pAhead.x - pHead.x);
 
-                        // Calculate Trailing Car position & heading angle (linked behind lead car)
-                        const tailPos = (headPos - 0.035 + 1) % 1;
-                        const pTail = getPointAtT(line.points, tailPos);
-                        const pTailAhead = getPointAtT(line.points, (tailPos + 0.005) % 1);
-                        const tailAngle = Math.atan2(pTailAhead.y - pTail.y, pTailAhead.x - pTail.x);
-
-                        // Draw Coupler Bar between cars
-                        ctx.beginPath();
-                        ctx.moveTo(pTail.x, pTail.y);
-                        ctx.lineTo(pHead.x, pHead.y);
-                        ctx.strokeStyle = '#64748b';
-                        ctx.lineWidth = 2;
-                        ctx.globalAlpha = 0.8;
-                        ctx.stroke();
-
-                        // Render Trailing Metro Car
-                        drawMetroCar(pTail.x, pTail.y, tailAngle, line.color, false, true);
-
-                        // Render Lead Metro Car
-                        drawMetroCar(pHead.x, pHead.y, leadAngle, line.color, true, false);
+                        // Render Single Subway Car
+                        drawSubwayCar(pHead.x, pHead.y, angle, line.color);
                     });
                 });
 
