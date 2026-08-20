@@ -99,7 +99,11 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        h1, h2, h3, h4, .font-display {
+        h1,
+        h2,
+        h3,
+        h4,
+        .font-display {
             font-family: 'Plus Jakarta Sans', sans-serif;
             letter-spacing: -0.02em;
         }
@@ -151,16 +155,20 @@
             border-bottom: 1px solid #e3e5f0;
         }
 
-        html.light .text-white {
-            color: #0c0e17 !important;
+        /* Contrast & Semantic Button Styling */
+        .btn-primary {
+            background-color: #5162c7 !important;
+            color: #ffffff !important;
         }
-
-        html.light .text-gray-300 {
-            color: #2d3142 !important;
+        .btn-primary * {
+            color: #ffffff !important;
         }
-
-        html.light .text-gray-400 {
-            color: #5a5f78 !important;
+        html.dark .btn-primary {
+            background-color: #8190dc !important;
+            color: #0c0d14 !important;
+        }
+        html.dark .btn-primary * {
+            color: #0c0d14 !important;
         }
 
         /* Active Filter Tab */
@@ -180,65 +188,87 @@
 <body class="antialiased selection:bg-periwinkle/30 selection:text-periwinkle relative min-h-screen">
 
     <!-- Interactive Ambient Canvas: Madrid-Inspired Subway Simulation -->
-    <canvas id="transit-network-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-30 dark:opacity-35"></canvas>
+    <canvas id="transit-network-canvas"
+        class="fixed inset-0 pointer-events-none z-0 opacity-30 dark:opacity-35"></canvas>
 
     <!-- Top Navigation -->
     <header class="fixed w-full z-50 top-0 nav-blur px-5 sm:px-8 py-3.5 transition-all duration-300">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
-            
+
             <!-- Brand -->
             <a href="#" class="flex items-center gap-3 group">
-                <div class="w-8 h-8 rounded-lg bg-periwinkle/15 dark:bg-periwinkle/20 border border-periwinkle/40 flex items-center justify-center text-periwinkle-dark dark:text-periwinkle group-hover:scale-105 transition-transform">
+                <div
+                    class="w-8 h-8 rounded-lg bg-periwinkle/15 dark:bg-periwinkle/20 border border-periwinkle/40 flex items-center justify-center text-periwinkle-dark dark:text-periwinkle group-hover:scale-105 transition-transform">
                     <i class="ph-bold ph-train text-base"></i>
                 </div>
                 <div class="flex flex-col">
-                    <span class="text-white font-bold text-sm sm:text-base tracking-tight group-hover:text-periwinkle-dark dark:group-hover:text-periwinkle transition-colors">Adair Garrett</span>
-                    <span class="text-[10px] text-gray-500 dark:text-gray-400 font-mono tracking-wider">Transit & Rail Systems</span>
+                    <span
+                        class="text-ink-950 dark:text-white font-bold text-sm sm:text-base tracking-tight group-hover:text-periwinkle-dark dark:group-hover:text-periwinkle transition-colors">Adair
+                        Garrett</span>
+                    <span class="text-[10px] text-gray-500 dark:text-gray-400 font-mono tracking-wider">Transit & Rail
+                        Systems</span>
                 </div>
             </a>
 
             <!-- Navigation Links -->
-            <nav class="hidden md:flex items-center gap-6 text-xs font-medium text-gray-400">
-                <a href="#about" class="hover:text-white transition-colors">About</a>
-                <a href="#education" class="hover:text-white transition-colors">Education</a>
-                <a href="#research" class="hover:text-white transition-colors">Research & Grants</a>
-                <a href="#publications" class="hover:text-white transition-colors">Publications</a>
-                <a href="#awards" class="hover:text-white transition-colors">Awards</a>
-                <a href="#presentations" class="hover:text-white transition-colors">Presentations</a>
-                <a href="#teaching" class="hover:text-white transition-colors">Teaching</a>
-                <a href="#service" class="hover:text-white transition-colors">Service</a>
+            <nav class="hidden md:flex items-center gap-6 text-xs font-medium text-gray-600 dark:text-gray-400 ">
+                <a href="#about" class="hover:text-ink-950 dark:text-white transition-colors">About</a>
+                <a href="#education" class="hover:text-ink-950 dark:text-white transition-colors">Education</a>
+                <a href="#research" class="hover:text-ink-950 dark:text-white transition-colors">Research & Grants</a>
+                <a href="#publications" class="hover:text-ink-950 dark:text-white transition-colors">Publications</a>
+                <a href="#awards" class="hover:text-ink-950 dark:text-white transition-colors">Awards</a>
+                <a href="#presentations" class="hover:text-ink-950 dark:text-white transition-colors">Presentations</a>
+                <a href="#teaching" class="hover:text-ink-950 dark:text-white transition-colors">Teaching</a>
+                <a href="#service" class="hover:text-ink-950 dark:text-white transition-colors">Service</a>
             </nav>
 
             <!-- Actions & Theme Toggle -->
             <div class="flex items-center gap-3">
                 <!-- Theme Toggle Button -->
-                <button onclick="toggleTheme()" class="p-2 rounded-lg border border-paper-300 dark:border-ink-700 hover:text-periwinkle-dark dark:hover:text-periwinkle transition text-gray-600 dark:text-gray-300 bg-paper-100 dark:bg-ink-850" aria-label="Toggle Theme">
+                <button onclick="toggleTheme()"
+                    class="p-2 rounded-lg border border-paper-300 dark:border-ink-700 hover:text-periwinkle-dark dark:hover:text-periwinkle transition text-gray-600 dark:text-gray-300 bg-paper-100 dark:bg-ink-850"
+                    aria-label="Toggle Theme">
                     <i id="theme-icon" class="ph-bold ph-sun text-base dark:ph-sun light:ph-moon"></i>
                 </button>
 
-                <a href="#contact" class="hidden sm:inline-flex items-center gap-1.5 bg-periwinkle-dark dark:bg-periwinkle text-white dark:text-ink-950 hover:opacity-90 px-3.5 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all shadow-sm">
+                <a href="#contact"
+                    class="hidden sm:inline-flex items-center gap-1.5 btn-primary hover:opacity-90 px-3.5 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all shadow-sm">
                     <i class="ph-bold ph-paper-plane-tilt text-xs"></i>
                     <span>Contact</span>
                 </a>
 
                 <!-- Mobile Menu Toggle -->
-                <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:text-white transition" aria-label="Toggle Menu">
+                <button onclick="toggleMobileMenu()"
+                    class="md:hidden p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:text-ink-950 dark:text-white transition"
+                    aria-label="Toggle Menu">
                     <i id="mobile-menu-icon" class="ph-bold ph-list text-xl"></i>
                 </button>
             </div>
         </div>
 
         <!-- Mobile Dropdown -->
-        <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2 border-t border-paper-300 dark:border-ink-800 mt-3 flex flex-col gap-2 text-xs font-medium text-gray-700 dark:text-gray-300">
-            <a href="#about" onclick="toggleMobileMenu()" class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">About</a>
-            <a href="#education" onclick="toggleMobileMenu()" class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Education</a>
-            <a href="#research" onclick="toggleMobileMenu()" class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Research & Grants</a>
-            <a href="#publications" onclick="toggleMobileMenu()" class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Publications</a>
-            <a href="#awards" onclick="toggleMobileMenu()" class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Awards</a>
-            <a href="#presentations" onclick="toggleMobileMenu()" class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Presentations</a>
-            <a href="#teaching" onclick="toggleMobileMenu()" class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Teaching</a>
-            <a href="#service" onclick="toggleMobileMenu()" class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Service</a>
-            <a href="#contact" onclick="toggleMobileMenu()" class="px-2 py-1.5 text-periwinkle-dark dark:text-periwinkle font-bold transition flex items-center gap-1.5"><i class="ph-bold ph-paper-plane-tilt"></i> Contact Me</a>
+        <div id="mobile-menu"
+            class="hidden md:hidden pt-4 pb-2 border-t border-paper-300 dark:border-ink-800 mt-3 flex flex-col gap-2 text-xs font-medium text-gray-700 dark:text-gray-300 ">
+            <a href="#about" onclick="toggleMobileMenu()"
+                class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">About</a>
+            <a href="#education" onclick="toggleMobileMenu()"
+                class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Education</a>
+            <a href="#research" onclick="toggleMobileMenu()"
+                class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Research &
+                Grants</a>
+            <a href="#publications" onclick="toggleMobileMenu()"
+                class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Publications</a>
+            <a href="#awards" onclick="toggleMobileMenu()"
+                class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Awards</a>
+            <a href="#presentations" onclick="toggleMobileMenu()"
+                class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Presentations</a>
+            <a href="#teaching" onclick="toggleMobileMenu()"
+                class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Teaching</a>
+            <a href="#service" onclick="toggleMobileMenu()"
+                class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Service</a>
+            <a href="#contact" onclick="toggleMobileMenu()"
+                class="px-2 py-1.5 text-periwinkle-dark dark:text-periwinkle font-bold transition flex items-center gap-1.5"><i
+                    class="ph-bold ph-paper-plane-tilt"></i> Contact Me</a>
         </div>
     </header>
 
@@ -253,50 +283,57 @@
 
                 <!-- Left: Headline & Bio -->
                 <div class="lg:col-span-7 space-y-6">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-periwinkle/10 border border-periwinkle/30 text-periwinkle-dark dark:text-periwinkle text-xs font-mono">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-periwinkle/10 border border-periwinkle/30 text-periwinkle-dark dark:text-periwinkle text-xs font-mono">
                         <span class="w-2 h-2 rounded-full bg-periwinkle animate-pulse"></span>
                         <span>Ph.D. Candidate &middot; Transportation Systems Engineering</span>
                     </div>
 
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-ink-950 dark:text-white leading-tight">
                         Adair Garrett
                     </h1>
 
-                    <p class="text-xl sm:text-2xl font-medium text-periwinkle-dark dark:text-periwinkle-light leading-snug">
+                    <p
+                        class="text-xl sm:text-2xl font-medium text-periwinkle-dark dark:text-periwinkle-light leading-snug">
                         Advancing Resilience, Reliability, & Safety for Transit and Urban Rail Systems.
                     </p>
 
-                    <p class="text-base text-gray-300 leading-relaxed max-w-xl">
-                        I lead interdisciplinary, community-engaged research focused on transforming passenger rail, transit agencies, and multimodal networks to withstand climate hazards, operational disruptions, and long-term uncertainties through adaptive capacity and proactive asset management.
+                    <p class="text-base text-gray-700 dark:text-gray-300 leading-relaxed max-w-xl">
+                        I lead interdisciplinary, community-engaged research focused on transforming passenger rail,
+                        transit agencies, and multimodal networks to withstand climate hazards, operational disruptions,
+                        and long-term uncertainties through adaptive capacity and proactive asset management.
                     </p>
 
                     <!-- Affiliations & Key Metrics -->
                     <div class="grid grid-cols-3 gap-3 pt-2 text-xs font-mono">
                         <div class="studio-card p-3 rounded-xl">
                             <span class="block text-gray-500 dark:text-gray-400 text-[11px]">TRB Committee</span>
-                            <span class="text-white font-semibold">Intercity Rail</span>
+                            <span class="text-ink-950 dark:text-white font-semibold">Intercity Rail</span>
                         </div>
                         <div class="studio-card p-3 rounded-xl border-l-2 border-l-sage">
                             <span class="block text-gray-500 dark:text-gray-400 text-[11px]">Research Grants</span>
-                            <span class="text-white font-semibold">$555k Awarded</span>
+                            <span class="text-ink-950 dark:text-white font-semibold">$555k Awarded</span>
                         </div>
                         <div class="studio-card p-3 rounded-xl border-l-2 border-l-lilac">
                             <span class="block text-gray-500 dark:text-gray-400 text-[11px]">Fellowships</span>
-                            <span class="text-white font-semibold">2x Eisenhower</span>
+                            <span class="text-ink-950 dark:text-white font-semibold">2x Eisenhower</span>
                         </div>
                     </div>
 
                     <!-- Call to Action Buttons -->
                     <div class="pt-3 flex flex-wrap gap-3.5">
-                        <a href="#research" class="inline-flex items-center gap-2 bg-periwinkle-dark dark:bg-periwinkle text-white dark:text-ink-950 font-semibold px-5 py-2.5 rounded-lg hover:opacity-95 transition text-sm shadow-sm">
+                        <a href="#research"
+                            class="inline-flex items-center gap-2 btn-primary font-semibold px-5 py-2.5 rounded-lg hover:opacity-95 transition text-sm shadow-sm">
                             <i class="ph-bold ph-compass text-base"></i>
                             <span>Research & Grants</span>
                         </a>
-                        <a href="#publications" class="inline-flex items-center gap-2 studio-card text-white font-medium px-5 py-2.5 rounded-lg hover:border-periwinkle transition text-sm">
+                        <a href="#publications"
+                            class="inline-flex items-center gap-2 studio-card text-ink-950 dark:text-white font-medium px-5 py-2.5 rounded-lg hover:border-periwinkle transition text-sm">
                             <i class="ph-bold ph-book-open text-base text-periwinkle-dark dark:text-periwinkle"></i>
                             <span>Publications (13)</span>
                         </a>
-                        <a href="#contact" class="inline-flex items-center gap-2 border border-paper-300 dark:border-ink-600 text-gray-700 dark:text-gray-300 font-medium px-5 py-2.5 rounded-lg hover:text-white transition text-sm bg-paper-100 dark:bg-transparent">
+                        <a href="#contact"
+                            class="inline-flex items-center gap-2 border border-paper-300 dark:border-ink-600 text-gray-700 dark:text-gray-300 font-medium px-5 py-2.5 rounded-lg hover:text-ink-950 dark:text-white transition text-sm bg-paper-100 dark:bg-transparent">
                             <i class="ph-bold ph-envelope text-base"></i>
                             <span>Get in Touch</span>
                         </a>
@@ -307,15 +344,18 @@
                 <div class="lg:col-span-5 flex justify-center lg:justify-end">
                     <div class="relative group">
                         <div class="relative rounded-2xl overflow-hidden studio-card p-2 shadow-xl">
-                            <img src="headshot.png" alt="Adair Garrett Headshot" class="w-64 h-80 sm:w-72 sm:h-96 object-cover object-top rounded-xl transform group-hover:scale-[1.01] transition duration-300" />
-                            
+                            <img src="headshot.png" alt="Adair Garrett Headshot"
+                                class="w-64 h-80 sm:w-72 sm:h-96 object-cover object-top rounded-xl transform group-hover:scale-[1.01] transition duration-300" />
+
                             <!-- Location Badge -->
-                            <div class="absolute bottom-4 left-4 right-4 bg-white/95 dark:bg-ink-900/90 border border-paper-300 dark:border-ink-700 py-2 px-3 rounded-lg flex items-center justify-between text-xs backdrop-blur-md shadow-sm">
-                                <span class="flex items-center gap-1.5 text-gray-700 dark:text-gray-300">
+                            <div
+                                class="absolute bottom-4 left-4 right-4 bg-white/95 dark:bg-ink-900/90 border border-paper-300 dark:border-ink-700 py-2 px-3 rounded-lg flex items-center justify-between text-xs backdrop-blur-md shadow-sm">
+                                <span class="flex items-center gap-1.5 text-gray-700 dark:text-gray-300 ">
                                     <i class="ph-fill ph-map-pin text-mauve"></i>
                                     <span>Atlanta, GA</span>
                                 </span>
-                                <span class="text-periwinkle-dark dark:text-periwinkle font-mono font-semibold">Georgia Tech</span>
+                                <span class="text-periwinkle-dark dark:text-periwinkle font-mono font-semibold">Georgia
+                                    Tech</span>
                             </div>
                         </div>
                     </div>
@@ -329,20 +369,30 @@
         <!-- ========================================================================= -->
         <section id="about" class="py-16 border-t border-paper-300 dark:border-ink-800 scroll-mt-20">
             <div class="mb-8">
-                <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2">About & Research Mission</h2>
-                <p class="text-xs font-mono text-periwinkle-dark dark:text-periwinkle uppercase tracking-wider">Interdisciplinary & Community-Engaged Engineering</p>
+                <h2 class="text-2xl sm:text-3xl font-bold text-ink-950 dark:text-white mb-2">About & Research Mission</h2>
+                <p class="text-xs font-mono text-periwinkle-dark dark:text-periwinkle uppercase tracking-wider">
+                    Interdisciplinary & Community-Engaged Engineering</p>
             </div>
 
             <div class="grid lg:grid-cols-12 gap-8 items-start">
-                <div class="lg:col-span-7 space-y-4 text-gray-300 leading-relaxed text-sm sm:text-base">
+                <div class="lg:col-span-7 space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed text-sm sm:text-base">
                     <p>
-                        As an aspiring academic faculty member in transportation systems engineering and urban planning, my mission is to lead <strong>interdisciplinary, community-engaged research</strong> that advances the resilience, reliability, and safety of <strong>rail and public transit networks</strong>.
+                        As an aspiring academic faculty member in transportation systems engineering and urban planning,
+                        my mission is to lead <strong>interdisciplinary, community-engaged research</strong> that
+                        advances the resilience, reliability, and safety of <strong>rail and public transit
+                            networks</strong>.
                     </p>
                     <p>
-                        Rail and transit systems form the backbone of sustainable urban mobility, yet they face increasing challenges from extreme weather events, aging infrastructure, and shifting demand patterns. My dissertation work—<em>"Advances in Assessing and Building Resilience Capabilities for Rail Systems"</em>—characterizes multi-dimensional adaptive capacity across physical rail assets, transit operating agencies, and riders.
+                        Rail and transit systems form the backbone of sustainable urban mobility, yet they face
+                        increasing challenges from extreme weather events, aging infrastructure, and shifting demand
+                        patterns. My dissertation work, <em>"Advances in Assessing and Building Resilience Capabilities
+                            for Rail Systems"</em>, characterizes multi-dimensional adaptive capacity across physical
+                        rail assets, transit operating agencies, and riders.
                     </p>
                     <p>
-                        By combining qualitative stakeholder engagement with quantitative modeling, structural equation modeling (SEM), and spatial vulnerability assessments, my work provides actionable frameworks for transit agencies and DOTs to make equitable, climate-ready infrastructure investments.
+                        By combining qualitative stakeholder engagement with quantitative modeling, structural equation
+                        modeling (SEM), and spatial vulnerability assessments, my work provides actionable frameworks
+                        for transit agencies and DOTs to make equitable, climate-ready infrastructure investments.
                     </p>
                 </div>
 
@@ -351,30 +401,33 @@
                     <div class="studio-card p-4 rounded-xl border-l-2 border-l-periwinkle">
                         <div class="flex items-center gap-2 mb-1">
                             <i class="ph-bold ph-train text-periwinkle-dark dark:text-periwinkle text-base"></i>
-                            <h3 class="text-white font-bold text-sm">Transit & Urban Rail Systems</h3>
+                            <h3 class="text-ink-950 dark:text-white font-bold text-sm">Transit & Urban Rail Systems</h3>
                         </div>
-                        <p class="text-xs text-gray-400 leading-relaxed">
-                            Evaluating passenger rail, light rail, and multimodal transit reliability, network connectivity, and track infrastructure adaptation under acute disruptions.
+                        <p class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                            Evaluating passenger rail, light rail, and multimodal transit reliability, network
+                            connectivity, and track infrastructure adaptation under acute disruptions.
                         </p>
                     </div>
 
                     <div class="studio-card p-4 rounded-xl border-l-2 border-l-mauve">
                         <div class="flex items-center gap-2 mb-1">
                             <i class="ph-bold ph-cloud-rain text-mauve-dark dark:text-mauve text-base"></i>
-                            <h3 class="text-white font-bold text-sm">Climate Hazard & Multi-Hazard Adaptation</h3>
+                            <h3 class="text-ink-950 dark:text-white font-bold text-sm">Climate Hazard & Multi-Hazard Adaptation</h3>
                         </div>
-                        <p class="text-xs text-gray-400 leading-relaxed">
-                            Developing GIS tools and hazard exposure matrices for flooding, extreme heat, and severe storms across state DOTs and urban transit agencies.
+                        <p class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                            Developing GIS tools and hazard exposure matrices for flooding, extreme heat, and severe
+                            storms across state DOTs and urban transit agencies.
                         </p>
                     </div>
 
                     <div class="studio-card p-4 rounded-xl border-l-2 border-l-lilac">
                         <div class="flex items-center gap-2 mb-1">
                             <i class="ph-bold ph-wrench text-lilac-dark dark:text-lilac text-base"></i>
-                            <h3 class="text-white font-bold text-sm">Infrastructure Asset Management</h3>
+                            <h3 class="text-ink-950 dark:text-white font-bold text-sm">Infrastructure Asset Management</h3>
                         </div>
-                        <p class="text-xs text-gray-400 leading-relaxed">
-                            Integrating lifecycle sustainability, triple-bottom-line criteria, and workforce competencies into rail and highway asset management plans.
+                        <p class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                            Integrating lifecycle sustainability, triple-bottom-line criteria, and workforce
+                            competencies into rail and highway asset management plans.
                         </p>
                     </div>
                 </div>
@@ -386,8 +439,9 @@
         <!-- ========================================================================= -->
         <section id="education" class="py-16 border-t border-paper-300 dark:border-ink-800 scroll-mt-20">
             <div class="mb-8">
-                <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2">Education & Academic Credentials</h2>
-                <p class="text-xs font-mono text-periwinkle-dark dark:text-periwinkle uppercase tracking-wider">Degrees & Pedagogical Certifications</p>
+                <h2 class="text-2xl sm:text-3xl font-bold text-ink-950 dark:text-white mb-2">Education & Academic Credentials</h2>
+                <p class="text-xs font-mono text-periwinkle-dark dark:text-periwinkle uppercase tracking-wider">Degrees
+                    & Pedagogical Certifications</p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-6">
@@ -396,19 +450,28 @@
                 <div class="studio-card p-6 rounded-xl flex flex-col justify-between border-t-2 border-t-periwinkle">
                     <div>
                         <div class="flex justify-between items-start mb-2">
-                            <span class="px-2.5 py-0.5 rounded bg-periwinkle/15 text-periwinkle-dark dark:text-periwinkle font-mono text-xs font-semibold">Anticipated May 2027</span>
+                            <span
+                                class="px-2.5 py-0.5 rounded bg-periwinkle/15 text-periwinkle-dark dark:text-periwinkle font-mono text-xs font-semibold">Anticipated
+                                May 2027</span>
                             <span class="text-xs text-gray-500 dark:text-gray-400 font-mono">Georgia Tech</span>
                         </div>
-                        <h3 class="text-lg font-bold text-white mb-0.5">Ph.D. in Civil Engineering</h3>
-                        <h4 class="text-xs font-medium text-periwinkle-dark dark:text-periwinkle mb-3">Transportation Systems Engineering</h4>
-                        <p class="text-xs text-gray-300 leading-relaxed mb-3">
-                            <strong>Dissertation:</strong> <em>"Advances in Assessing and Building Resilience Capabilities for Rail Systems"</em><br>
+                        <h3 class="text-lg font-bold text-ink-950 dark:text-white mb-0.5">Ph.D. in Civil Engineering</h3>
+                        <h4 class="text-xs font-medium text-periwinkle-dark dark:text-periwinkle mb-3">Transportation
+                            Systems Engineering</h4>
+                        <p class="text-xs text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+                            <strong>Dissertation:</strong> <em>"Advances in Assessing and Building Resilience
+                                Capabilities for Rail Systems"</em><br>
                             <strong>Advisor:</strong> Dr. Adjo Amekudzi-Kennedy
                         </p>
                     </div>
-                    <div class="pt-3 border-t border-paper-300 dark:border-ink-800 flex flex-wrap gap-2 text-[11px] font-mono">
-                        <span class="bg-paper-200 dark:bg-ink-800 border border-paper-300 dark:border-ink-700 px-2 py-0.5 rounded text-gray-700 dark:text-gray-300">CIRTL Teaching Cert (2024)</span>
-                        <span class="bg-paper-200 dark:bg-ink-800 border border-paper-300 dark:border-ink-700 px-2 py-0.5 rounded text-gray-700 dark:text-gray-300">Impactful Mentorship Cert (2026)</span>
+                    <div
+                        class="pt-3 border-t border-paper-300 dark:border-ink-800 flex flex-wrap gap-2 text-[11px] font-mono">
+                        <span
+                            class="bg-paper-200 dark:bg-ink-800 border border-paper-300 dark:border-ink-700 px-2 py-0.5 rounded text-gray-700 dark:text-gray-300 ">CIRTL
+                            Teaching Cert (2024)</span>
+                        <span
+                            class="bg-paper-200 dark:bg-ink-800 border border-paper-300 dark:border-ink-700 px-2 py-0.5 rounded text-gray-700 dark:text-gray-300 ">Impactful
+                            Mentorship Cert (2026)</span>
                     </div>
                 </div>
 
@@ -416,18 +479,26 @@
                 <div class="studio-card p-6 rounded-xl flex flex-col justify-between border-t-2 border-t-lilac">
                     <div>
                         <div class="flex justify-between items-start mb-2">
-                            <span class="px-2.5 py-0.5 rounded bg-lilac/15 text-lilac-dark dark:text-lilac font-mono text-xs font-semibold">May 2026 & 2023</span>
+                            <span
+                                class="px-2.5 py-0.5 rounded bg-lilac/15 text-lilac-dark dark:text-lilac font-mono text-xs font-semibold">May
+                                2026</span>
                             <span class="text-xs text-gray-500 dark:text-gray-400 font-mono">Georgia Tech</span>
                         </div>
-                        <h3 class="text-lg font-bold text-white mb-0.5">Dual Master's Degrees</h3>
-                        <h4 class="text-xs font-medium text-lilac-dark dark:text-lilac mb-3">M.C.R.P. & M.S. in Civil Engineering</h4>
-                        <p class="text-xs text-gray-300 leading-relaxed mb-3">
-                            <strong>Master of City and Regional Planning (MCRP):</strong> School of City & Regional Planning (2026)<br>
-                            <strong>M.S. in Civil Engineering:</strong> Thesis: <em>"Evaluating Resilience Capabilities in Long-Range Transportation Plans: Flexibility and Agility"</em> (2023)
+                        <h3 class="text-lg font-bold text-ink-950 dark:text-white mb-0.5">Dual Master's Degrees</h3>
+                        <h4 class="text-xs font-medium text-lilac-dark dark:text-lilac mb-3">M.C.R.P. & M.S. in Civil
+                            Engineering</h4>
+                        <p class="text-xs text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+                            <strong>Master of City and Regional Planning (MCRP):</strong> School of City & Regional
+                            Planning (2026)<br>
+                            <strong>M.S. in Civil Engineering:</strong> Thesis: <em>"Evaluating Resilience Capabilities
+                                in Long-Range Transportation Plans: Flexibility and Agility"</em> (2023)
                         </p>
                     </div>
-                    <div class="pt-3 border-t border-paper-300 dark:border-ink-800 flex flex-wrap gap-2 text-[11px] font-mono">
-                        <span class="bg-paper-200 dark:bg-ink-800 border border-paper-300 dark:border-ink-700 px-2 py-0.5 rounded text-gray-700 dark:text-gray-300">Academic Excellence Award (2026)</span>
+                    <div
+                        class="pt-3 border-t border-paper-300 dark:border-ink-800 flex flex-wrap gap-2 text-[11px] font-mono">
+                        <span
+                            class="bg-paper-200 dark:bg-ink-800 border border-paper-300 dark:border-ink-700 px-2 py-0.5 rounded text-gray-700 dark:text-gray-300 ">Academic
+                            Excellence Award (2026)</span>
                     </div>
                 </div>
 
@@ -435,17 +506,24 @@
                 <div class="studio-card p-6 rounded-xl flex flex-col justify-between border-t-2 border-t-sage">
                     <div>
                         <div class="flex justify-between items-start mb-2">
-                            <span class="px-2.5 py-0.5 rounded bg-sage/15 text-sage-dark dark:text-sage font-mono text-xs font-semibold">May 2021</span>
+                            <span
+                                class="px-2.5 py-0.5 rounded bg-sage/15 text-sage-dark dark:text-sage font-mono text-xs font-semibold">May
+                                2021</span>
                             <span class="text-xs text-gray-500 dark:text-gray-400 font-mono">Georgia Tech</span>
                         </div>
-                        <h3 class="text-lg font-bold text-white mb-0.5">B.S. in Civil Engineering</h3>
-                        <h4 class="text-xs font-medium text-sage-dark dark:text-sage mb-3">Civil & Environmental Engineering</h4>
-                        <p class="text-xs text-gray-300 leading-relaxed">
-                            Graduated with Highest Honors. Focused on structural design, transportation planning, and community sustainability initiatives.
+                        <h3 class="text-lg font-bold text-ink-950 dark:text-white mb-0.5">B.S. in Civil Engineering</h3>
+                        <h4 class="text-xs font-medium text-sage-dark dark:text-sage mb-3">Civil & Environmental
+                            Engineering</h4>
+                        <p class="text-xs text-gray-700 dark:text-gray-300 leading-relaxed">
+                            Graduated with Highest Honors. Focused on structural design, transportation planning, and
+                            community sustainability initiatives.
                         </p>
                     </div>
-                    <div class="pt-3 border-t border-paper-300 dark:border-ink-800 flex flex-wrap gap-2 text-[11px] font-mono">
-                        <span class="bg-paper-200 dark:bg-ink-800 border border-paper-300 dark:border-ink-700 px-2 py-0.5 rounded text-gray-700 dark:text-gray-300">College of Eng. Honors Day Award</span>
+                    <div
+                        class="pt-3 border-t border-paper-300 dark:border-ink-800 flex flex-wrap gap-2 text-[11px] font-mono">
+                        <span
+                            class="bg-paper-200 dark:bg-ink-800 border border-paper-300 dark:border-ink-700 px-2 py-0.5 rounded text-gray-700 dark:text-gray-300 ">College
+                            of Eng. Honors Day Award</span>
                     </div>
                 </div>
 
@@ -453,15 +531,20 @@
                 <div class="studio-card p-6 rounded-xl flex flex-col justify-between border-t-2 border-t-mauve">
                     <div>
                         <div class="flex justify-between items-start mb-2">
-                            <span class="px-2.5 py-0.5 rounded bg-mauve/15 text-mauve-dark dark:text-mauve font-mono text-xs font-semibold">Certificates</span>
+                            <span
+                                class="px-2.5 py-0.5 rounded bg-mauve/15 text-mauve-dark dark:text-mauve font-mono text-xs font-semibold">Certificates</span>
                             <span class="text-xs text-gray-500 dark:text-gray-400 font-mono">AREMA & Georgia Tech</span>
                         </div>
-                        <h3 class="text-lg font-bold text-white mb-0.5">Professional Development</h3>
-                        <h4 class="text-xs font-medium text-mauve-dark dark:text-mauve mb-3">Railway Engineering & Pedagogical Excellence</h4>
-                        <ul class="text-xs text-gray-300 space-y-1.5">
-                            <li class="flex items-center gap-2"><i class="ph-bold ph-check text-mauve"></i> Introduction to Practical Railway Engineering (AREMA, 2023)</li>
-                            <li class="flex items-center gap-2"><i class="ph-bold ph-check text-mauve"></i> Tech-to-Teaching Certificate (Georgia Tech, 2024)</li>
-                            <li class="flex items-center gap-2"><i class="ph-bold ph-check text-mauve"></i> CIRTL Associate Certificate (2024)</li>
+                        <h3 class="text-lg font-bold text-ink-950 dark:text-white mb-0.5">Professional Development</h3>
+                        <h4 class="text-xs font-medium text-mauve-dark dark:text-mauve mb-3">Railway Engineering &
+                            Pedagogical Excellence</h4>
+                        <ul class="text-xs text-gray-700 dark:text-gray-300 space-y-1.5">
+                            <li class="flex items-center gap-2"><i class="ph-bold ph-check text-mauve"></i> Introduction
+                                to Practical Railway Engineering (AREMA, 2023)</li>
+                            <li class="flex items-center gap-2"><i class="ph-bold ph-check text-mauve"></i>
+                                Tech-to-Teaching Certificate (Georgia Tech, 2024)</li>
+                            <li class="flex items-center gap-2"><i class="ph-bold ph-check text-mauve"></i> CIRTL
+                                Associate Certificate (2024)</li>
                         </ul>
                     </div>
                 </div>
@@ -474,25 +557,32 @@
         <!-- ========================================================================= -->
         <section id="research" class="py-16 border-t border-paper-300 dark:border-ink-800 scroll-mt-20">
             <div class="mb-6">
-                <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2">Funded Research & Grants</h2>
-                <p class="text-sm text-gray-300 leading-relaxed max-w-3xl">
-                    I have actively led and supported the conceptualization, proposal writing, and execution of competitive research grants and fellowships totaling over <strong>$555,000</strong> in received funding ($900k+ total project value) from federal, state, and academic sponsors.
+                <h2 class="text-2xl sm:text-3xl font-bold text-ink-950 dark:text-white mb-2">Funded Research & Grants</h2>
+                <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed max-w-3xl">
+                    I have actively led and supported the conceptualization, proposal writing, and execution of
+                    competitive research grants and fellowships totaling over <strong>$555,000</strong> in received
+                    funding ($900k+ total project value) from federal, state, and academic sponsors.
                 </p>
             </div>
 
             <!-- Funding Tier Legend -->
             <div class="flex flex-wrap items-center gap-3 mb-8 text-xs font-mono">
-                <span class="text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wider text-[10px]">Categories:</span>
-                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-sage/10 text-sage-dark dark:text-sage border border-sage/30 font-medium">
+                <span
+                    class="text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wider text-[10px]">Categories:</span>
+                <span
+                    class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-sage/10 text-sage-dark dark:text-sage border border-sage/30 font-medium">
                     <span class="w-1.5 h-1.5 rounded-full bg-sage"></span> &gt; $70k (Major Research Grants)
                 </span>
-                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-periwinkle/10 text-periwinkle-dark dark:text-periwinkle border border-periwinkle/30 font-medium">
+                <span
+                    class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-periwinkle/10 text-periwinkle-dark dark:text-periwinkle border border-periwinkle/30 font-medium">
                     <span class="w-1.5 h-1.5 rounded-full bg-periwinkle"></span> NCST Research Grants
                 </span>
-                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-lilac/10 text-lilac-dark dark:text-lilac border border-lilac/30 font-medium">
+                <span
+                    class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-lilac/10 text-lilac-dark dark:text-lilac border border-lilac/30 font-medium">
                     <span class="w-1.5 h-1.5 rounded-full bg-lilac"></span> USDOT Eisenhower Fellowships
                 </span>
-                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-mauve/10 text-mauve-dark dark:text-mauve border border-mauve/30 font-medium">
+                <span
+                    class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-mauve/10 text-mauve-dark dark:text-mauve border border-mauve/30 font-medium">
                     <span class="w-1.5 h-1.5 rounded-full bg-mauve"></span> Institutional Seed Grants
                 </span>
             </div>
@@ -500,145 +590,201 @@
             <div class="grid md:grid-cols-2 gap-6">
 
                 <!-- Grant 1: GDOT Short Line (> $70k -> Sage) -->
-                <div class="studio-card p-6 rounded-xl flex flex-col justify-between relative overflow-hidden border-t-2 border-t-sage">
-                    <div class="absolute top-0 right-0 px-3 py-1 bg-sage/15 text-sage-dark dark:text-sage text-xs font-mono font-bold rounded-bl-lg border-l border-b border-sage/20">
+                <div
+                    class="studio-card p-6 rounded-xl flex flex-col justify-between relative overflow-hidden border-t-2 border-t-sage">
+                    <div
+                        class="absolute top-0 right-0 px-3 py-1 bg-sage/15 text-sage-dark dark:text-sage text-xs font-mono font-bold rounded-bl-lg border-l border-b border-sage/20">
                         $250,000
                     </div>
                     <div>
-                        <span class="text-xs font-mono text-sage-dark dark:text-sage font-semibold uppercase">Co-Lead &middot; 2026 – 2028</span>
-                        <h3 class="text-base sm:text-lg font-bold text-white mt-1 mb-2">Assessing and Advancing Asset Management Capabilities for Short Line Railroads</h3>
-                        <p class="text-xs text-gray-300 leading-relaxed mb-3">
+                        <span class="text-xs font-mono text-sage-dark dark:text-sage font-semibold uppercase">Co-Lead
+                            &middot; 2026 - 2028</span>
+                        <h3 class="text-base sm:text-lg font-bold text-ink-950 dark:text-white mt-1 mb-2">Assessing and Advancing Asset
+                            Management Capabilities for Short Line Railroads</h3>
+                        <p class="text-xs text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
                             <strong>Sponsor:</strong> Georgia Department of Transportation (GDOT)<br>
-                            Investigating asset maintenance practices, inspection data integration, and hazard resilience across freight short-line rail networks in Georgia.
+                            Investigating asset maintenance practices, inspection data integration, and hazard
+                            resilience across freight short-line rail networks in Georgia.
                         </p>
                     </div>
-                    <div class="text-[11px] font-mono text-sage-dark dark:text-sage bg-sage/10 dark:bg-sage/15 border border-sage/30 px-2.5 py-1 rounded inline-block w-fit">
+                    <div
+                        class="text-[11px] font-mono text-sage-dark dark:text-sage bg-sage/10 dark:bg-sage/15 border border-sage/30 px-2.5 py-1 rounded inline-block w-fit">
                         Status: Funded / Pending
                     </div>
                 </div>
 
                 <!-- Grant 2: NCHRP 20-138 (> $70k -> Sage) -->
-                <div class="studio-card p-6 rounded-xl flex flex-col justify-between relative overflow-hidden border-t-2 border-t-sage">
-                    <div class="absolute top-0 right-0 px-3 py-1 bg-sage/15 text-sage-dark dark:text-sage text-xs font-mono font-bold rounded-bl-lg border-l border-b border-sage/20">
+                <div
+                    class="studio-card p-6 rounded-xl flex flex-col justify-between relative overflow-hidden border-t-2 border-t-sage">
+                    <div
+                        class="absolute top-0 right-0 px-3 py-1 bg-sage/15 text-sage-dark dark:text-sage text-xs font-mono font-bold rounded-bl-lg border-l border-b border-sage/20">
                         $70,000 <span class="text-[10px] font-normal opacity-80">(20% of $350k)</span>
                     </div>
                     <div>
-                        <span class="text-xs font-mono text-sage-dark dark:text-sage font-semibold uppercase">GRA / Proposal Support &middot; 2026 – 2028</span>
-                        <h3 class="text-base sm:text-lg font-bold text-white mt-1 mb-2">NCHRP 20-138: Defining, Assessing, and Monitoring Transportation Systems Health Guide</h3>
-                        <p class="text-xs text-gray-300 leading-relaxed mb-3">
+                        <span class="text-xs font-mono text-sage-dark dark:text-sage font-semibold uppercase">GRA /
+                            Proposal Support &middot; 2026 - 2028</span>
+                        <h3 class="text-base sm:text-lg font-bold text-ink-950 dark:text-white mt-1 mb-2">NCHRP 20-138: Defining,
+                            Assessing, and Monitoring Transportation Systems Health Guide</h3>
+                        <p class="text-xs text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
                             <strong>Sponsor:</strong> National Cooperative Highway Research Program (TRB / AASHTO)<br>
-                            Developing an overarching guide for DOT executives to evaluate, communicate, and track system health and long-term vitality.
+                            Developing an overarching guide for DOT executives to evaluate, communicate, and track
+                            system health and long-term vitality.
                         </p>
                     </div>
-                    <div class="text-[11px] font-mono text-sage-dark dark:text-sage bg-sage/10 dark:bg-sage/15 border border-sage/30 px-2.5 py-1 rounded inline-block w-fit">
+                    <div
+                        class="text-[11px] font-mono text-sage-dark dark:text-sage bg-sage/10 dark:bg-sage/15 border border-sage/30 px-2.5 py-1 rounded inline-block w-fit">
                         Status: Funded (In Progress)
                     </div>
                 </div>
 
                 <!-- Grant 3: NCST Rail IAM ($60k -> Periwinkle) -->
-                <div class="studio-card p-6 rounded-xl flex flex-col justify-between relative overflow-hidden border-t-2 border-t-periwinkle">
-                    <div class="absolute top-0 right-0 px-3 py-1 bg-periwinkle/15 text-periwinkle-dark dark:text-periwinkle text-xs font-mono font-bold rounded-bl-lg border-l border-b border-periwinkle/20">
+                <div
+                    class="studio-card p-6 rounded-xl flex flex-col justify-between relative overflow-hidden border-t-2 border-t-periwinkle">
+                    <div
+                        class="absolute top-0 right-0 px-3 py-1 bg-periwinkle/15 text-periwinkle-dark dark:text-periwinkle text-xs font-mono font-bold rounded-bl-lg border-l border-b border-periwinkle/20">
                         $60,000 <span class="text-[10px] font-normal opacity-80">(50% of $120k)</span>
                     </div>
                     <div>
-                        <span class="text-xs font-mono text-periwinkle-dark dark:text-periwinkle font-semibold uppercase">Lead (PI) &middot; 2026 – 2027</span>
-                        <h3 class="text-base sm:text-lg font-bold text-white mt-1 mb-2">Advancing Rail Infrastructure Asset Management and Hazard Mitigation</h3>
-                        <p class="text-xs text-gray-300 leading-relaxed mb-3">
-                            <strong>Sponsor:</strong> National Center for Sustainable Transportation (NCST, USDOT UTC)<br>
-                            Creating practical educational modules and workforce development frameworks for rail asset risk mitigation and hazard response.
+                        <span
+                            class="text-xs font-mono text-periwinkle-dark dark:text-periwinkle font-semibold uppercase">Lead
+                            (PI) &middot; 2026 - 2027</span>
+                        <h3 class="text-base sm:text-lg font-bold text-ink-950 dark:text-white mt-1 mb-2">Advancing Rail Infrastructure
+                            Asset Management and Hazard Mitigation</h3>
+                        <p class="text-xs text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+                            <strong>Sponsor:</strong> National Center for Sustainable Transportation (NCST, USDOT
+                            UTC)<br>
+                            Creating practical educational modules and workforce development frameworks for rail asset
+                            risk mitigation and hazard response.
                         </p>
                     </div>
-                    <div class="text-[11px] font-mono text-periwinkle-dark dark:text-periwinkle bg-periwinkle/10 dark:bg-periwinkle/15 border border-periwinkle/30 px-2.5 py-1 rounded inline-block w-fit">
+                    <div
+                        class="text-[11px] font-mono text-periwinkle-dark dark:text-periwinkle bg-periwinkle/10 dark:bg-periwinkle/15 border border-periwinkle/30 px-2.5 py-1 rounded inline-block w-fit">
                         Status: Funded (In Progress)
                     </div>
                 </div>
 
                 <!-- Grant 4: NCST Rail Adaptive Capacity ($52k -> Periwinkle) -->
-                <div class="studio-card p-6 rounded-xl flex flex-col justify-between relative overflow-hidden border-t-2 border-t-periwinkle">
-                    <div class="absolute top-0 right-0 px-3 py-1 bg-periwinkle/15 text-periwinkle-dark dark:text-periwinkle text-xs font-mono font-bold rounded-bl-lg border-l border-b border-periwinkle/20">
+                <div
+                    class="studio-card p-6 rounded-xl flex flex-col justify-between relative overflow-hidden border-t-2 border-t-periwinkle">
+                    <div
+                        class="absolute top-0 right-0 px-3 py-1 bg-periwinkle/15 text-periwinkle-dark dark:text-periwinkle text-xs font-mono font-bold rounded-bl-lg border-l border-b border-periwinkle/20">
                         $52,000 <span class="text-[10px] font-normal opacity-80">(50% of $104k)</span>
                     </div>
                     <div>
-                        <span class="text-xs font-mono text-periwinkle-dark dark:text-periwinkle font-semibold uppercase">Lead (PI) &middot; 2024 – 2026</span>
-                        <h3 class="text-base sm:text-lg font-bold text-white mt-1 mb-2">Characterizing Adaptive Capacity for Rail Transportation Resilience</h3>
-                        <p class="text-xs text-gray-300 leading-relaxed mb-3">
-                            <strong>Sponsor:</strong> National Center for Sustainable Transportation (NCST Dissertation Grant)<br>
-                            Conducted 40+ semi-structured expert interviews with U.S. rail and transit leaders to synthesize adaptation pathways into an open-access dashboard.
+                        <span
+                            class="text-xs font-mono text-periwinkle-dark dark:text-periwinkle font-semibold uppercase">Lead
+                            (PI) &middot; 2024 - 2026</span>
+                        <h3 class="text-base sm:text-lg font-bold text-ink-950 dark:text-white mt-1 mb-2">Characterizing Adaptive Capacity
+                            for Rail Transportation Resilience</h3>
+                        <p class="text-xs text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+                            <strong>Sponsor:</strong> National Center for Sustainable Transportation (NCST Dissertation
+                            Grant)<br>
+                            Conducted 40+ semi-structured expert interviews with U.S. rail and transit leaders to
+                            synthesize adaptation pathways into an open-access dashboard.
                         </p>
                     </div>
-                    <div class="text-[11px] font-mono text-periwinkle-dark dark:text-periwinkle bg-periwinkle/10 dark:bg-periwinkle/15 border border-periwinkle/30 px-2.5 py-1 rounded inline-block w-fit">
+                    <div
+                        class="text-[11px] font-mono text-periwinkle-dark dark:text-periwinkle bg-periwinkle/10 dark:bg-periwinkle/15 border border-periwinkle/30 px-2.5 py-1 rounded inline-block w-fit">
                         Status: Funded (In Progress)
                     </div>
                 </div>
 
                 <!-- Grant 5: NCST Triple Bottom Line Rail ($52k -> Periwinkle) -->
-                <div class="studio-card p-6 rounded-xl flex flex-col justify-between relative overflow-hidden border-t-2 border-t-periwinkle">
-                    <div class="absolute top-0 right-0 px-3 py-1 bg-periwinkle/15 text-periwinkle-dark dark:text-periwinkle text-xs font-mono font-bold rounded-bl-lg border-l border-b border-periwinkle/20">
+                <div
+                    class="studio-card p-6 rounded-xl flex flex-col justify-between relative overflow-hidden border-t-2 border-t-periwinkle">
+                    <div
+                        class="absolute top-0 right-0 px-3 py-1 bg-periwinkle/15 text-periwinkle-dark dark:text-periwinkle text-xs font-mono font-bold rounded-bl-lg border-l border-b border-periwinkle/20">
                         $52,000 <span class="text-[10px] font-normal opacity-80">(50% of $104k)</span>
                     </div>
                     <div>
-                        <span class="text-xs font-mono text-periwinkle-dark dark:text-periwinkle font-semibold uppercase">Lead (PI) &middot; 2023 – 2025</span>
-                        <h3 class="text-base sm:text-lg font-bold text-white mt-1 mb-2">Applying Vulnerability Assessments and Triple Bottom Line Considerations to Rail Infrastructure</h3>
-                        <p class="text-xs text-gray-300 leading-relaxed mb-3">
+                        <span
+                            class="text-xs font-mono text-periwinkle-dark dark:text-periwinkle font-semibold uppercase">Lead
+                            (PI) &middot; 2023 - 2025</span>
+                        <h3 class="text-base sm:text-lg font-bold text-ink-950 dark:text-white mt-1 mb-2">Applying Vulnerability
+                            Assessments and Triple Bottom Line Considerations to Rail Infrastructure</h3>
+                        <p class="text-xs text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
                             <strong>Sponsor:</strong> NCST Dissertation Grant<br>
-                            Synthesized global literature and transit agency practices to formulate a multi-capability rail system resilience assessment framework.
+                            Synthesized global literature and transit agency practices to formulate a multi-capability
+                            rail system resilience assessment framework.
                         </p>
                     </div>
-                    <div class="text-[11px] font-mono text-gray-700 dark:text-gray-400 bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 px-2.5 py-1 rounded inline-block w-fit">
+                    <div
+                        class="text-[11px] font-mono text-gray-700 dark:text-gray-400 bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 px-2.5 py-1 rounded inline-block w-fit">
                         Status: Completed
                     </div>
                 </div>
 
                 <!-- Grant 6: Eisenhower Fellowship 2024 ($35,500 -> Lilac) -->
-                <div class="studio-card p-6 rounded-xl flex flex-col justify-between relative overflow-hidden border-t-2 border-t-lilac">
-                    <div class="absolute top-0 right-0 px-3 py-1 bg-lilac/15 text-lilac-dark dark:text-lilac text-xs font-mono font-bold rounded-bl-lg border-l border-b border-lilac/20">
+                <div
+                    class="studio-card p-6 rounded-xl flex flex-col justify-between relative overflow-hidden border-t-2 border-t-lilac">
+                    <div
+                        class="absolute top-0 right-0 px-3 py-1 bg-lilac/15 text-lilac-dark dark:text-lilac text-xs font-mono font-bold rounded-bl-lg border-l border-b border-lilac/20">
                         $35,500
                     </div>
                     <div>
-                        <span class="text-xs font-mono text-lilac-dark dark:text-lilac font-semibold uppercase">Lead Fellow &middot; 2024 – 2025</span>
-                        <h3 class="text-base sm:text-lg font-bold text-white mt-1 mb-2">Integrated Resilience and Sustainability Assessments for Rail Infrastructure Management</h3>
-                        <p class="text-xs text-gray-300 leading-relaxed mb-3">
-                            <strong>Sponsor:</strong> USDOT Dwight David Eisenhower Transportation Fellowship Program (DDETFP)<br>
-                            Formulating an assessment methodology uniting climate resilience metrics with life-cycle sustainability for passenger and freight rail corridors.
+                        <span class="text-xs font-mono text-lilac-dark dark:text-lilac font-semibold uppercase">Lead
+                            Fellow &middot; 2024 - 2025</span>
+                        <h3 class="text-base sm:text-lg font-bold text-ink-950 dark:text-white mt-1 mb-2">Integrated Resilience and
+                            Sustainability Assessments for Rail Infrastructure Management</h3>
+                        <p class="text-xs text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+                            <strong>Sponsor:</strong> USDOT Dwight David Eisenhower Transportation Fellowship Program
+                            (DDETFP)<br>
+                            Formulating an assessment methodology uniting climate resilience metrics with life-cycle
+                            sustainability for passenger and freight rail corridors.
                         </p>
                     </div>
-                    <div class="text-[11px] font-mono text-gray-700 dark:text-gray-400 bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 px-2.5 py-1 rounded inline-block w-fit">
+                    <div
+                        class="text-[11px] font-mono text-gray-700 dark:text-gray-400 bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 px-2.5 py-1 rounded inline-block w-fit">
                         Status: Completed
                     </div>
                 </div>
 
                 <!-- Grant 7: BBISS Sustainability Next ($30,000 -> Mauve Seed Grant) -->
-                <div class="studio-card p-6 rounded-xl flex flex-col justify-between relative overflow-hidden border-t-2 border-t-mauve">
-                    <div class="absolute top-0 right-0 px-3 py-1 bg-mauve/15 text-mauve-dark dark:text-mauve text-xs font-mono font-bold rounded-bl-lg border-l border-b border-mauve/20">
+                <div
+                    class="studio-card p-6 rounded-xl flex flex-col justify-between relative overflow-hidden border-t-2 border-t-mauve">
+                    <div
+                        class="absolute top-0 right-0 px-3 py-1 bg-mauve/15 text-mauve-dark dark:text-mauve text-xs font-mono font-bold rounded-bl-lg border-l border-b border-mauve/20">
                         $30,000
                     </div>
                     <div>
-                        <span class="text-xs font-mono text-mauve-dark dark:text-mauve font-semibold uppercase">Seed Grant / Proposal Support &middot; 2024 – 2025</span>
-                        <h3 class="text-base sm:text-lg font-bold text-white mt-1 mb-2">Interdisciplinary Program in Transportation – Transportation and Community Resilience</h3>
-                        <p class="text-xs text-gray-300 leading-relaxed mb-3">
-                            <strong>Sponsor:</strong> Georgia Tech Brook Byers Institute for Sustainable Systems (BBISS)<br>
-                            Created an interdisciplinary teaching-and-learning module integrating community resilience and climate adaptation into graduate courses.
+                        <span class="text-xs font-mono text-mauve-dark dark:text-mauve font-semibold uppercase">Seed
+                            Grant / Proposal Support &middot; 2024 - 2025</span>
+                        <h3 class="text-base sm:text-lg font-bold text-ink-950 dark:text-white mt-1 mb-2">Interdisciplinary Program in
+                            Transportation - Transportation and Community Resilience</h3>
+                        <p class="text-xs text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+                            <strong>Sponsor:</strong> Georgia Tech Brook Byers Institute for Sustainable Systems
+                            (BBISS)<br>
+                            Created an interdisciplinary teaching-and-learning module integrating community resilience
+                            and climate adaptation into graduate courses.
                         </p>
                     </div>
-                    <div class="text-[11px] font-mono text-gray-700 dark:text-gray-400 bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 px-2.5 py-1 rounded inline-block w-fit">
+                    <div
+                        class="text-[11px] font-mono text-gray-700 dark:text-gray-400 bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 px-2.5 py-1 rounded inline-block w-fit">
                         Status: Completed
                     </div>
                 </div>
 
                 <!-- Grant 8: Eisenhower Fellowship 2022 ($5,500 -> Lilac) -->
-                <div class="studio-card p-6 rounded-xl flex flex-col justify-between relative overflow-hidden border-t-2 border-t-lilac">
-                    <div class="absolute top-0 right-0 px-3 py-1 bg-lilac/15 text-lilac-dark dark:text-lilac text-xs font-mono font-bold rounded-bl-lg border-l border-b border-lilac/20">
+                <div
+                    class="studio-card p-6 rounded-xl flex flex-col justify-between relative overflow-hidden border-t-2 border-t-lilac">
+                    <div
+                        class="absolute top-0 right-0 px-3 py-1 bg-lilac/15 text-lilac-dark dark:text-lilac text-xs font-mono font-bold rounded-bl-lg border-l border-b border-lilac/20">
                         $5,500
                     </div>
                     <div>
-                        <span class="text-xs font-mono text-lilac-dark dark:text-lilac font-semibold uppercase">Lead Fellow &middot; 2022 – 2023</span>
-                        <h3 class="text-base sm:text-lg font-bold text-white mt-1 mb-2">Incorporating Flexibility and Agility into Long-Term Transportation Planning</h3>
-                        <p class="text-xs text-gray-300 leading-relaxed mb-3">
-                            <strong>Sponsor:</strong> USDOT Dwight David Eisenhower Transportation Fellowship Program (DDETFP)<br>
-                            Investigated adaptive capacity indicators in Metropolitan Planning Organization (MPO) Long-Range Transportation Plans.
+                        <span class="text-xs font-mono text-lilac-dark dark:text-lilac font-semibold uppercase">Lead
+                            Fellow &middot; 2022 - 2023</span>
+                        <h3 class="text-base sm:text-lg font-bold text-ink-950 dark:text-white mt-1 mb-2">Incorporating Flexibility and
+                            Agility into Long-Term Transportation Planning</h3>
+                        <p class="text-xs text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+                            <strong>Sponsor:</strong> USDOT Dwight David Eisenhower Transportation Fellowship Program
+                            (DDETFP)<br>
+                            Investigated adaptive capacity indicators in Metropolitan Planning Organization (MPO)
+                            Long-Range Transportation Plans.
                         </p>
                     </div>
-                    <div class="text-[11px] font-mono text-gray-700 dark:text-gray-400 bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 px-2.5 py-1 rounded inline-block w-fit">
+                    <div
+                        class="text-[11px] font-mono text-gray-700 dark:text-gray-400 bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 px-2.5 py-1 rounded inline-block w-fit">
                         Status: Completed
                     </div>
                 </div>
@@ -651,17 +797,28 @@
         <!-- ========================================================================= -->
         <section id="publications" class="py-16 border-t border-paper-300 dark:border-ink-800 scroll-mt-20">
             <div class="mb-6">
-                <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2">Publications & Scholarly Works</h2>
-                <p class="text-xs font-mono text-periwinkle-dark dark:text-periwinkle uppercase tracking-wider">Peer-Reviewed Papers, Proceedings & Technical Reports</p>
+                <h2 class="text-2xl sm:text-3xl font-bold text-ink-950 dark:text-white mb-2">Publications & Scholarly Works</h2>
+                <p class="text-xs font-mono text-periwinkle-dark dark:text-periwinkle uppercase tracking-wider">
+                    Peer-Reviewed Papers, Proceedings & Technical Reports</p>
             </div>
 
             <!-- Filter Controls -->
             <div class="flex flex-wrap gap-2 mb-8 text-xs font-mono">
-                <button onclick="filterPubs('all')" class="pub-tab active px-3 py-1.5 rounded-lg border border-paper-300 dark:border-ink-700 studio-card transition" data-filter="all">All (13)</button>
-                <button onclick="filterPubs('journal')" class="pub-tab px-3 py-1.5 rounded-lg border border-paper-300 dark:border-ink-700 studio-card transition" data-filter="journal">Peer-Reviewed Journals (5)</button>
-                <button onclick="filterPubs('conference')" class="pub-tab px-3 py-1.5 rounded-lg border border-paper-300 dark:border-ink-700 studio-card transition" data-filter="conference">Conference Proceedings (3)</button>
-                <button onclick="filterPubs('report')" class="pub-tab px-3 py-1.5 rounded-lg border border-paper-300 dark:border-ink-700 studio-card transition" data-filter="report">Research & Technical Reports (4)</button>
-                <button onclick="filterPubs('review')" class="pub-tab px-3 py-1.5 rounded-lg border border-paper-300 dark:border-ink-700 studio-card transition" data-filter="review">Book Reviews (1)</button>
+                <button onclick="filterPubs('all')"
+                    class="pub-tab active px-3 py-1.5 rounded-lg border border-paper-300 dark:border-ink-700 studio-card transition"
+                    data-filter="all">All (13)</button>
+                <button onclick="filterPubs('journal')"
+                    class="pub-tab px-3 py-1.5 rounded-lg border border-paper-300 dark:border-ink-700 studio-card transition"
+                    data-filter="journal">Peer-Reviewed Journals (5)</button>
+                <button onclick="filterPubs('conference')"
+                    class="pub-tab px-3 py-1.5 rounded-lg border border-paper-300 dark:border-ink-700 studio-card transition"
+                    data-filter="conference">Conference Proceedings (3)</button>
+                <button onclick="filterPubs('report')"
+                    class="pub-tab px-3 py-1.5 rounded-lg border border-paper-300 dark:border-ink-700 studio-card transition"
+                    data-filter="report">Research & Technical Reports (4)</button>
+                <button onclick="filterPubs('review')"
+                    class="pub-tab px-3 py-1.5 rounded-lg border border-paper-300 dark:border-ink-700 studio-card transition"
+                    data-filter="review">Book Reviews (1)</button>
             </div>
 
             <!-- Publications Feed -->
@@ -671,18 +828,24 @@
                 <div class="pub-item studio-card p-5 rounded-xl" data-category="journal">
                     <div class="flex justify-between items-start gap-4">
                         <div class="space-y-1">
-                            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-periwinkle/15 text-periwinkle-dark dark:text-periwinkle font-semibold">Journal Article &middot; 2025</span>
-                            <h3 class="text-base sm:text-lg font-bold text-white leading-snug">
+                            <span
+                                class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-periwinkle/15 text-periwinkle-dark dark:text-periwinkle font-semibold">Journal
+                                Article &middot; 2025</span>
+                            <h3 class="text-base sm:text-lg font-bold text-ink-950 dark:text-white leading-snug">
                                 Review on approaches to assess rail system resilience: a multi-capability perspective
                             </h3>
-                            <p class="text-xs text-gray-300 font-mono">
-                                <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett, A.</strong>, Sherwood, T., Panero, J.A., and A. Amekudzi-Kennedy.
+                            <p class="text-xs text-gray-700 dark:text-gray-300 font-mono">
+                                <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett, A.</strong>,
+                                Sherwood, T., Panero, J.A., and A. Amekudzi-Kennedy.
                             </p>
                             <p class="text-xs text-gray-500 dark:text-gray-400 italic">
                                 Civil Engineering and Environmental Systems, 2025.
                             </p>
                         </div>
-                        <a href="https://doi.org/10.1080/10286608.2025.2498167" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 text-periwinkle-dark dark:text-periwinkle hover:bg-periwinkle hover:text-white transition flex-shrink-0" title="Open DOI Link">
+                        <a href="https://doi.org/10.1080/10286608.2025.2498167" target="_blank"
+                            rel="noopener noreferrer"
+                            class="p-2 rounded-lg bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 text-periwinkle-dark dark:text-periwinkle hover:bg-periwinkle hover:text-ink-950 dark:text-white transition flex-shrink-0"
+                            title="Open DOI Link">
                             <i class="ph-bold ph-arrow-up-right text-base"></i>
                         </a>
                     </div>
@@ -692,18 +855,24 @@
                 <div class="pub-item studio-card p-5 rounded-xl" data-category="journal">
                     <div class="flex justify-between items-start gap-4">
                         <div class="space-y-1">
-                            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-periwinkle/15 text-periwinkle-dark dark:text-periwinkle font-semibold">Journal Article &middot; 2025</span>
-                            <h3 class="text-base sm:text-lg font-bold text-white leading-snug">
-                                Enhancing Disaster Resilience and Authentic Public Partnership in Transportation Practice: Negotiated Resilience Capability Maturity Model
+                            <span
+                                class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-periwinkle/15 text-periwinkle-dark dark:text-periwinkle font-semibold">Journal
+                                Article &middot; 2025</span>
+                            <h3 class="text-base sm:text-lg font-bold text-ink-950 dark:text-white leading-snug">
+                                Enhancing Disaster Resilience and Authentic Public Partnership in Transportation
+                                Practice: Negotiated Resilience Capability Maturity Model
                             </h3>
-                            <p class="text-xs text-gray-300 font-mono">
-                                <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett, A.</strong>, Orthous Inchauste, M., Yarbrough, C., Amekudzi-Kennedy, A., and B. Woodall.
+                            <p class="text-xs text-gray-700 dark:text-gray-300 font-mono">
+                                <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett, A.</strong>, Orthous
+                                Inchauste, M., Yarbrough, C., Amekudzi-Kennedy, A., and B. Woodall.
                             </p>
                             <p class="text-xs text-gray-500 dark:text-gray-400 italic">
                                 Transportation Research Record: Journal of the Transportation Research Board, 2025.
                             </p>
                         </div>
-                        <a href="https://doi.org/10.1177/03611981251364841" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 text-periwinkle-dark dark:text-periwinkle hover:bg-periwinkle hover:text-white transition flex-shrink-0" title="Open DOI Link">
+                        <a href="https://doi.org/10.1177/03611981251364841" target="_blank" rel="noopener noreferrer"
+                            class="p-2 rounded-lg bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 text-periwinkle-dark dark:text-periwinkle hover:bg-periwinkle hover:text-ink-950 dark:text-white transition flex-shrink-0"
+                            title="Open DOI Link">
                             <i class="ph-bold ph-arrow-up-right text-base"></i>
                         </a>
                     </div>
@@ -713,18 +882,25 @@
                 <div class="pub-item studio-card p-5 rounded-xl" data-category="journal">
                     <div class="flex justify-between items-start gap-4">
                         <div class="space-y-1">
-                            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-periwinkle/15 text-periwinkle-dark dark:text-periwinkle font-semibold">Journal Article &middot; 2024</span>
-                            <h3 class="text-base sm:text-lg font-bold text-white leading-snug">
-                                Effective Practices in Flood Adaptation by Recognizing System, Organization, and Project Interdependencies
+                            <span
+                                class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-periwinkle/15 text-periwinkle-dark dark:text-periwinkle font-semibold">Journal
+                                Article &middot; 2024</span>
+                            <h3 class="text-base sm:text-lg font-bold text-ink-950 dark:text-white leading-snug">
+                                Effective Practices in Flood Adaptation by Recognizing System, Organization, and Project
+                                Interdependencies
                             </h3>
-                            <p class="text-xs text-gray-300 font-mono">
-                                Cuadra, M., <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett, A.</strong>, Tennakoon, M., Amekudzi-Kennedy, A., Woodall, B., Ashuri, B., and P. Singh.
+                            <p class="text-xs text-gray-700 dark:text-gray-300 font-mono">
+                                Cuadra, M., <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett,
+                                    A.</strong>, Tennakoon, M., Amekudzi-Kennedy, A., Woodall, B., Ashuri, B., and P.
+                                Singh.
                             </p>
                             <p class="text-xs text-gray-500 dark:text-gray-400 italic">
                                 Transportation Research Record: Journal of the Transportation Research Board, 2024.
                             </p>
                         </div>
-                        <a href="https://doi.org/10.1177/03611981241231960" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 text-periwinkle-dark dark:text-periwinkle hover:bg-periwinkle hover:text-white transition flex-shrink-0" title="Open DOI Link">
+                        <a href="https://doi.org/10.1177/03611981241231960" target="_blank" rel="noopener noreferrer"
+                            class="p-2 rounded-lg bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 text-periwinkle-dark dark:text-periwinkle hover:bg-periwinkle hover:text-ink-950 dark:text-white transition flex-shrink-0"
+                            title="Open DOI Link">
                             <i class="ph-bold ph-arrow-up-right text-base"></i>
                         </a>
                     </div>
@@ -734,18 +910,24 @@
                 <div class="pub-item studio-card p-5 rounded-xl" data-category="journal">
                     <div class="flex justify-between items-start gap-4">
                         <div class="space-y-1">
-                            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-periwinkle/15 text-periwinkle-dark dark:text-periwinkle font-semibold">Journal Article &middot; 2025</span>
-                            <h3 class="text-base sm:text-lg font-bold text-white leading-snug">
-                                A Performance-Based Approach to Developing Capabilities for Building Resilience to Climate Hazards in Transportation Systems
+                            <span
+                                class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-periwinkle/15 text-periwinkle-dark dark:text-periwinkle font-semibold">Journal
+                                Article &middot; 2025</span>
+                            <h3 class="text-base sm:text-lg font-bold text-ink-950 dark:text-white leading-snug">
+                                A Performance-Based Approach to Developing Capabilities for Building Resilience to
+                                Climate Hazards in Transportation Systems
                             </h3>
-                            <p class="text-xs text-gray-300 font-mono">
-                                Amekudzi-Kennedy, A., Yang, Z., Singh, P., and <strong class="text-periwinkle-dark dark:text-periwinkle">A. Garrett</strong>.
+                            <p class="text-xs text-gray-700 dark:text-gray-300 font-mono">
+                                Amekudzi-Kennedy, A., Yang, Z., Singh, P., and <strong
+                                    class="text-periwinkle-dark dark:text-periwinkle">A. Garrett</strong>.
                             </p>
                             <p class="text-xs text-gray-500 dark:text-gray-400 italic">
                                 Smart and Resilient Transportation, 2024.
                             </p>
                         </div>
-                        <a href="https://doi.org/10.1108/SRT-12-2023-0017" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 text-periwinkle-dark dark:text-periwinkle hover:bg-periwinkle hover:text-white transition flex-shrink-0" title="Open DOI Link">
+                        <a href="https://doi.org/10.1108/SRT-12-2023-0017" target="_blank" rel="noopener noreferrer"
+                            class="p-2 rounded-lg bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 text-periwinkle-dark dark:text-periwinkle hover:bg-periwinkle hover:text-ink-950 dark:text-white transition flex-shrink-0"
+                            title="Open DOI Link">
                             <i class="ph-bold ph-arrow-up-right text-base"></i>
                         </a>
                     </div>
@@ -755,18 +937,25 @@
                 <div class="pub-item studio-card p-5 rounded-xl" data-category="journal">
                     <div class="flex justify-between items-start gap-4">
                         <div class="space-y-1">
-                            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-periwinkle/15 text-periwinkle-dark dark:text-periwinkle font-semibold">Journal Article &middot; 2023</span>
-                            <h3 class="text-base sm:text-lg font-bold text-white leading-snug">
-                                Developing Transportation Resilience Adaptively to Climate Change: A Risk-Based, Adaptive and Mitigation-Based Approach
+                            <span
+                                class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-periwinkle/15 text-periwinkle-dark dark:text-periwinkle font-semibold">Journal
+                                Article &middot; 2023</span>
+                            <h3 class="text-base sm:text-lg font-bold text-ink-950 dark:text-white leading-snug">
+                                Developing Transportation Resilience Adaptively to Climate Change: A Risk-Based,
+                                Adaptive and Mitigation-Based Approach
                             </h3>
-                            <p class="text-xs text-gray-300 font-mono">
-                                Amekudzi-Kennedy, A., Singh, P., Williams, E., Cuadra, M., Ashuri, B., Woodall, B., <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett, A.</strong>, Tennakoon, M., Clark, R., and A. Dheeraj.
+                            <p class="text-xs text-gray-700 dark:text-gray-300 font-mono">
+                                Amekudzi-Kennedy, A., Singh, P., Williams, E., Cuadra, M., Ashuri, B., Woodall, B.,
+                                <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett, A.</strong>,
+                                Tennakoon, M., Clark, R., and A. Dheeraj.
                             </p>
                             <p class="text-xs text-gray-500 dark:text-gray-400 italic">
                                 Transportation Research Record: Journal of the Transportation Research Board, 2023.
                             </p>
                         </div>
-                        <a href="https://doi.org/10.1177/03611981231186989" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 text-periwinkle-dark dark:text-periwinkle hover:bg-periwinkle hover:text-white transition flex-shrink-0" title="Open DOI Link">
+                        <a href="https://doi.org/10.1177/03611981231186989" target="_blank" rel="noopener noreferrer"
+                            class="p-2 rounded-lg bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 text-periwinkle-dark dark:text-periwinkle hover:bg-periwinkle hover:text-ink-950 dark:text-white transition flex-shrink-0"
+                            title="Open DOI Link">
                             <i class="ph-bold ph-arrow-up-right text-base"></i>
                         </a>
                     </div>
@@ -776,18 +965,25 @@
                 <div class="pub-item studio-card p-5 rounded-xl" data-category="conference">
                     <div class="flex justify-between items-start gap-4">
                         <div class="space-y-1">
-                            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-lilac/15 text-lilac-dark dark:text-lilac font-semibold">Conference Proceeding &middot; 2026</span>
-                            <h3 class="text-base sm:text-lg font-bold text-white leading-snug">
-                                Infrastructure Asset Management (IAM) Educational Needs and Workforce Competencies: Mapping Findings from a Survey and Expert Workshop to a Rail IAM Module
+                            <span
+                                class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-lilac/15 text-lilac-dark dark:text-lilac font-semibold">Conference
+                                Proceeding &middot; 2026</span>
+                            <h3 class="text-base sm:text-lg font-bold text-ink-950 dark:text-white leading-snug">
+                                Infrastructure Asset Management (IAM) Educational Needs and Workforce Competencies:
+                                Mapping Findings from a Survey and Expert Workshop to a Rail IAM Module
                             </h3>
-                            <p class="text-xs text-gray-300 font-mono">
-                                <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett, A.</strong>, and A. Amekudzi-Kennedy.
+                            <p class="text-xs text-gray-700 dark:text-gray-300 font-mono">
+                                <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett, A.</strong>, and A.
+                                Amekudzi-Kennedy.
                             </p>
                             <p class="text-xs text-gray-500 dark:text-gray-400 italic">
-                                American Society of Engineering Education (ASEE) 2026 Annual Conference & Exposition, Charlotte, NC.
+                                American Society of Engineering Education (ASEE) 2026 Annual Conference & Exposition,
+                                Charlotte, NC.
                             </p>
                         </div>
-                        <a href="https://peer.asee.org/59994" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 text-lilac-dark dark:text-lilac hover:bg-lilac hover:text-white transition flex-shrink-0" title="Open Link">
+                        <a href="https://peer.asee.org/59994" target="_blank" rel="noopener noreferrer"
+                            class="p-2 rounded-lg bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 text-lilac-dark dark:text-lilac hover:bg-lilac hover:text-ink-950 dark:text-white transition flex-shrink-0"
+                            title="Open Link">
                             <i class="ph-bold ph-arrow-up-right text-base"></i>
                         </a>
                     </div>
@@ -797,15 +993,21 @@
                 <div class="pub-item studio-card p-5 rounded-xl" data-category="conference">
                     <div class="flex justify-between items-start gap-4">
                         <div class="space-y-1">
-                            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-lilac/15 text-lilac-dark dark:text-lilac font-semibold">Conference Proceeding &middot; 2026</span>
-                            <h3 class="text-base sm:text-lg font-bold text-white leading-snug">
-                                Transportation Resilience: Trends in Education and Development of a Teaching-and-Learning Module for Graduate Courses
+                            <span
+                                class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-lilac/15 text-lilac-dark dark:text-lilac font-semibold">Conference
+                                Proceeding &middot; 2026</span>
+                            <h3 class="text-base sm:text-lg font-bold text-ink-950 dark:text-white leading-snug">
+                                Transportation Resilience: Trends in Education and Development of a
+                                Teaching-and-Learning Module for Graduate Courses
                             </h3>
-                            <p class="text-xs text-gray-300 font-mono">
-                                <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett, A.</strong>, Castañeda-Torres, V., Muruganandham, S., Peddi, I., Perez-Guzman, S., Robel, A., Amekudzi-Kennedy, A., and B. Woodall.
+                            <p class="text-xs text-gray-700 dark:text-gray-300 font-mono">
+                                <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett, A.</strong>,
+                                Castañeda-Torres, V., Muruganandham, S., Peddi, I., Perez-Guzman, S., Robel, A.,
+                                Amekudzi-Kennedy, A., and B. Woodall.
                             </p>
                             <p class="text-xs text-gray-500 dark:text-gray-400 italic">
-                                American Society of Civil Engineers (ASCE) Infrastructure Resilience Division (IRD), San Antonio, TX.
+                                American Society of Civil Engineers (ASCE) Infrastructure Resilience Division (IRD), San
+                                Antonio, TX.
                             </p>
                         </div>
                     </div>
@@ -815,18 +1017,26 @@
                 <div class="pub-item studio-card p-5 rounded-xl" data-category="conference">
                     <div class="flex justify-between items-start gap-4">
                         <div class="space-y-1">
-                            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-lilac/15 text-lilac-dark dark:text-lilac font-semibold">Conference Proceeding &middot; 2024</span>
-                            <h3 class="text-base sm:text-lg font-bold text-white leading-snug">
-                                Leveraging a Digital Twin Interface for Multimodal Transportation Resilience, Connectivity, and Equity – Case Study of Toyosu, Tokyo
+                            <span
+                                class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-lilac/15 text-lilac-dark dark:text-lilac font-semibold">Conference
+                                Proceeding &middot; 2024</span>
+                            <h3 class="text-base sm:text-lg font-bold text-ink-950 dark:text-white leading-snug">
+                                Leveraging a Digital Twin Interface for Multimodal Transportation Resilience,
+                                Connectivity, and Equity - Case Study of Toyosu, Tokyo
                             </h3>
-                            <p class="text-xs text-gray-300 font-mono">
-                                <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett, A.</strong>, Ginensky, K., Wang, X., Ahmed, H., Shen, J., Yoshida, T., Murayama, M., and P. Yang.
+                            <p class="text-xs text-gray-700 dark:text-gray-300 font-mono">
+                                <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett, A.</strong>,
+                                Ginensky, K., Wang, X., Ahmed, H., Shen, J., Yoshida, T., Murayama, M., and P. Yang.
                             </p>
                             <p class="text-xs text-gray-500 dark:text-gray-400 italic">
-                                International Conference on Applied Energy (ICAE 2024), Niigata City, Japan. Energy Proceedings.
+                                International Conference on Applied Energy (ICAE 2024), Niigata City, Japan. Energy
+                                Proceedings.
                             </p>
                         </div>
-                        <a href="https://doi.org/10.46855/energy-proceedings-11460" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 text-lilac-dark dark:text-lilac hover:bg-lilac hover:text-white transition flex-shrink-0" title="Open DOI">
+                        <a href="https://doi.org/10.46855/energy-proceedings-11460" target="_blank"
+                            rel="noopener noreferrer"
+                            class="p-2 rounded-lg bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 text-lilac-dark dark:text-lilac hover:bg-lilac hover:text-ink-950 dark:text-white transition flex-shrink-0"
+                            title="Open DOI">
                             <i class="ph-bold ph-arrow-up-right text-base"></i>
                         </a>
                     </div>
@@ -836,12 +1046,16 @@
                 <div class="pub-item studio-card p-5 rounded-xl" data-category="report">
                     <div class="flex justify-between items-start gap-4">
                         <div class="space-y-1">
-                            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-mauve/15 text-mauve-dark dark:text-mauve font-semibold">Research Report &middot; 2026</span>
-                            <h3 class="text-base sm:text-lg font-bold text-white leading-snug">
-                                Characterizing Adaptive Capacity for Rail Transportation Resilience: Options, Strategies, and Influential Factors
+                            <span
+                                class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-mauve/15 text-mauve-dark dark:text-mauve font-semibold">Research
+                                Report &middot; 2026</span>
+                            <h3 class="text-base sm:text-lg font-bold text-ink-950 dark:text-white leading-snug">
+                                Characterizing Adaptive Capacity for Rail Transportation Resilience: Options,
+                                Strategies, and Influential Factors
                             </h3>
-                            <p class="text-xs text-gray-300 font-mono">
-                                <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett, A.</strong>, and A. Amekudzi-Kennedy.
+                            <p class="text-xs text-gray-700 dark:text-gray-300 font-mono">
+                                <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett, A.</strong>, and A.
+                                Amekudzi-Kennedy.
                             </p>
                             <p class="text-xs text-gray-500 dark:text-gray-400 italic">
                                 National Center for Sustainable Transportation (NCST).
@@ -854,18 +1068,24 @@
                 <div class="pub-item studio-card p-5 rounded-xl" data-category="report">
                     <div class="flex justify-between items-start gap-4">
                         <div class="space-y-1">
-                            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-mauve/15 text-mauve-dark dark:text-mauve font-semibold">Research Report &middot; 2025</span>
-                            <h3 class="text-base sm:text-lg font-bold text-white leading-snug">
-                                Enhancing Extreme Weather Resilience for Rail Systems: Multi-Capability Assessment & Sustainability Integration
+                            <span
+                                class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-mauve/15 text-mauve-dark dark:text-mauve font-semibold">Research
+                                Report &middot; 2025</span>
+                            <h3 class="text-base sm:text-lg font-bold text-ink-950 dark:text-white leading-snug">
+                                Enhancing Extreme Weather Resilience for Rail Systems: Multi-Capability Assessment &
+                                Sustainability Integration
                             </h3>
-                            <p class="text-xs text-gray-300 font-mono">
-                                <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett, A.</strong>, and A. Amekudzi-Kennedy.
+                            <p class="text-xs text-gray-700 dark:text-gray-300 font-mono">
+                                <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett, A.</strong>, and A.
+                                Amekudzi-Kennedy.
                             </p>
                             <p class="text-xs text-gray-500 dark:text-gray-400 italic">
                                 National Center for Sustainable Transportation (NCST).
                             </p>
                         </div>
-                        <a href="https://doi.org/10.7922/G2KH0KPR" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 text-mauve-dark dark:text-mauve hover:bg-mauve hover:text-white transition flex-shrink-0" title="Open Report DOI">
+                        <a href="https://doi.org/10.7922/G2KH0KPR" target="_blank" rel="noopener noreferrer"
+                            class="p-2 rounded-lg bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 text-mauve-dark dark:text-mauve hover:bg-mauve hover:text-ink-950 dark:text-white transition flex-shrink-0"
+                            title="Open Report DOI">
                             <i class="ph-bold ph-arrow-up-right text-base"></i>
                         </a>
                     </div>
@@ -875,18 +1095,24 @@
                 <div class="pub-item studio-card p-5 rounded-xl" data-category="report">
                     <div class="flex justify-between items-start gap-4">
                         <div class="space-y-1">
-                            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-mauve/15 text-mauve-dark dark:text-mauve font-semibold">Research Report &middot; 2024</span>
-                            <h3 class="text-base sm:text-lg font-bold text-white leading-snug">
-                                A Study of the Relationship between Transportation System Resilience (to Climate Hazards) and Social Equity
+                            <span
+                                class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-mauve/15 text-mauve-dark dark:text-mauve font-semibold">Research
+                                Report &middot; 2024</span>
+                            <h3 class="text-base sm:text-lg font-bold text-ink-950 dark:text-white leading-snug">
+                                A Study of the Relationship between Transportation System Resilience (to Climate
+                                Hazards) and Social Equity
                             </h3>
-                            <p class="text-xs text-gray-300 font-mono">
-                                Amekudzi-Kennedy, A., <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett, A.</strong>, Patil, P., and M. Orthous Inchauste.
+                            <p class="text-xs text-gray-700 dark:text-gray-300 font-mono">
+                                Amekudzi-Kennedy, A., <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett,
+                                    A.</strong>, Patil, P., and M. Orthous Inchauste.
                             </p>
                             <p class="text-xs text-gray-500 dark:text-gray-400 italic">
                                 Center for Transportation, Equity, Decisions and Dollars (CTEDD).
                             </p>
                         </div>
-                        <a href="https://rosap.ntl.bts.gov/view/dot/78252" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 text-mauve-dark dark:text-mauve hover:bg-mauve hover:text-white transition flex-shrink-0" title="Open Report">
+                        <a href="https://rosap.ntl.bts.gov/view/dot/78252" target="_blank" rel="noopener noreferrer"
+                            class="p-2 rounded-lg bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 text-mauve-dark dark:text-mauve hover:bg-mauve hover:text-ink-950 dark:text-white transition flex-shrink-0"
+                            title="Open Report">
                             <i class="ph-bold ph-arrow-up-right text-base"></i>
                         </a>
                     </div>
@@ -896,18 +1122,26 @@
                 <div class="pub-item studio-card p-5 rounded-xl" data-category="report">
                     <div class="flex justify-between items-start gap-4">
                         <div class="space-y-1">
-                            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-mauve/15 text-mauve-dark dark:text-mauve font-semibold">Research Report &middot; 2023</span>
-                            <h3 class="text-base sm:text-lg font-bold text-white leading-snug">
-                                Incorporating Resilience Considerations in Transportation Planning, TSMO and Asset Management
+                            <span
+                                class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-mauve/15 text-mauve-dark dark:text-mauve font-semibold">Research
+                                Report &middot; 2023</span>
+                            <h3 class="text-base sm:text-lg font-bold text-ink-950 dark:text-white leading-snug">
+                                Incorporating Resilience Considerations in Transportation Planning, TSMO and Asset
+                                Management
                             </h3>
-                            <p class="text-xs text-gray-300 font-mono">
-                                Amekudzi-Kennedy, A., Ashuri, B., Clark, R., Woodall, B., Singh, P., Morano, K., Cuadra, M., <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett, A.</strong>, Tennakoon, M., and Z. Yang.
+                            <p class="text-xs text-gray-700 dark:text-gray-300 font-mono">
+                                Amekudzi-Kennedy, A., Ashuri, B., Clark, R., Woodall, B., Singh, P., Morano, K., Cuadra,
+                                M., <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett, A.</strong>,
+                                Tennakoon, M., and Z. Yang.
                             </p>
                             <p class="text-xs text-gray-500 dark:text-gray-400 italic">
-                                Georgia Department of Transportation (GDOT) Office of Performance-Based Management & Research.
+                                Georgia Department of Transportation (GDOT) Office of Performance-Based Management &
+                                Research.
                             </p>
                         </div>
-                        <a href="https://rosap.ntl.bts.gov/view/dot/73032" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 text-mauve-dark dark:text-mauve hover:bg-mauve hover:text-white transition flex-shrink-0" title="Open GDOT Report">
+                        <a href="https://rosap.ntl.bts.gov/view/dot/73032" target="_blank" rel="noopener noreferrer"
+                            class="p-2 rounded-lg bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 text-mauve-dark dark:text-mauve hover:bg-mauve hover:text-ink-950 dark:text-white transition flex-shrink-0"
+                            title="Open GDOT Report">
                             <i class="ph-bold ph-arrow-up-right text-base"></i>
                         </a>
                     </div>
@@ -917,18 +1151,23 @@
                 <div class="pub-item studio-card p-5 rounded-xl" data-category="review">
                     <div class="flex justify-between items-start gap-4">
                         <div class="space-y-1">
-                            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-blush/20 text-blush-dark font-semibold">Book Review &middot; 2026</span>
-                            <h3 class="text-base sm:text-lg font-bold text-white leading-snug">
+                            <span
+                                class="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-blush/20 text-blush-dark font-semibold">Book
+                                Review &middot; 2026</span>
+                            <h3 class="text-base sm:text-lg font-bold text-ink-950 dark:text-white leading-snug">
                                 Review of "How to write your literature review", by Gary Thomas
                             </h3>
-                            <p class="text-xs text-gray-300 font-mono">
+                            <p class="text-xs text-gray-700 dark:text-gray-300 font-mono">
                                 <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett, A.</strong>
                             </p>
                             <p class="text-xs text-gray-500 dark:text-gray-400 italic">
                                 Journal of Urban Affairs, 2026.
                             </p>
                         </div>
-                        <a href="https://doi.org/10.1080/07352166.2026.2639284" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 text-blush-dark hover:bg-blush hover:text-ink-950 transition flex-shrink-0" title="Open Book Review DOI">
+                        <a href="https://doi.org/10.1080/07352166.2026.2639284" target="_blank"
+                            rel="noopener noreferrer"
+                            class="p-2 rounded-lg bg-paper-200 dark:bg-ink-850 border border-paper-300 dark:border-ink-750 text-blush-dark hover:bg-blush hover:text-ink-950 transition flex-shrink-0"
+                            title="Open Book Review DOI">
                             <i class="ph-bold ph-arrow-up-right text-base"></i>
                         </a>
                     </div>
@@ -942,8 +1181,9 @@
         <!-- ========================================================================= -->
         <section id="awards" class="py-16 border-t border-paper-300 dark:border-ink-800 scroll-mt-20">
             <div class="mb-8">
-                <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2">Honors & Awards</h2>
-                <p class="text-xs font-mono text-periwinkle-dark dark:text-periwinkle uppercase tracking-wider">National Scholarships & Academic Recognitions</p>
+                <h2 class="text-2xl sm:text-3xl font-bold text-ink-950 dark:text-white mb-2">Honors & Awards</h2>
+                <p class="text-xs font-mono text-periwinkle-dark dark:text-periwinkle uppercase tracking-wider">National
+                    Scholarships & Academic Recognitions</p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -952,11 +1192,14 @@
                 <div class="studio-card p-5 rounded-xl border-t-2 border-t-periwinkle flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-center mb-2">
-                            <span class="text-periwinkle-dark dark:text-periwinkle font-mono text-xs font-semibold">2026</span>
-                            <span class="text-xs font-mono text-periwinkle-dark dark:text-periwinkle bg-periwinkle/10 dark:bg-periwinkle/15 border border-periwinkle/30 px-2 py-0.5 rounded font-bold">$500</span>
+                            <span
+                                class="text-periwinkle-dark dark:text-periwinkle font-mono text-xs font-semibold">2026</span>
+                            <span
+                                class="text-xs font-mono text-periwinkle-dark dark:text-periwinkle bg-periwinkle/10 dark:bg-periwinkle/15 border border-periwinkle/30 px-2 py-0.5 rounded font-bold">$500</span>
                         </div>
-                        <h3 class="text-base font-bold text-white mb-1">Outstanding Graduate Student Instructor</h3>
-                        <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Georgia Institute of Technology</p>
+                        <h3 class="text-base font-bold text-ink-950 dark:text-white mb-1">Outstanding Graduate Student Instructor</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Georgia Institute of Technology
+                        </p>
                     </div>
                 </div>
 
@@ -966,8 +1209,9 @@
                         <div class="flex justify-between items-center mb-2">
                             <span class="text-lilac-dark dark:text-lilac font-mono text-xs font-semibold">2026</span>
                         </div>
-                        <h3 class="text-base font-bold text-white mb-1">Academic Excellence Award</h3>
-                        <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Georgia Tech School of City and Regional Planning</p>
+                        <h3 class="text-base font-bold text-ink-950 dark:text-white mb-1">Academic Excellence Award</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Georgia Tech School of City and
+                            Regional Planning</p>
                     </div>
                 </div>
 
@@ -975,11 +1219,14 @@
                 <div class="studio-card p-5 rounded-xl border-t-2 border-t-periwinkle flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-center mb-2">
-                            <span class="text-periwinkle-dark dark:text-periwinkle font-mono text-xs font-semibold">2025</span>
-                            <span class="text-xs font-mono text-periwinkle-dark dark:text-periwinkle bg-periwinkle/10 dark:bg-periwinkle/15 border border-periwinkle/30 px-2 py-0.5 rounded font-bold">$2,000</span>
+                            <span
+                                class="text-periwinkle-dark dark:text-periwinkle font-mono text-xs font-semibold">2025</span>
+                            <span
+                                class="text-xs font-mono text-periwinkle-dark dark:text-periwinkle bg-periwinkle/10 dark:bg-periwinkle/15 border border-periwinkle/30 px-2 py-0.5 rounded font-bold">$2,000</span>
                         </div>
-                        <h3 class="text-base font-bold text-white mb-1">Outstanding Student of the Year</h3>
-                        <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">National Center for Sustainable Transportation (USDOT UTC)</p>
+                        <h3 class="text-base font-bold text-ink-950 dark:text-white mb-1">Outstanding Student of the Year</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">National Center for Sustainable
+                            Transportation (USDOT UTC)</p>
                     </div>
                 </div>
 
@@ -988,10 +1235,12 @@
                     <div>
                         <div class="flex justify-between items-center mb-2">
                             <span class="text-lilac-dark dark:text-lilac font-mono text-xs font-semibold">2024</span>
-                            <span class="text-xs font-mono text-lilac-dark dark:text-lilac bg-lilac/10 dark:bg-lilac/15 border border-lilac/30 px-2 py-0.5 rounded font-bold">$5,000</span>
+                            <span
+                                class="text-xs font-mono text-lilac-dark dark:text-lilac bg-lilac/10 dark:bg-lilac/15 border border-lilac/30 px-2 py-0.5 rounded font-bold">$5,000</span>
                         </div>
-                        <h3 class="text-base font-bold text-white mb-1">Georgia Section Scholarship Award</h3>
-                        <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Institute of Transportation Engineers (ITE)</p>
+                        <h3 class="text-base font-bold text-ink-950 dark:text-white mb-1">Georgia Section Scholarship Award</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Institute of Transportation
+                            Engineers (ITE)</p>
                     </div>
                 </div>
 
@@ -1000,10 +1249,12 @@
                     <div>
                         <div class="flex justify-between items-center mb-2">
                             <span class="text-lilac-dark dark:text-lilac font-mono text-xs font-semibold">2024</span>
-                            <span class="text-xs font-mono text-lilac-dark dark:text-lilac bg-lilac/10 dark:bg-lilac/15 border border-lilac/30 px-2 py-0.5 rounded font-bold">$1,000</span>
+                            <span
+                                class="text-xs font-mono text-lilac-dark dark:text-lilac bg-lilac/10 dark:bg-lilac/15 border border-lilac/30 px-2 py-0.5 rounded font-bold">$1,000</span>
                         </div>
-                        <h3 class="text-base font-bold text-white mb-1">Mundy Global Learning Endowment Award</h3>
-                        <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Georgia Tech School of Civil and Environmental Engineering</p>
+                        <h3 class="text-base font-bold text-ink-950 dark:text-white mb-1">Mundy Global Learning Endowment Award</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Georgia Tech School of Civil and
+                            Environmental Engineering</p>
                     </div>
                 </div>
 
@@ -1012,10 +1263,12 @@
                     <div>
                         <div class="flex justify-between items-center mb-2">
                             <span class="text-lilac-dark dark:text-lilac font-mono text-xs font-semibold">2023</span>
-                            <span class="text-xs font-mono text-lilac-dark dark:text-lilac bg-lilac/10 dark:bg-lilac/15 border border-lilac/30 px-2 py-0.5 rounded font-bold">$5,000</span>
+                            <span
+                                class="text-xs font-mono text-lilac-dark dark:text-lilac bg-lilac/10 dark:bg-lilac/15 border border-lilac/30 px-2 py-0.5 rounded font-bold">$5,000</span>
                         </div>
-                        <h3 class="text-base font-bold text-white mb-1">Helene M. Overly Memorial Scholarship</h3>
-                        <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Women's Transportation Seminar (WTS)</p>
+                        <h3 class="text-base font-bold text-ink-950 dark:text-white mb-1">Helene M. Overly Memorial Scholarship</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Women's Transportation Seminar
+                            (WTS)</p>
                     </div>
                 </div>
 
@@ -1024,9 +1277,10 @@
                     <div>
                         <div class="flex justify-between items-center mb-2">
                             <span class="text-mauve-dark dark:text-mauve font-mono text-xs font-semibold">2021</span>
-                            <span class="text-xs font-mono text-mauve-dark dark:text-mauve bg-mauve/10 dark:bg-mauve/15 border border-mauve/30 px-2 py-0.5 rounded font-bold">$10,000</span>
+                            <span
+                                class="text-xs font-mono text-mauve-dark dark:text-mauve bg-mauve/10 dark:bg-mauve/15 border border-mauve/30 px-2 py-0.5 rounded font-bold">$10,000</span>
                         </div>
-                        <h3 class="text-base font-bold text-white mb-1">HDR Transportation Scholarship</h3>
+                        <h3 class="text-base font-bold text-ink-950 dark:text-white mb-1">HDR Transportation Scholarship</h3>
                         <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">HDR Engineering</p>
                     </div>
                 </div>
@@ -1035,11 +1289,15 @@
                 <div class="studio-card p-5 rounded-xl border-t-2 border-t-mauve flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-center mb-2">
-                            <span class="text-mauve-dark dark:text-mauve font-mono text-xs font-semibold">2021, 2022, 2023, 2026</span>
-                            <span class="text-xs font-mono text-mauve-dark dark:text-mauve bg-mauve/10 dark:bg-mauve/15 border border-mauve/30 px-2 py-0.5 rounded font-bold">$2,500 / yr</span>
+                            <span class="text-mauve-dark dark:text-mauve font-mono text-xs font-semibold">2021, 2022,
+                                2023, 2026</span>
+                            <span
+                                class="text-xs font-mono text-mauve-dark dark:text-mauve bg-mauve/10 dark:bg-mauve/15 border border-mauve/30 px-2 py-0.5 rounded font-bold">$2,500
+                                / yr</span>
                         </div>
-                        <h3 class="text-base font-bold text-white mb-1">GEF Scholarships</h3>
-                        <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Georgia Engineering Foundation (4-time Recipient)</p>
+                        <h3 class="text-base font-bold text-ink-950 dark:text-white mb-1">GEF Scholarships</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Georgia Engineering Foundation
+                            (4-time Recipient)</p>
                     </div>
                 </div>
 
@@ -1048,10 +1306,13 @@
                     <div>
                         <div class="flex justify-between items-center mb-2">
                             <span class="text-mauve-dark dark:text-mauve font-mono text-xs font-semibold">2021</span>
-                            <span class="text-xs font-mono text-mauve-dark dark:text-mauve bg-mauve/10 dark:bg-mauve/15 border border-mauve/30 px-2 py-0.5 rounded font-bold">$2,500</span>
+                            <span
+                                class="text-xs font-mono text-mauve-dark dark:text-mauve bg-mauve/10 dark:bg-mauve/15 border border-mauve/30 px-2 py-0.5 rounded font-bold">$2,500</span>
                         </div>
-                        <h3 class="text-base font-bold text-white mb-1">McMahon Transportation Engineering Scholarship</h3>
-                        <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Transportation Engineering Academic Scholarship</p>
+                        <h3 class="text-base font-bold text-ink-950 dark:text-white mb-1">McMahon Transportation Engineering Scholarship
+                        </h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Transportation Engineering
+                            Academic Scholarship</p>
                     </div>
                 </div>
 
@@ -1063,37 +1324,50 @@
         <!-- ========================================================================= -->
         <section id="presentations" class="py-16 border-t border-paper-300 dark:border-ink-800 scroll-mt-20">
             <div class="mb-8">
-                <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2">Presentations & Workshops</h2>
-                <p class="text-xs font-mono text-periwinkle-dark dark:text-periwinkle uppercase tracking-wider">Invited Talks, Conference Lecterns, Posters & Workshops</p>
+                <h2 class="text-2xl sm:text-3xl font-bold text-ink-950 dark:text-white mb-2">Presentations & Workshops</h2>
+                <p class="text-xs font-mono text-periwinkle-dark dark:text-periwinkle uppercase tracking-wider">Invited
+                    Talks, Conference Lecterns, Posters & Workshops</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-6">
 
                 <!-- Oral / Lectern Presentations -->
                 <div class="studio-card p-5 rounded-xl space-y-3">
-                    <h3 class="font-bold text-sm text-white flex items-center gap-2">
+                    <h3 class="font-bold text-sm text-ink-950 dark:text-white flex items-center gap-2">
                         <i class="ph-bold ph-microphone text-periwinkle-dark dark:text-periwinkle text-base"></i>
                         <span>Oral & Lectern Talks</span>
                     </h3>
-                    <ul class="space-y-2.5 text-xs text-gray-300">
+                    <ul class="space-y-2.5 text-xs text-gray-700 dark:text-gray-300 ">
                         <li class="border-b border-paper-300 dark:border-ink-800 pb-2">
-                            <span class="text-periwinkle-dark dark:text-periwinkle font-mono text-[10px] block font-medium">ASCE IRD 2026 &middot; San Antonio, TX</span>
-                            Transportation Resilience: Trends in Education and Development of a Teaching-and-Learning Module for Graduate Courses
+                            <span
+                                class="text-periwinkle-dark dark:text-periwinkle font-mono text-[10px] block font-medium">ASCE
+                                IRD 2026 &middot; San Antonio, TX</span>
+                            Transportation Resilience: Trends in Education and Development of a Teaching-and-Learning
+                            Module for Graduate Courses
                         </li>
                         <li class="border-b border-paper-300 dark:border-ink-800 pb-2">
-                            <span class="text-periwinkle-dark dark:text-periwinkle font-mono text-[10px] block font-medium">ASEE 2026 &middot; Charlotte, NC</span>
+                            <span
+                                class="text-periwinkle-dark dark:text-periwinkle font-mono text-[10px] block font-medium">ASEE
+                                2026 &middot; Charlotte, NC</span>
                             Infrastructure Asset Management Educational Needs and Workforce Competencies
                         </li>
                         <li class="border-b border-paper-300 dark:border-ink-800 pb-2">
-                            <span class="text-periwinkle-dark dark:text-periwinkle font-mono text-[10px] block font-medium">VISIM 2025 &middot; Online</span>
+                            <span
+                                class="text-periwinkle-dark dark:text-periwinkle font-mono text-[10px] block font-medium">VISIM
+                                2025 &middot; Online</span>
                             Approaches to Assess Rail System Resilience: A Multi-Capability Perspective
                         </li>
                         <li class="border-b border-paper-300 dark:border-ink-800 pb-2">
-                            <span class="text-periwinkle-dark dark:text-periwinkle font-mono text-[10px] block font-medium">TRB Annual Meeting 2025 &middot; Washington, DC</span>
-                            Multi-Capability Resilience Assessment Approach for Improved Rail Network Performance Monitoring
+                            <span
+                                class="text-periwinkle-dark dark:text-periwinkle font-mono text-[10px] block font-medium">TRB
+                                Annual Meeting 2025 &middot; Washington, DC</span>
+                            Multi-Capability Resilience Assessment Approach for Improved Rail Network Performance
+                            Monitoring
                         </li>
                         <li>
-                            <span class="text-periwinkle-dark dark:text-periwinkle font-mono text-[10px] block font-medium">Climate Challenges 2023 &middot; Washington, DC</span>
+                            <span
+                                class="text-periwinkle-dark dark:text-periwinkle font-mono text-[10px] block font-medium">Climate
+                                Challenges 2023 &middot; Washington, DC</span>
                             Resilience-Building Resources for State DOTs
                         </li>
                     </ul>
@@ -1101,55 +1375,73 @@
 
                 <!-- Poster Presentations -->
                 <div class="studio-card p-5 rounded-xl space-y-3">
-                    <h3 class="font-bold text-sm text-white flex items-center gap-2">
+                    <h3 class="font-bold text-sm text-ink-950 dark:text-white flex items-center gap-2">
                         <i class="ph-bold ph-presentation text-lilac-dark dark:text-lilac text-base"></i>
                         <span>Poster Sessions</span>
                     </h3>
-                    <ul class="space-y-2.5 text-xs text-gray-300">
+                    <ul class="space-y-2.5 text-xs text-gray-700 dark:text-gray-300 ">
                         <li class="border-b border-paper-300 dark:border-ink-800 pb-2">
-                            <span class="text-lilac-dark dark:text-lilac font-mono text-[10px] block font-medium">TRB Annual Meeting 2026 &middot; Washington, DC</span>
-                            Evaluating Flexibility and Agility in Transportation Systems and Organizations Using Long-Range Transportation Plans: Results from Hybrid LLM-Human Scoring
+                            <span class="text-lilac-dark dark:text-lilac font-mono text-[10px] block font-medium">TRB
+                                Annual Meeting 2026 &middot; Washington, DC</span>
+                            Evaluating Flexibility and Agility in Transportation Systems and Organizations Using
+                            Long-Range Transportation Plans: Results from Hybrid LLM-Human Scoring
                         </li>
                         <li class="border-b border-paper-300 dark:border-ink-800 pb-2">
-                            <span class="text-lilac-dark dark:text-lilac font-mono text-[10px] block font-medium">TRB Annual Meeting 2025 &middot; Washington, DC</span>
-                            Integrated Rail System Sustainability and Resilience: Risks, Challenges, Opportunities, and Solution Pathways
+                            <span class="text-lilac-dark dark:text-lilac font-mono text-[10px] block font-medium">TRB
+                                Annual Meeting 2025 &middot; Washington, DC</span>
+                            Integrated Rail System Sustainability and Resilience: Risks, Challenges, Opportunities, and
+                            Solution Pathways
                         </li>
                         <li class="border-b border-paper-300 dark:border-ink-800 pb-2">
-                            <span class="text-lilac-dark dark:text-lilac font-mono text-[10px] block font-medium">TRB Annual Meeting 2024 &middot; Washington, DC</span>
-                            Building Rail System Resilience: Framework for Incorporating Vulnerability Assessments and Hazard-Specific Adaptation into Planning
+                            <span class="text-lilac-dark dark:text-lilac font-mono text-[10px] block font-medium">TRB
+                                Annual Meeting 2024 &middot; Washington, DC</span>
+                            Building Rail System Resilience: Framework for Incorporating Vulnerability Assessments and
+                            Hazard-Specific Adaptation into Planning
                         </li>
                         <li class="border-b border-paper-300 dark:border-ink-800 pb-2">
-                            <span class="text-lilac-dark dark:text-lilac font-mono text-[10px] block font-medium">TRB Annual Meeting 2024 &middot; Washington, DC</span>
-                            Vulnerability Assessments Incorporating Accessibility Considerations to Enhance Transportation System Resilience and Equity
+                            <span class="text-lilac-dark dark:text-lilac font-mono text-[10px] block font-medium">TRB
+                                Annual Meeting 2024 &middot; Washington, DC</span>
+                            Vulnerability Assessments Incorporating Accessibility Considerations to Enhance
+                            Transportation System Resilience and Equity
                         </li>
                         <li>
-                            <span class="text-lilac-dark dark:text-lilac font-mono text-[10px] block font-medium">TRB Annual Meeting 2023 &middot; Washington, DC</span>
-                            A Performance-Based Approach to Developing Capabilities for Building Resilience to Climate Hazards
+                            <span class="text-lilac-dark dark:text-lilac font-mono text-[10px] block font-medium">TRB
+                                Annual Meeting 2023 &middot; Washington, DC</span>
+                            A Performance-Based Approach to Developing Capabilities for Building Resilience to Climate
+                            Hazards
                         </li>
                     </ul>
                 </div>
 
                 <!-- Workshops & Panels -->
                 <div class="studio-card p-5 rounded-xl space-y-3">
-                    <h3 class="font-bold text-sm text-white flex items-center gap-2">
+                    <h3 class="font-bold text-sm text-ink-950 dark:text-white flex items-center gap-2">
                         <i class="ph-bold ph-users text-mauve-dark dark:text-mauve text-base"></i>
                         <span>Workshops</span>
                     </h3>
-                    <ul class="space-y-2.5 text-xs text-gray-300">
+                    <ul class="space-y-2.5 text-xs text-gray-700 dark:text-gray-300 ">
                         <li class="border-b border-paper-300 dark:border-ink-800 pb-2">
-                            <span class="text-mauve-dark dark:text-mauve font-mono text-[10px] block font-medium">Transportation Forum 2026 &middot; Atlanta, GA (May 2026)</span>
+                            <span
+                                class="text-mauve-dark dark:text-mauve font-mono text-[10px] block font-medium">Transportation
+                                Forum 2026 &middot; Atlanta, GA (August 2026)</span>
                             Performance Management and Measurement
                         </li>
                         <li class="border-b border-paper-300 dark:border-ink-800 pb-2">
-                            <span class="text-mauve-dark dark:text-mauve font-mono text-[10px] block font-medium">Georgia Tech 2025 &middot; Virtual (July 2025)</span>
+                            <span
+                                class="text-mauve-dark dark:text-mauve font-mono text-[10px] block font-medium">Georgia
+                                Tech 2025 &middot; Virtual (July 2025)</span>
                             Infrastructure Asset Management Education and Workforce Development Needs Workshop
                         </li>
                         <li class="border-b border-paper-300 dark:border-ink-800 pb-2">
-                            <span class="text-mauve-dark dark:text-mauve font-mono text-[10px] block font-medium">TRB Annual Meeting 2025 &middot; Washington, DC (Jan 2025)</span>
-                            Deep Uncertainty and the Development of the Multi-Hazards Exposure, Vulnerability and Risk Assessment Tool (Asset Risk & Resilience Workshop)
+                            <span class="text-mauve-dark dark:text-mauve font-mono text-[10px] block font-medium">TRB
+                                Annual Meeting 2025 &middot; Washington, DC (Jan 2025)</span>
+                            Deep Uncertainty and the Development of the Multi-Hazards Exposure, Vulnerability and Risk
+                            Assessment Tool (Asset Risk & Resilience Workshop)
                         </li>
                         <li>
-                            <span class="text-mauve-dark dark:text-mauve font-mono text-[10px] block font-medium">Georgia Adaptation Workshop 2023 &middot; Atlanta, GA (July 2023)</span>
+                            <span
+                                class="text-mauve-dark dark:text-mauve font-mono text-[10px] block font-medium">Georgia
+                                Adaptation Workshop 2023 &middot; Atlanta, GA (July 2023)</span>
                             Workshop on Transportation Adaptation to Flooding, Extreme Heat, and Tornadoes in Georgia
                         </li>
                     </ul>
@@ -1163,8 +1455,9 @@
         <!-- ========================================================================= -->
         <section id="teaching" class="py-16 border-t border-paper-300 dark:border-ink-800 scroll-mt-20">
             <div class="mb-8">
-                <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2">Teaching & Mentorship</h2>
-                <p class="text-xs font-mono text-periwinkle-dark dark:text-periwinkle uppercase tracking-wider">Instructor of Record & Research Mentorship</p>
+                <h2 class="text-2xl sm:text-3xl font-bold text-ink-950 dark:text-white mb-2">Teaching & Mentorship</h2>
+                <p class="text-xs font-mono text-periwinkle-dark dark:text-periwinkle uppercase tracking-wider">
+                    Instructor of Record & Research Mentorship</p>
             </div>
 
             <div class="grid lg:grid-cols-12 gap-8">
@@ -1174,36 +1467,48 @@
                     <div class="studio-card p-5 rounded-xl border-l-2 border-l-periwinkle">
                         <div class="flex justify-between items-start">
                             <div>
-                                <h4 class="text-base font-bold text-white">CEE 6651: Infrastructure Systems</h4>
-                                <p class="text-xs text-periwinkle-dark dark:text-periwinkle font-mono font-medium">Instructor of Record &middot; Fall 2025 (and Upcoming Fall 2026)</p>
+                                <h4 class="text-base font-bold text-ink-950 dark:text-white ">CEE 6651: Infrastructure Systems</h4>
+                                <p class="text-xs text-periwinkle-dark dark:text-periwinkle font-mono font-medium">
+                                    Instructor of Record &middot; Fall 2025 (and Upcoming Fall 2026)</p>
                             </div>
-                            <span class="text-xs font-mono font-bold bg-periwinkle/15 text-periwinkle-dark dark:text-periwinkle px-2.5 py-1 rounded">Rating: 4.94 / 5.0</span>
+                            <span
+                                class="text-xs font-mono font-bold bg-periwinkle/15 text-periwinkle-dark dark:text-periwinkle px-2.5 py-1 rounded">Rating:
+                                4.94 / 5.0</span>
                         </div>
-                        <p class="text-xs text-gray-300 mt-2 leading-relaxed">
-                            Graduate level core course. Designed curriculum, lectures, and semester projects covering infrastructure lifecycle management, multi-hazard risk, and transit network flexibility.
+                        <p class="text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed">
+                            Graduate level core course. Designed curriculum, lectures, and semester projects covering
+                            infrastructure lifecycle management, multi-hazard risk, and transit network flexibility.
                         </p>
                     </div>
 
                     <div class="studio-card p-5 rounded-xl border-l-2 border-l-lilac">
                         <div class="flex justify-between items-start">
                             <div>
-                                <h4 class="text-base font-bold text-white">CEE 2090: Civil & Environmental Engineering Systems</h4>
-                                <p class="text-xs text-lilac-dark dark:text-lilac font-mono font-medium">Instructor of Record &middot; Spring 2025</p>
+                                <h4 class="text-base font-bold text-ink-950 dark:text-white ">CEE 2090: Civil & Environmental Engineering
+                                    Systems</h4>
+                                <p class="text-xs text-lilac-dark dark:text-lilac font-mono font-medium">Instructor of
+                                    Record &middot; Spring 2025</p>
                             </div>
-                            <span class="text-xs font-mono font-bold bg-lilac/15 text-lilac-dark dark:text-lilac px-2.5 py-1 rounded">Rating: 4.78 / 5.0</span>
+                            <span
+                                class="text-xs font-mono font-bold bg-lilac/15 text-lilac-dark dark:text-lilac px-2.5 py-1 rounded">Rating:
+                                4.78 / 5.0</span>
                         </div>
-                        <p class="text-xs text-gray-300 mt-2 leading-relaxed">
-                            Undergraduate foundational systems course (29 students). Taught linear programming, decision trees, engineering economics, and optimization.
+                        <p class="text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed">
+                            Undergraduate foundational systems course (29 students). Taught linear programming, decision
+                            trees, engineering economics, and optimization.
                         </p>
                     </div>
 
                     <div class="studio-card p-5 rounded-xl border-l-2 border-l-sage">
                         <div class="flex justify-between items-start">
                             <div>
-                                <h4 class="text-base font-bold text-white">CEE 6651: Infrastructure Systems</h4>
-                                <p class="text-xs text-sage-dark dark:text-sage font-mono font-medium">Co-Instructor of Record &middot; Fall 2024</p>
+                                <h4 class="text-base font-bold text-ink-950 dark:text-white ">CEE 6651: Infrastructure Systems</h4>
+                                <p class="text-xs text-sage-dark dark:text-sage font-mono font-medium">Co-Instructor of
+                                    Record &middot; Fall 2024</p>
                             </div>
-                            <span class="text-xs font-mono font-bold bg-sage/15 text-sage-dark dark:text-sage px-2.5 py-1 rounded">Rating: 4.33 / 5.0</span>
+                            <span
+                                class="text-xs font-mono font-bold bg-sage/15 text-sage-dark dark:text-sage px-2.5 py-1 rounded">Rating:
+                                4.33 / 5.0</span>
                         </div>
                     </div>
                 </div>
@@ -1211,36 +1516,50 @@
                 <!-- Right: Student Mentorship -->
                 <div class="lg:col-span-5 space-y-4">
                     <div class="studio-card p-6 rounded-xl space-y-4">
-                        <h3 class="text-base font-bold text-white flex items-center gap-2">
+                        <h3 class="text-base font-bold text-ink-950 dark:text-white flex items-center gap-2">
                             <i class="ph-bold ph-users-three text-periwinkle-dark dark:text-periwinkle text-lg"></i>
                             <span>Student Research Mentorship</span>
                         </h3>
 
-                        <p class="text-xs text-gray-300 leading-relaxed">
-                            I have mentored <strong>16+ graduate, undergraduate, and high school researchers</strong> on grant-funded projects, resulting in multiple co-authored peer-reviewed journal papers and conference presentations.
+                        <p class="text-xs text-gray-700 dark:text-gray-300 leading-relaxed">
+                            I have mentored <strong>16+ graduate, undergraduate, and high school researchers</strong> on
+                            grant-funded projects, resulting in multiple co-authored peer-reviewed journal papers and
+                            conference presentations.
                         </p>
 
                         <div class="space-y-2.5 text-xs">
-                            <div class="p-3 rounded-lg bg-paper-100 dark:bg-ink-850 border border-paper-300 dark:border-ink-750">
-                                <div class="font-semibold text-ink-950 dark:text-white text-sm">Taylor Sherwood & Jose Antonio Pañero</div>
-                                <div class="text-[11px] text-periwinkle-dark dark:text-periwinkle font-medium mt-0.5">M.S. & Undergrad Researchers &rarr; Resulted in CEES Journal Paper (2025)</div>
+                            <div
+                                class="p-3 rounded-lg bg-paper-100 dark:bg-ink-850 border border-paper-300 dark:border-ink-750">
+                                <div class="font-semibold text-ink-950 dark:text-white text-sm">Taylor Sherwood & Jose
+                                    Antonio Pañero</div>
+                                <div class="text-[11px] text-periwinkle-dark dark:text-periwinkle font-medium mt-0.5">
+                                    Graduate Researchers &rarr; Resulted in CEES Journal Paper (2025)</div>
                             </div>
-                            <div class="p-3 rounded-lg bg-paper-100 dark:bg-ink-850 border border-paper-300 dark:border-ink-750">
-                                <div class="font-semibold text-ink-950 dark:text-white text-sm">Maya Orthous Inchauste</div>
-                                <div class="text-[11px] text-periwinkle-dark dark:text-periwinkle font-medium mt-0.5">Undergrad Researcher &rarr; Resulted in TRR Journal Paper (2025)</div>
+                            <div
+                                class="p-3 rounded-lg bg-paper-100 dark:bg-ink-850 border border-paper-300 dark:border-ink-750">
+                                <div class="font-semibold text-ink-950 dark:text-white text-sm">Maya Orthous Inchauste
+                                </div>
+                                <div class="text-[11px] text-periwinkle-dark dark:text-periwinkle font-medium mt-0.5">
+                                    Undergrad Researcher &rarr; Resulted in TRR Journal Paper (2025)</div>
                             </div>
-                            <div class="p-3 rounded-lg bg-paper-100 dark:bg-ink-850 border border-paper-300 dark:border-ink-750">
+                            <div
+                                class="p-3 rounded-lg bg-paper-100 dark:bg-ink-850 border border-paper-300 dark:border-ink-750">
                                 <div class="font-semibold text-ink-950 dark:text-white text-sm">Grace Jiang</div>
-                                <div class="text-[11px] text-periwinkle-dark dark:text-periwinkle font-medium mt-0.5">Undergrad Researcher &rarr; Asset Management Workshop (2025)</div>
+                                <div class="text-[11px] text-periwinkle-dark dark:text-periwinkle font-medium mt-0.5">
+                                    Undergrad Researcher &rarr; Asset Management Workshop (2025)</div>
                             </div>
-                            <div class="p-3 rounded-lg bg-paper-100 dark:bg-ink-850 border border-paper-300 dark:border-ink-750">
+                            <div
+                                class="p-3 rounded-lg bg-paper-100 dark:bg-ink-850 border border-paper-300 dark:border-ink-750">
                                 <div class="font-semibold text-ink-950 dark:text-white text-sm">Hannah Bui</div>
-                                <div class="text-[11px] text-periwinkle-dark dark:text-periwinkle font-medium mt-0.5">High School Researcher &rarr; Resulted in TRB 2026 Presentation</div>
+                                <div class="text-[11px] text-periwinkle-dark dark:text-periwinkle font-medium mt-0.5">
+                                    High School Researcher &rarr; Resulted in TRB 2026 Presentation</div>
                             </div>
                         </div>
 
-                        <div class="text-[11px] text-gray-500 dark:text-gray-400 font-mono pt-2 border-t border-paper-300 dark:border-ink-800">
-                            &bull; Completed Georgia Tech Impactful Research Mentorship Program Certification (2025–2026).
+                        <div
+                            class="text-[11px] text-gray-500 dark:text-gray-400 font-mono pt-2 border-t border-paper-300 dark:border-ink-800">
+                            &bull; Completed Georgia Tech Impactful Research Mentorship Program Certification
+                            (2025-2026).
                         </div>
                     </div>
                 </div>
@@ -1253,46 +1572,54 @@
         <!-- ========================================================================= -->
         <section id="service" class="py-16 border-t border-paper-300 dark:border-ink-800 scroll-mt-20">
             <div class="mb-8">
-                <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2">Leadership & Service</h2>
-                <p class="text-xs font-mono text-periwinkle-dark dark:text-periwinkle uppercase tracking-wider">Committee Appointments & Professional Community</p>
+                <h2 class="text-2xl sm:text-3xl font-bold text-ink-950 dark:text-white mb-2">Leadership & Service</h2>
+                <p class="text-xs font-mono text-periwinkle-dark dark:text-periwinkle uppercase tracking-wider">
+                    Committee Appointments & Professional Community</p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-6 text-xs text-gray-300">
+            <div class="grid md:grid-cols-3 gap-6 text-xs text-gray-700 dark:text-gray-300 ">
 
                 <!-- TRB & National Service -->
                 <div class="studio-card p-5 rounded-xl space-y-3">
-                    <h3 class="font-bold text-sm text-white flex items-center gap-2">
+                    <h3 class="font-bold text-sm text-ink-950 dark:text-white flex items-center gap-2">
                         <i class="ph-bold ph-shield-check text-periwinkle-dark dark:text-periwinkle text-base"></i>
                         <span>TRB & Professional Service</span>
                     </h3>
                     <ul class="space-y-2 leading-relaxed">
-                        <li><strong>NASEM TRB Standing Committee on Regional Intercity Passenger Rail:</strong> Invited Member (2025 – 2028)</li>
-                        <li><strong>TRB Extreme Weather & Climate Change Committee:</strong> Volunteer (2024 – 2025)</li>
-                        <li><strong>Peer Reviewer:</strong> Transportation Research Record (TRR), ASCE Journal of Infrastructure Systems</li>
+                        <li><strong>NASEM TRB Standing Committee on Regional Intercity Passenger Rail:</strong> Invited
+                            Member (2025 - 2028)</li>
+                        <li><strong>TRB Extreme Weather & Climate Change Committee:</strong> Volunteer (2024 - 2025)
+                        </li>
+                        <li><strong>Peer Reviewer:</strong> Transportation Research Record (TRR), ASCE Journal of
+                            Infrastructure Systems</li>
                     </ul>
                 </div>
 
                 <!-- Community & Agency Advisory -->
                 <div class="studio-card p-5 rounded-xl space-y-3">
-                    <h3 class="font-bold text-sm text-white flex items-center gap-2">
+                    <h3 class="font-bold text-sm text-ink-950 dark:text-white flex items-center gap-2">
                         <i class="ph-bold ph-globe-hemisphere-west text-lilac-dark dark:text-lilac text-base"></i>
                         <span>Community Service</span>
                     </h3>
                     <ul class="space-y-2 leading-relaxed">
-                        <li><strong>City of Atlanta Climate Resilience Advisory Board:</strong> Transportation Working Group (2022 – Present)</li>
-                        <li><strong>Dallas Area Rapid Transit (DART):</strong> Resilience Committee Volunteer (2026 – Present)</li>
-                        <li><strong>Georgia Planning Association (GPA):</strong> Climate Action Committee (2026 – Present)</li>
+                        <li><strong>City of Atlanta Climate Resilience Advisory Board:</strong> Transportation Working
+                            Group (2022 - Present)</li>
+                        <li><strong>Dallas Area Rapid Transit (DART):</strong> Resilience Committee Volunteer (2026 -
+                            Present)</li>
+                        <li><strong>Georgia Planning Association (GPA):</strong> Climate Action Committee (2026 -
+                            Present)</li>
                     </ul>
                 </div>
 
                 <!-- Professional Societies -->
                 <div class="studio-card p-5 rounded-xl space-y-3">
-                    <h3 class="font-bold text-sm text-white flex items-center gap-2">
+                    <h3 class="font-bold text-sm text-ink-950 dark:text-white flex items-center gap-2">
                         <i class="ph-bold ph-buildings text-mauve-dark dark:text-mauve text-base"></i>
                         <span>Affiliations & Leadership</span>
                     </h3>
                     <ul class="space-y-2 leading-relaxed">
-                        <li><strong>Women's Transportation Seminar (WTS):</strong> President, Georgia Tech Chapter (2023 – 2025)</li>
+                        <li><strong>Women's Transportation Seminar (WTS):</strong> President, Georgia Tech Chapter (2023
+                            - 2025)</li>
                         <li><strong>AREMA:</strong> American Railway Engineering and Maintenance-of-Way Association</li>
                         <li><strong>ASCE:</strong> American Society of Civil Engineers</li>
                         <li><strong>APA:</strong> American Planning Association</li>
@@ -1308,15 +1635,18 @@
         <!-- ========================================================================= -->
         <section id="contact" class="py-20 border-t border-paper-300 dark:border-ink-800 text-center scroll-mt-20">
             <div class="max-w-xl mx-auto space-y-6">
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Let's Connect</h2>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-ink-950 dark:text-white ">Let's Connect</h2>
 
-                <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
-                    I am always excited to connect with students, researchers, transit practitioners, and community partners interested in rail resilience, public transit equity, and infrastructure systems. Whether you have questions about my research, are exploring graduate studies, or want to discuss potential collaborations, please feel free to reach out!
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
+                    I am always excited to connect with students, researchers, transit practitioners, and community
+                    partners interested in rail resilience, public transit equity, and infrastructure systems. Whether
+                    you have questions about my research, are exploring graduate studies, or want to discuss potential
+                    collaborations, please feel free to reach out!
                 </p>
 
                 <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
                     <a href="mailto:adairgarrett@gatech.edu"
-                        class="inline-flex items-center gap-2 bg-periwinkle-dark dark:bg-periwinkle text-white dark:text-ink-950 font-semibold px-6 py-3 rounded-xl hover:opacity-95 transition text-sm w-full sm:w-auto justify-center shadow-md">
+                        class="inline-flex items-center gap-2 btn-primary font-semibold px-6 py-3 rounded-xl hover:opacity-95 transition text-sm w-full sm:w-auto justify-center shadow-md">
                         <i class="ph-bold ph-envelope-simple text-base"></i>
                         <span>adairgarrett@gatech.edu</span>
                     </a>
@@ -1325,19 +1655,25 @@
                 <!-- Contact Details Card -->
                 <div class="studio-card p-5 rounded-xl max-w-md mx-auto text-left text-xs space-y-2.5 mt-6">
                     <div class="flex items-center justify-between border-b border-paper-300 dark:border-ink-800 pb-2">
-                        <span class="text-gray-500 dark:text-gray-400">Office:</span>
-                        <span class="text-white font-mono">SEB 215, 788 Atlantic Dr NW, Atlanta, GA</span>
+                        <span class="text-gray-500 dark:text-gray-400 ">Office:</span>
+                        <span class="text-ink-950 dark:text-white font-mono">SEB 215, 788 Atlantic Dr NW, Atlanta, GA</span>
                     </div>
                     <div class="flex items-center justify-between border-b border-paper-300 dark:border-ink-800 pb-2">
-                        <span class="text-gray-500 dark:text-gray-400">Phone:</span>
-                        <span class="text-white font-mono">(678) 596-7194</span>
+                        <span class="text-gray-500 dark:text-gray-400 ">Phone:</span>
+                        <span class="text-ink-950 dark:text-white font-mono">(678) 596-7194</span>
                     </div>
                     <div class="flex items-center justify-between">
-                        <span class="text-gray-500 dark:text-gray-400">Profiles:</span>
+                        <span class="text-gray-500 dark:text-gray-400 ">Profiles:</span>
                         <div class="flex gap-4 text-base text-periwinkle-dark dark:text-periwinkle">
-                            <a href="https://scholar.google.com/citations?user=4-bFEJwAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="hover:text-white transition" title="Google Scholar"><i class="ph-bold ph-graduation-cap"></i></a>
-                            <a href="https://orcid.org/0000-0001-9990-4568" target="_blank" rel="noopener noreferrer" class="hover:text-white transition" title="ORCID"><i class="ph-bold ph-identification-card"></i></a>
-                            <a href="https://www.linkedin.com/me?trk=p_mwlite_feed-secondary_nav" target="_blank" rel="noopener noreferrer" class="hover:text-white transition" title="LinkedIn"><i class="ph-bold ph-linkedin-logo"></i></a>
+                            <a href="https://scholar.google.com/citations?user=4-bFEJwAAAAJ&hl=en" target="_blank"
+                                rel="noopener noreferrer" class="hover:text-ink-950 dark:text-white transition" title="Google Scholar"><i
+                                    class="ph-bold ph-graduation-cap"></i></a>
+                            <a href="https://orcid.org/0000-0001-9990-4568" target="_blank" rel="noopener noreferrer"
+                                class="hover:text-ink-950 dark:text-white transition" title="ORCID"><i
+                                    class="ph-bold ph-identification-card"></i></a>
+                            <a href="https://www.linkedin.com/me?trk=p_mwlite_feed-secondary_nav" target="_blank"
+                                rel="noopener noreferrer" class="hover:text-ink-950 dark:text-white transition" title="LinkedIn"><i
+                                    class="ph-bold ph-linkedin-logo"></i></a>
                         </div>
                     </div>
                 </div>
@@ -1349,7 +1685,8 @@
 
     <!-- Footer -->
     <footer class="border-t border-paper-300 dark:border-ink-800 py-8 text-center text-xs text-gray-500 font-mono">
-        <p>&copy; 2026 Adair Garrett &middot; Transportation Systems Engineering &middot; Georgia Institute of Technology</p>
+        <p>&copy; 2026 Adair Garrett &middot; Transportation Systems Engineering &middot; Georgia Institute of
+            Technology</p>
     </footer>
 
     <!-- Interactive Scripts: Theme Toggle, Publication Filtering, and Subway Simulation Canvas -->
@@ -1435,11 +1772,11 @@
             // Madrid Metro Inspired Nodes
             const stations = [
                 { id: 'M_NORT', x: 0.50, y: 0.20, isTransfer: true, name: 'Cuatro Caminos' },
-                { id: 'M_NE',   x: 0.74, y: 0.32, isTransfer: true, name: 'Avenida de América' },
-                { id: 'M_SE',   x: 0.74, y: 0.68, isTransfer: true, name: 'Pacífico' },
+                { id: 'M_NE', x: 0.74, y: 0.32, isTransfer: true, name: 'Avenida de América' },
+                { id: 'M_SE', x: 0.74, y: 0.68, isTransfer: true, name: 'Pacífico' },
                 { id: 'M_SOUT', x: 0.50, y: 0.80, isTransfer: true, name: 'Atocha' },
-                { id: 'M_SW',   x: 0.26, y: 0.68, isTransfer: true, name: 'Príncipe Pío' },
-                { id: 'M_NW',   x: 0.26, y: 0.32, isTransfer: true, name: 'Moncloa' },
+                { id: 'M_SW', x: 0.26, y: 0.68, isTransfer: true, name: 'Príncipe Pío' },
+                { id: 'M_NW', x: 0.26, y: 0.32, isTransfer: true, name: 'Moncloa' },
                 { id: 'M_CENT', x: 0.50, y: 0.50, isTransfer: true, name: 'Sol' },
                 { id: 'T_NORT', x: 0.50, y: 0.08, isTransfer: false, name: 'Chamartín' },
                 { id: 'T_SOUT', x: 0.50, y: 0.92, isTransfer: false, name: 'Villaverde' },
