@@ -194,7 +194,7 @@
 
     <!-- Interactive Ambient Canvas: Madrid-Inspired Subway Simulation -->
     <canvas id="transit-network-canvas"
-        class="fixed inset-0 pointer-events-none z-0 opacity-15 dark:opacity-20 transition-opacity duration-500"></canvas>
+        class="fixed inset-0 pointer-events-none z-0 opacity-25 dark:opacity-35 transition-opacity duration-500"></canvas>
 
     <!-- Top Navigation -->
     <header class="fixed w-full z-50 top-0 nav-blur px-5 sm:px-8 py-3.5 transition-all duration-300">
@@ -1785,7 +1785,7 @@
             });
         }
 
-        // Ambient Transit Simulation Canvas: Calm Metro System with Elongated Trains & Station Interlocking
+        // Ambient Transit Simulation Canvas: Madrid Metro Network with Multi-Colored Routes & Cute Trains
         (function initTransitCanvas() {
             const canvas = document.getElementById('transit-network-canvas');
             if (!canvas) return;
@@ -1799,154 +1799,217 @@
             window.addEventListener('resize', resize);
             resize();
 
-            // Madrid & Atlanta-Inspired Transit Network Nodes
-            const stations = [
-                { id: 'M_NORT', x: 0.50, y: 0.20, isTransfer: true, name: 'North Interchange' },
-                { id: 'M_NE', x: 0.74, y: 0.32, isTransfer: true, name: 'Northeast Station' },
-                { id: 'M_SE', x: 0.74, y: 0.68, isTransfer: true, name: 'Southeast Station' },
-                { id: 'M_SOUT', x: 0.50, y: 0.80, isTransfer: true, name: 'South Central' },
-                { id: 'M_SW', x: 0.26, y: 0.68, isTransfer: true, name: 'Southwest Station' },
-                { id: 'M_NW', x: 0.26, y: 0.32, isTransfer: true, name: 'Northwest Station' },
-                { id: 'M_CENT', x: 0.50, y: 0.50, isTransfer: true, name: 'Central Interchange' },
-                { id: 'T_NORT', x: 0.50, y: 0.08, isTransfer: false, name: 'North Terminal' },
-                { id: 'T_SOUT', x: 0.50, y: 0.92, isTransfer: false, name: 'South Terminal' },
-                { id: 'T_WEST', x: 0.12, y: 0.50, isTransfer: false, name: 'West Terminal' },
-                { id: 'T_EAST', x: 0.88, y: 0.50, isTransfer: false, name: 'East Terminal' }
-            ];
+            // Authentic Madrid Metro Schematic Stations (Normalized coordinates 0.0 to 1.0)
+            const stations = {
+                // Northern Terminals & Interchanges
+                'CHAM': { x: 0.50, y: 0.07, name: 'Chamartín', isHub: true },
+                'PL_CAST': { x: 0.50, y: 0.14, name: 'Plaza de Castilla', isHub: true },
+                
+                // Line 6 Circular (Loop) Stations & Interchanges
+                'C_CAM': { x: 0.44, y: 0.22, name: 'Cuatro Caminos', isHub: true },
+                'N_MIN': { x: 0.56, y: 0.22, name: 'Nuevos Ministerios', isHub: true },
+                'AV_AM': { x: 0.70, y: 0.28, name: 'Av. de América', isHub: true },
+                'D_LEON': { x: 0.70, y: 0.40, name: 'Diego de León', isHub: true },
+                'GOYA': { x: 0.70, y: 0.52, name: 'Goya', isHub: true },
+                'S_BAR': { x: 0.70, y: 0.64, name: 'Sainz de Baranda', isHub: true },
+                'PACIF': { x: 0.62, y: 0.76, name: 'Pacífico', isHub: true },
+                'M_ALV': { x: 0.54, y: 0.82, name: 'Méndez Álvaro', isHub: true },
+                'LEGZP': { x: 0.46, y: 0.82, name: 'Legazpi', isHub: true },
+                'P_ELIP': { x: 0.36, y: 0.76, name: 'Plaza Elíptica', isHub: true },
+                'OPORT': { x: 0.28, y: 0.64, name: 'Oporto', isHub: true },
+                'P_PIO': { x: 0.28, y: 0.48, name: 'Príncipe Pío', isHub: true },
+                'MONCL': { x: 0.32, y: 0.28, name: 'Moncloa', isHub: true },
+                
+                // Central Core Interchanges
+                'TRIB': { x: 0.48, y: 0.38, name: 'Tribunal', isHub: true },
+                'AL_MT': { x: 0.56, y: 0.38, name: 'Alonso Martínez', isHub: true },
+                'SOL': { x: 0.50, y: 0.52, name: 'Sol', isHub: true },
+                'OPERA': { x: 0.42, y: 0.52, name: 'Ópera', isHub: true },
+                'ATOCHA': { x: 0.54, y: 0.66, name: 'Atocha Renfe', isHub: true },
+                
+                // Radial Branches & Terminals
+                'VENTAS': { x: 0.84, y: 0.40, name: 'Ventas', isHub: true },
+                'C_CAMPO': { x: 0.16, y: 0.52, name: 'Casa de Campo', isHub: true },
+                'ALUCH': { x: 0.16, y: 0.68, name: 'Aluche', isHub: false },
+                'VILLAV': { x: 0.46, y: 0.93, name: 'Villaverde Alto', isHub: false },
+                'VALDEC': { x: 0.62, y: 0.93, name: 'Valdecarros', isHub: false },
+                'AEROP': { x: 0.86, y: 0.18, name: 'Aeropuerto T4', isHub: false }
+            };
 
-            const stationMap = {};
-            stations.forEach(s => { stationMap[s.id] = s; });
-
-            function getRoute(ids) {
-                return ids.map(id => stationMap[id]);
+            function getRoute(idList) {
+                return idList.map(id => ({ id, ...stations[id] }));
             }
 
-            // Station Interlocking System: Tracks occupied stations so no two trains are ever at the same station
-            const occupiedStations = {};
-
-            // Metro Transit Lines & Running Calm Trains
+            // Authentic Madrid Metro Multi-Colored Lines
             const lines = [
                 {
-                    id: 'L6',
-                    name: 'Line 6 Circular (Loop)',
-                    darkColor: '#bcaee8',
-                    lightColor: '#7664af',
-                    points: getRoute(['M_NORT', 'M_NE', 'M_SE', 'M_SOUT', 'M_SW', 'M_NW', 'M_NORT']),
-                    isLoop: true,
-                    trains: [
-                        { id: 'T_L6_1', seg: 0, t: 0.15, dwelling: false, dwellTimer: 0, baseSpeed: 0.0022, dir: 1 },
-                        { id: 'T_L6_2', seg: 3, t: 0.15, dwelling: false, dwellTimer: 0, baseSpeed: 0.0022, dir: 1 }
-                    ]
-                },
-                {
                     id: 'L1',
-                    name: 'Line 1 Central Spine',
-                    darkColor: '#8190dc',
-                    lightColor: '#5162c7',
-                    points: getRoute(['T_NORT', 'M_NORT', 'M_CENT', 'M_SOUT', 'T_SOUT']),
+                    name: 'Línea 1 (Azul Claro)',
+                    color: '#0284c7',       // L1 Light Blue (Sky Blue)
+                    colorDark: '#38bdf8',
+                    points: getRoute(['PL_CAST', 'C_CAM', 'TRIB', 'SOL', 'ATOCHA', 'PACIF', 'VALDEC']),
                     isLoop: false,
                     trains: [
-                        { id: 'T_L1_1', seg: 0, t: 0.45, dwelling: false, dwellTimer: 0, baseSpeed: 0.0024, dir: 1 },
-                        { id: 'T_L1_2', seg: 3, t: 0.45, dwelling: false, dwellTimer: 0, baseSpeed: 0.0024, dir: -1 }
+                        { id: 'T_L1_1', seg: 1, t: 0.3, dwelling: false, dwellTimer: 0, baseSpeed: 0.0022, dir: 1 },
+                        { id: 'T_L1_2', seg: 4, t: 0.4, dwelling: false, dwellTimer: 0, baseSpeed: 0.0022, dir: -1 }
                     ]
                 },
                 {
                     id: 'L2',
-                    name: 'Line 2 East-West Cross',
-                    darkColor: '#a67c8e',
-                    lightColor: '#885469',
-                    points: getRoute(['T_WEST', 'M_SW', 'M_CENT', 'M_NE', 'T_EAST']),
+                    name: 'Línea 2 (Roja)',
+                    color: '#dc2626',       // L2 Red
+                    colorDark: '#f87171',
+                    points: getRoute(['C_CAM', 'OPERA', 'SOL', 'GOYA', 'VENTAS']),
                     isLoop: false,
                     trains: [
-                        { id: 'T_L2_1', seg: 0, t: 0.25, dwelling: false, dwellTimer: 0, baseSpeed: 0.0023, dir: 1 }
+                        { id: 'T_L2_1', seg: 0, t: 0.6, dwelling: false, dwellTimer: 0, baseSpeed: 0.0024, dir: 1 }
+                    ]
+                },
+                {
+                    id: 'L3',
+                    name: 'Línea 3 (Amarilla)',
+                    color: '#d97706',       // L3 Warm Amber/Yellow
+                    colorDark: '#fbbf24',
+                    points: getRoute(['MONCL', 'SOL', 'LEGZP', 'VILLAV']),
+                    isLoop: false,
+                    trains: [
+                        { id: 'T_L3_1', seg: 0, t: 0.2, dwelling: false, dwellTimer: 0, baseSpeed: 0.0023, dir: 1 }
+                    ]
+                },
+                {
+                    id: 'L5',
+                    name: 'Línea 5 (Verde)',
+                    color: '#65a30d',       // L5 Apple Green
+                    colorDark: '#a3e635',
+                    points: getRoute(['C_CAMPO', 'OPORT', 'OPERA', 'AL_MT', 'D_LEON', 'VENTAS']),
+                    isLoop: false,
+                    trains: [
+                        { id: 'T_L5_1', seg: 1, t: 0.5, dwelling: false, dwellTimer: 0, baseSpeed: 0.0022, dir: 1 }
+                    ]
+                },
+                {
+                    id: 'L6',
+                    name: 'Línea 6 Circular (Violeta / Gris)',
+                    color: '#9333ea',       // L6 Circular Purple/Lilac
+                    colorDark: '#c084fc',
+                    points: getRoute(['C_CAM', 'N_MIN', 'AV_AM', 'D_LEON', 'GOYA', 'S_BAR', 'PACIF', 'M_ALV', 'LEGZP', 'P_ELIP', 'OPORT', 'P_PIO', 'MONCL', 'C_CAM']),
+                    isLoop: true,
+                    trains: [
+                        { id: 'T_L6_1', seg: 1, t: 0.1, dwelling: false, dwellTimer: 0, baseSpeed: 0.0020, dir: 1 },
+                        { id: 'T_L6_2', seg: 7, t: 0.1, dwelling: false, dwellTimer: 0, baseSpeed: 0.0020, dir: 1 }
+                    ]
+                },
+                {
+                    id: 'L10',
+                    name: 'Línea 10 (Azul Marino)',
+                    color: '#1d4ed8',       // L10 Navy/Royal Blue
+                    colorDark: '#60a5fa',
+                    points: getRoute(['CHAM', 'PL_CAST', 'N_MIN', 'AL_MT', 'TRIB', 'P_PIO', 'C_CAMPO', 'ALUCH']),
+                    isLoop: false,
+                    trains: [
+                        { id: 'T_L10_1', seg: 1, t: 0.7, dwelling: false, dwellTimer: 0, baseSpeed: 0.0023, dir: 1 }
+                    ]
+                },
+                {
+                    id: 'L8',
+                    name: 'Línea 8 (Rosa Aeropuerto)',
+                    color: '#db2777',       // L8 Pink (Airport branch)
+                    colorDark: '#f472b6',
+                    points: getRoute(['N_MIN', 'AV_AM', 'AEROP']),
+                    isLoop: false,
+                    trains: [
+                        { id: 'T_L8_1', seg: 0, t: 0.4, dwelling: false, dwellTimer: 0, baseSpeed: 0.0025, dir: 1 }
                     ]
                 }
             ];
 
-            // Draw an Elongated, Cute & Calming Subway Train
-            function drawElongatedSubwayTrain(x, y, angle, color, isLight, isDwelling) {
+            // Station Interlocking System: Tracks occupied stations so no two trains are ever at the same station
+            const occupiedStations = {};
+
+            // Draw Cute Streamlined Subway Train
+            function drawCuteSubwayTrain(x, y, angle, color, isLight, isDwelling) {
                 ctx.save();
                 ctx.translate(x, y);
                 ctx.rotate(angle);
 
-                const trainLen = 56; // Elongated proportions
+                const trainLen = 54;
                 const trainWidth = 14;
                 const halfL = trainLen / 2;
                 const halfW = trainWidth / 2;
 
-                // Soft Forward Ambient Light Beam (Non-distracting)
-                const beamGrad = ctx.createRadialGradient(halfL + 2, 0, 1, halfL + 24, 0, 16);
+                // Ambient Forward Light Cone
+                const beamGrad = ctx.createRadialGradient(halfL + 2, 0, 1, halfL + 22, 0, 14);
                 if (isLight) {
-                    beamGrad.addColorStop(0, 'rgba(81, 98, 199, 0.18)');
-                    beamGrad.addColorStop(1, 'rgba(81, 98, 199, 0)');
+                    beamGrad.addColorStop(0, 'rgba(0, 0, 0, 0.14)');
+                    beamGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
                 } else {
-                    beamGrad.addColorStop(0, 'rgba(255, 255, 255, 0.25)');
-                    beamGrad.addColorStop(0.4, 'rgba(129, 144, 220, 0.10)');
-                    beamGrad.addColorStop(1, 'rgba(129, 144, 220, 0)');
+                    beamGrad.addColorStop(0, 'rgba(255, 255, 255, 0.28)');
+                    beamGrad.addColorStop(0.4, 'rgba(255, 255, 255, 0.08)');
+                    beamGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
                 }
                 ctx.fillStyle = beamGrad;
                 ctx.beginPath();
                 ctx.moveTo(halfL, -3.5);
-                ctx.lineTo(halfL + 22, -9);
-                ctx.lineTo(halfL + 22, 9);
+                ctx.lineTo(halfL + 20, -8);
+                ctx.lineTo(halfL + 20, 8);
                 ctx.lineTo(halfL, 3.5);
                 ctx.closePath();
                 ctx.fill();
 
-                // Undercarriage Bogies / Wheel Trucks
-                ctx.fillStyle = isLight ? '#949ab0' : '#07080f';
-                ctx.fillRect(-halfL + 6, -halfW - 1.2, 8, trainWidth + 2.4);
-                ctx.fillRect(halfL - 14, -halfW - 1.2, 8, trainWidth + 2.4);
+                // Undercarriage Bogies
+                ctx.fillStyle = isLight ? '#949ab0' : '#05060a';
+                ctx.fillRect(-halfL + 5, -halfW - 1.2, 7, trainWidth + 2.4);
+                ctx.fillRect(halfL - 12, -halfW - 1.2, 7, trainWidth + 2.4);
 
-                // Train Body - Sleek Rounded Passenger Car
+                // Train Body Chassis
                 ctx.fillStyle = isLight ? '#ffffff' : '#141624';
                 ctx.beginPath();
                 ctx.roundRect(-halfL, -halfW, trainLen, trainWidth, 4);
                 ctx.fill();
 
                 // Outer Border
-                ctx.strokeStyle = isLight ? '#c5c9e2' : '#2d3352';
+                ctx.strokeStyle = isLight ? '#c5c9e2' : '#33395c';
                 ctx.lineWidth = 1.0;
                 ctx.stroke();
 
-                // Subtle Center Car Section Line
-                ctx.strokeStyle = isLight ? '#e2e4f0' : '#22263d';
+                // Center Divider
+                ctx.strokeStyle = isLight ? '#e2e4f0' : '#262b45';
                 ctx.lineWidth = 1;
                 ctx.beginPath();
                 ctx.moveTo(0, -halfW + 1);
                 ctx.lineTo(0, halfW - 1);
                 ctx.stroke();
 
-                // Vibrant Colored Metro Line Waistband Stripe
+                // Official Metro Line Color Waistband
                 ctx.fillStyle = color;
-                ctx.globalAlpha = 0.9;
-                ctx.fillRect(-halfL + 5, -1.8, trainLen - 10, 3.6);
+                ctx.globalAlpha = 0.95;
+                ctx.fillRect(-halfL + 4, -1.8, trainLen - 8, 3.6);
 
-                // 4 Cute Rounded Illuminated Passenger Windows
+                // 4 Cute Passenger Windows
                 ctx.fillStyle = isLight ? '#475569' : '#e0e7ff';
-                ctx.globalAlpha = isDwelling ? 0.9 : (isLight ? 0.40 : 0.75);
-                [-18, -7, 7, 18].forEach(wx => {
+                ctx.globalAlpha = isDwelling ? 0.95 : (isLight ? 0.45 : 0.8);
+                [-17, -6, 6, 17].forEach(wx => {
                     ctx.beginPath();
-                    ctx.roundRect(wx - 2.5, -halfW + 1.2, 5, 2.0, 0.8);
+                    ctx.roundRect(wx - 2.4, -halfW + 1.2, 4.8, 1.9, 0.8);
                     ctx.fill();
                     ctx.beginPath();
-                    ctx.roundRect(wx - 2.5, halfW - 3.2, 5, 2.0, 0.8);
+                    ctx.roundRect(wx - 2.4, halfW - 3.1, 4.8, 1.9, 0.8);
                     ctx.fill();
                 });
 
-                // Panoramic Front Cab Windshield
-                ctx.fillStyle = isLight ? '#3b82f6' : '#8190dc';
-                ctx.globalAlpha = 0.9;
-                ctx.beginPath();
-                ctx.roundRect(halfL - 5, -halfW + 1.6, 4, trainWidth - 3.2, 1.2);
-                ctx.fill();
-
-                // Dual Round Front LED Headlights
-                ctx.fillStyle = '#ffffff';
+                // Panoramic Cab Windshield
+                ctx.fillStyle = isLight ? '#38bdf8' : '#60a5fa';
                 ctx.globalAlpha = 0.95;
                 ctx.beginPath();
-                ctx.arc(halfL - 0.5, -halfW + 2.5, 1.2, 0, Math.PI * 2);
-                ctx.arc(halfL - 0.5, halfW - 2.5, 1.2, 0, Math.PI * 2);
+                ctx.roundRect(halfL - 4.8, -halfW + 1.6, 3.8, trainWidth - 3.2, 1.2);
+                ctx.fill();
+
+                // Dual Front LED Headlights
+                ctx.fillStyle = '#ffffff';
+                ctx.globalAlpha = 1;
+                ctx.beginPath();
+                ctx.arc(halfL - 0.5, -halfW + 2.5, 1.1, 0, Math.PI * 2);
+                ctx.arc(halfL - 0.5, halfW - 2.5, 1.1, 0, Math.PI * 2);
                 ctx.fill();
 
                 // Dual Red Rear Taillights
@@ -1956,11 +2019,11 @@
                 ctx.arc(-halfL + 0.5, halfW - 2.5, 1.0, 0, Math.PI * 2);
                 ctx.fill();
 
-                // Gentle Station Boarding Glow Aura during dwell
+                // Station Boarding Glow Aura during dwell
                 if (isDwelling) {
                     ctx.strokeStyle = color;
                     ctx.lineWidth = 1.2;
-                    ctx.globalAlpha = 0.5;
+                    ctx.globalAlpha = 0.55;
                     ctx.beginPath();
                     ctx.roundRect(-halfL - 2, -halfW - 2, trainLen + 4, trainWidth + 4, 5);
                     ctx.stroke();
@@ -1974,14 +2037,14 @@
                 ctx.clearRect(0, 0, width, height);
                 const isLight = document.documentElement.classList.contains('light');
 
-                // 1. Draw Calm, Clean Metro Lines
+                // 1. Draw Real Multi-Colored Madrid Metro Lines (45° & 90° schematic angles)
                 lines.forEach(line => {
-                    const color = isLight ? line.lightColor : line.darkColor;
+                    const color = isLight ? line.color : line.colorDark;
 
                     ctx.beginPath();
                     ctx.strokeStyle = color;
-                    ctx.lineWidth = 2.4; // Soft & non-distracting
-                    ctx.globalAlpha = isLight ? 0.22 : 0.28;
+                    ctx.lineWidth = 2.8; // Distinct metro line width
+                    ctx.globalAlpha = isLight ? 0.35 : 0.42;
                     ctx.lineCap = 'round';
                     ctx.lineJoin = 'round';
 
@@ -1994,47 +2057,47 @@
                     ctx.stroke();
                 });
 
-                // 2. Draw Subway Stations (Interchanges & Terminals)
-                stations.forEach(st => {
+                // 2. Draw Madrid Metro Stations (Transfer Hubs & Regular Stations)
+                Object.values(stations).forEach(st => {
                     const sx = st.x * width;
                     const sy = st.y * height;
 
-                    if (st.isTransfer) {
+                    if (st.isHub) {
+                        // Metro Interchange Hub (Classic Beck double-ring disc)
                         ctx.beginPath();
-                        ctx.arc(sx, sy, 7, 0, Math.PI * 2);
+                        ctx.arc(sx, sy, 6.5, 0, Math.PI * 2);
+                        ctx.fillStyle = isLight ? '#ffffff' : '#0c0d14';
+                        ctx.globalAlpha = 1;
+                        ctx.fill();
+
+                        ctx.strokeStyle = isLight ? '#1e293b' : '#94a3b8';
+                        ctx.lineWidth = 1.8;
+                        ctx.globalAlpha = 0.85;
+                        ctx.stroke();
+
+                        ctx.beginPath();
+                        ctx.arc(sx, sy, 2.2, 0, Math.PI * 2);
+                        ctx.fillStyle = isLight ? '#1e293b' : '#ffffff';
+                        ctx.globalAlpha = 0.9;
+                        ctx.fill();
+                    } else {
+                        // Regular Metro Station Stop
+                        ctx.beginPath();
+                        ctx.arc(sx, sy, 4.2, 0, Math.PI * 2);
                         ctx.fillStyle = isLight ? '#ffffff' : '#0c0d14';
                         ctx.globalAlpha = 0.9;
                         ctx.fill();
 
-                        ctx.strokeStyle = isLight ? '#5162c7' : '#8190dc';
-                        ctx.lineWidth = 1.8;
+                        ctx.strokeStyle = isLight ? '#64748b' : '#64748b';
+                        ctx.lineWidth = 1.3;
+                        ctx.globalAlpha = 0.75;
                         ctx.stroke();
-
-                        ctx.beginPath();
-                        ctx.arc(sx, sy, 2.5, 0, Math.PI * 2);
-                        ctx.fillStyle = isLight ? '#5162c7' : '#8190dc';
-                        ctx.fill();
-                    } else {
-                        ctx.beginPath();
-                        ctx.arc(sx, sy, 4.5, 0, Math.PI * 2);
-                        ctx.fillStyle = isLight ? '#ffffff' : '#0c0d14';
-                        ctx.globalAlpha = 0.85;
-                        ctx.fill();
-
-                        ctx.strokeStyle = isLight ? '#8e94a8' : '#8190dc';
-                        ctx.lineWidth = 1.4;
-                        ctx.stroke();
-
-                        ctx.beginPath();
-                        ctx.arc(sx, sy, 1.8, 0, Math.PI * 2);
-                        ctx.fillStyle = isLight ? '#5162c7' : '#ffffff';
-                        ctx.fill();
                     }
                 });
 
-                // 3. Move and Render Trains with Station Interlocking (Guarantees no two trains share a station)
+                // 3. Move and Render Multi-Colored Metro Trains with Collision Interlocking
                 lines.forEach(line => {
-                    const color = isLight ? line.lightColor : line.darkColor;
+                    const color = isLight ? line.color : line.colorDark;
                     const totalSegments = line.points.length - 1;
 
                     line.trains.forEach(train => {
@@ -2046,12 +2109,10 @@
                         const targetStation = train.dir === -1 ? pStart : pEnd;
 
                         if (train.dwelling) {
-                            // Occupy station
                             occupiedStations[targetStation.id] = train.id;
                             train.dwellTimer--;
 
                             if (train.dwellTimer <= 0) {
-                                // Release station lock on departure
                                 if (occupiedStations[targetStation.id] === train.id) {
                                     delete occupiedStations[targetStation.id];
                                 }
@@ -2067,15 +2128,13 @@
                                 }
                             }
                         } else {
-                            // Check interlock signal: If station ahead is occupied by another train, hold train outside
                             const isStationOccupied = occupiedStations[targetStation.id] && occupiedStations[targetStation.id] !== train.id;
                             const legProgress = train.t;
                             let speedFactor = 1.0;
 
                             if (isStationOccupied && legProgress >= 0.86) {
-                                speedFactor = 0; // Hold at signal outside station
+                                speedFactor = 0; // Hold at red signal outside station
                             } else {
-                                // Graceful, slow acceleration & deceleration (Slow, peaceful cruise)
                                 if (legProgress < 0.25) {
                                     speedFactor = 0.4 + 0.6 * (legProgress / 0.25);
                                 } else if (legProgress > 0.75) {
@@ -2086,7 +2145,7 @@
                                 if (train.t >= 1) {
                                     train.t = 1;
                                     train.dwelling = true;
-                                    train.dwellTimer = 75; // ~1.25s station stop
+                                    train.dwellTimer = 75; // ~1.2s stop
                                     occupiedStations[targetStation.id] = train.id;
                                 }
                             }
@@ -2099,7 +2158,7 @@
                         const curY = (fromP.y + (toP.y - fromP.y) * train.t) * height;
                         const angle = Math.atan2((toP.y - fromP.y) * height, (toP.x - fromP.x) * width);
 
-                        drawElongatedSubwayTrain(curX, curY, angle, color, isLight, train.dwelling);
+                        drawCuteSubwayTrain(curX, curY, angle, color, isLight, train.dwelling);
                     });
                 });
 
