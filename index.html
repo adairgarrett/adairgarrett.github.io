@@ -253,64 +253,87 @@
 
         <!-- Transit Rail Track & Reading Progress Fill -->
         <div class="absolute bottom-0 left-0 w-full h-[2px] bg-paper-300 dark:bg-ink-800/80 overflow-visible">
-            <div id="track-progress" class="h-full bg-gradient-to-r from-periwinkle-dark to-periwinkle dark:from-periwinkle dark:to-periwinkle-light w-0 transition-all duration-75 ease-out"></div>
+            <div id="track-progress"
+                class="h-full bg-gradient-to-r from-periwinkle-dark to-periwinkle dark:from-periwinkle dark:to-periwinkle-light w-0 transition-all duration-75 ease-out">
+            </div>
             <!-- Side-View Subway Car Scrolling Progress Indicator -->
-            <div id="scroll-train-wrapper" class="absolute -top-[13px] left-0 -translate-x-1/2 pointer-events-none transition-all duration-75 ease-out z-10" style="left: 0%;">
-                <svg width="44" height="15" viewBox="0 0 44 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="drop-shadow-[0_2px_6px_rgba(81,98,199,0.4)]">
+            <div id="scroll-train-wrapper"
+                class="absolute -top-[13px] left-0 -translate-x-1/2 pointer-events-none transition-all duration-75 ease-out z-10"
+                style="left: 0%;">
+                <svg width="44" height="15" viewBox="0 0 44 15" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="drop-shadow-[0_2px_6px_rgba(81,98,199,0.4)]">
                     <!-- Train Body Chassis -->
-                    <rect x="1.5" y="2" width="41" height="10" rx="2.5" class="fill-white dark:fill-[#131626] stroke-periwinkle-dark dark:stroke-periwinkle" stroke-width="1.2"/>
+                    <rect x="1.5" y="2" width="41" height="10" rx="2.5"
+                        class="fill-white dark:fill-[#131626] stroke-periwinkle-dark dark:stroke-periwinkle"
+                        stroke-width="1.2" />
                     <!-- Roof AC / Pantograph details -->
-                    <rect x="10" y="0.8" width="7" height="1.4" rx="0.5" class="fill-periwinkle-dark dark:fill-periwinkle"/>
-                    <rect x="25" y="0.8" width="7" height="1.4" rx="0.5" class="fill-periwinkle-dark dark:fill-periwinkle"/>
+                    <rect x="10" y="0.8" width="7" height="1.4" rx="0.5"
+                        class="fill-periwinkle-dark dark:fill-periwinkle" />
+                    <rect x="25" y="0.8" width="7" height="1.4" rx="0.5"
+                        class="fill-periwinkle-dark dark:fill-periwinkle" />
                     <!-- Transit Line Color Stripe -->
-                    <rect x="1.5" y="7.5" width="41" height="1.6" class="fill-periwinkle-dark dark:fill-periwinkle"/>
+                    <rect x="1.5" y="7.5" width="41" height="1.6" class="fill-periwinkle-dark dark:fill-periwinkle" />
                     <!-- Driver Front Windshield -->
-                    <path d="M38.5 3.2H40.8C41.6 3.2 42.2 3.8 42.2 4.6V7H38.5V3.2Z" class="fill-sky-400 fill-opacity-90"/>
+                    <path d="M38.5 3.2H40.8C41.6 3.2 42.2 3.8 42.2 4.6V7H38.5V3.2Z"
+                        class="fill-sky-400 fill-opacity-90" />
                     <!-- Passenger Windows -->
-                    <rect x="5" y="3.5" width="4.5" height="3" rx="0.6" class="fill-ink-700 dark:fill-periwinkle-light fill-opacity-80"/>
-                    <rect x="13.5" y="3.5" width="4.5" height="3" rx="0.6" class="fill-ink-700 dark:fill-periwinkle-light fill-opacity-80"/>
-                    <rect x="22" y="3.5" width="4.5" height="3" rx="0.6" class="fill-ink-700 dark:fill-periwinkle-light fill-opacity-80"/>
-                    <rect x="30.5" y="3.5" width="4.5" height="3" rx="0.6" class="fill-ink-700 dark:fill-periwinkle-light fill-opacity-80"/>
+                    <rect x="5" y="3.5" width="4.5" height="3" rx="0.6"
+                        class="fill-ink-700 dark:fill-periwinkle-light fill-opacity-80" />
+                    <rect x="13.5" y="3.5" width="4.5" height="3" rx="0.6"
+                        class="fill-ink-700 dark:fill-periwinkle-light fill-opacity-80" />
+                    <rect x="22" y="3.5" width="4.5" height="3" rx="0.6"
+                        class="fill-ink-700 dark:fill-periwinkle-light fill-opacity-80" />
+                    <rect x="30.5" y="3.5" width="4.5" height="3" rx="0.6"
+                        class="fill-ink-700 dark:fill-periwinkle-light fill-opacity-80" />
                     <!-- Sliding Doors Separator Line -->
-                    <line x1="19.7" y1="2.5" x2="19.7" y2="11.5" class="stroke-paper-300 dark:stroke-ink-700" stroke-width="0.8"/>
+                    <line x1="19.7" y1="2.5" x2="19.7" y2="11.5" class="stroke-paper-300 dark:stroke-ink-700"
+                        stroke-width="0.8" />
                     <!-- Front LED Headlight -->
-                    <circle cx="42" cy="10" r="1.1" fill="#ffffff"/>
+                    <circle cx="42" cy="10" r="1.1" fill="#ffffff" />
                     <!-- Rear Red Taillight -->
-                    <circle cx="2" cy="10" r="0.9" fill="#ef4444"/>
+                    <circle cx="2" cy="10" r="0.9" fill="#ef4444" />
                     <!-- Undercarriage Wheels (Bogies) -->
-                    <circle cx="8.5" cy="12.8" r="1.4" class="fill-gray-600 dark:fill-gray-400 stroke-ink-950 dark:stroke-ink-900" stroke-width="0.6"/>
-                    <circle cx="14" cy="12.8" r="1.4" class="fill-gray-600 dark:fill-gray-400 stroke-ink-950 dark:stroke-ink-900" stroke-width="0.6"/>
-                    <circle cx="29" cy="12.8" r="1.4" class="fill-gray-600 dark:fill-gray-400 stroke-ink-950 dark:stroke-ink-900" stroke-width="0.6"/>
-                    <circle cx="34.5" cy="12.8" r="1.4" class="fill-gray-600 dark:fill-gray-400 stroke-ink-950 dark:stroke-ink-900" stroke-width="0.6"/>
+                    <circle cx="8.5" cy="12.8" r="1.4"
+                        class="fill-gray-600 dark:fill-gray-400 stroke-ink-950 dark:stroke-ink-900"
+                        stroke-width="0.6" />
+                    <circle cx="14" cy="12.8" r="1.4"
+                        class="fill-gray-600 dark:fill-gray-400 stroke-ink-950 dark:stroke-ink-900"
+                        stroke-width="0.6" />
+                    <circle cx="29" cy="12.8" r="1.4"
+                        class="fill-gray-600 dark:fill-gray-400 stroke-ink-950 dark:stroke-ink-900"
+                        stroke-width="0.6" />
+                    <circle cx="34.5" cy="12.8" r="1.4"
+                        class="fill-gray-600 dark:fill-gray-400 stroke-ink-950 dark:stroke-ink-900"
+                        stroke-width="0.6" />
                 </svg>
             </div>
         </div>
     </header>
 
-        <!-- Mobile Dropdown -->
-        <div id="mobile-menu"
-            class="hidden md:hidden pt-4 pb-2 border-t border-paper-300 dark:border-ink-800 mt-3 flex flex-col gap-2 text-xs font-medium text-gray-700 dark:text-gray-300">
-            <a href="#about" onclick="toggleMobileMenu()"
-                class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">About</a>
-            <a href="#education" onclick="toggleMobileMenu()"
-                class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Education</a>
-            <a href="#research" onclick="toggleMobileMenu()"
-                class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Research &
-                Grants</a>
-            <a href="#publications" onclick="toggleMobileMenu()"
-                class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Publications</a>
-            <a href="#awards" onclick="toggleMobileMenu()"
-                class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Awards</a>
-            <a href="#presentations" onclick="toggleMobileMenu()"
-                class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Presentations</a>
-            <a href="#teaching" onclick="toggleMobileMenu()"
-                class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Teaching</a>
-            <a href="#service" onclick="toggleMobileMenu()"
-                class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Service</a>
-            <a href="#contact" onclick="toggleMobileMenu()"
-                class="px-2 py-1.5 text-periwinkle-dark dark:text-periwinkle font-bold transition flex items-center gap-1.5"><i
-                    class="ph-bold ph-paper-plane-tilt"></i> Contact Me</a>
-        </div>
+    <!-- Mobile Dropdown -->
+    <div id="mobile-menu"
+        class="hidden md:hidden pt-4 pb-2 border-t border-paper-300 dark:border-ink-800 mt-3 flex flex-col gap-2 text-xs font-medium text-gray-700 dark:text-gray-300">
+        <a href="#about" onclick="toggleMobileMenu()"
+            class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">About</a>
+        <a href="#education" onclick="toggleMobileMenu()"
+            class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Education</a>
+        <a href="#research" onclick="toggleMobileMenu()"
+            class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Research &
+            Grants</a>
+        <a href="#publications" onclick="toggleMobileMenu()"
+            class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Publications</a>
+        <a href="#awards" onclick="toggleMobileMenu()"
+            class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Awards</a>
+        <a href="#presentations" onclick="toggleMobileMenu()"
+            class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Presentations</a>
+        <a href="#teaching" onclick="toggleMobileMenu()"
+            class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Teaching</a>
+        <a href="#service" onclick="toggleMobileMenu()"
+            class="px-2 py-1.5 rounded hover:bg-periwinkle/10 hover:text-periwinkle transition">Service</a>
+        <a href="#contact" onclick="toggleMobileMenu()"
+            class="px-2 py-1.5 text-periwinkle-dark dark:text-periwinkle font-bold transition flex items-center gap-1.5"><i
+                class="ph-bold ph-paper-plane-tilt"></i> Contact Me</a>
+    </div>
     </header>
 
     <!-- Main Content Container -->
@@ -507,8 +530,7 @@
                             <strong>Advisor:</strong> Dr. Adjo Amekudzi-Kennedy
                         </p>
                     </div>
-                    <div
-                        class="pt-3 border-t border-paper-300 dark:border-ink-800 flex flex-wrap gap-2 text-[11px]">
+                    <div class="pt-3 border-t border-paper-300 dark:border-ink-800 flex flex-wrap gap-2 text-[11px]">
                         <span
                             class="bg-paper-200 dark:bg-ink-800 border border-paper-300 dark:border-ink-700 px-2 py-0.5 rounded text-gray-700 dark:text-gray-300">CIRTL
                             Teaching Cert (2024)</span>
@@ -537,8 +559,7 @@
                                 in Long-Range Transportation Plans: Flexibility and Agility"</em> (2023)
                         </p>
                     </div>
-                    <div
-                        class="pt-3 border-t border-paper-300 dark:border-ink-800 flex flex-wrap gap-2 text-[11px]">
+                    <div class="pt-3 border-t border-paper-300 dark:border-ink-800 flex flex-wrap gap-2 text-[11px]">
                         <span
                             class="bg-paper-200 dark:bg-ink-800 border border-paper-300 dark:border-ink-700 px-2 py-0.5 rounded text-gray-700 dark:text-gray-300">Academic
                             Excellence Award (2026)</span>
@@ -562,8 +583,7 @@
                             community sustainability initiatives.
                         </p>
                     </div>
-                    <div
-                        class="pt-3 border-t border-paper-300 dark:border-ink-800 flex flex-wrap gap-2 text-[11px]">
+                    <div class="pt-3 border-t border-paper-300 dark:border-ink-800 flex flex-wrap gap-2 text-[11px]">
                         <span
                             class="bg-paper-200 dark:bg-ink-800 border border-paper-300 dark:border-ink-700 px-2 py-0.5 rounded text-gray-700 dark:text-gray-300">College
                             of Eng. Honors Day Award</span>
@@ -691,8 +711,7 @@
                         $60,000 <span class="text-[10px] font-normal opacity-80">(50% of $120k)</span>
                     </div>
                     <div>
-                        <span
-                            class="text-xs text-periwinkle-dark dark:text-periwinkle font-semibold uppercase">Lead
+                        <span class="text-xs text-periwinkle-dark dark:text-periwinkle font-semibold uppercase">Lead
                             (PI) &middot; 2026 - 2027</span>
                         <h3 class="text-base sm:text-lg font-bold text-ink-950 dark:text-white mt-1 mb-2">Advancing Rail
                             Infrastructure
@@ -718,8 +737,7 @@
                         $52,000 <span class="text-[10px] font-normal opacity-80">(50% of $104k)</span>
                     </div>
                     <div>
-                        <span
-                            class="text-xs text-periwinkle-dark dark:text-periwinkle font-semibold uppercase">Lead
+                        <span class="text-xs text-periwinkle-dark dark:text-periwinkle font-semibold uppercase">Lead
                             (PI) &middot; 2024 - 2026</span>
                         <h3 class="text-base sm:text-lg font-bold text-ink-950 dark:text-white mt-1 mb-2">Characterizing
                             Adaptive Capacity
@@ -745,8 +763,7 @@
                         $52,000 <span class="text-[10px] font-normal opacity-80">(50% of $104k)</span>
                     </div>
                     <div>
-                        <span
-                            class="text-xs text-periwinkle-dark dark:text-periwinkle font-semibold uppercase">Lead
+                        <span class="text-xs text-periwinkle-dark dark:text-periwinkle font-semibold uppercase">Lead
                             (PI) &middot; 2023 - 2025</span>
                         <h3 class="text-base sm:text-lg font-bold text-ink-950 dark:text-white mt-1 mb-2">Applying
                             Vulnerability
@@ -1211,7 +1228,8 @@
                                 Review of "How to write your literature review", by Gary Thomas
                             </h3>
                             <p class="text-xs text-gray-700 dark:text-gray-300">
-                                <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett, A.</strong>
+                                <strong class="text-periwinkle-dark dark:text-periwinkle">Garrett, A.</strong>, and E.
+                                Poiraud.
                             </p>
                             <p class="text-xs text-gray-500 dark:text-gray-300 italic">
                                 Journal of Urban Affairs, 2026.
@@ -1245,8 +1263,7 @@
                 <div class="studio-card p-5 rounded-xl border-t-2 border-t-periwinkle flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-center mb-2">
-                            <span
-                                class="text-periwinkle-dark dark:text-periwinkle text-xs font-semibold">2026</span>
+                            <span class="text-periwinkle-dark dark:text-periwinkle text-xs font-semibold">2026</span>
                             <span
                                 class="text-xs text-periwinkle-dark dark:text-periwinkle bg-periwinkle/10 dark:bg-periwinkle/15 border border-periwinkle/30 px-2 py-0.5 rounded font-bold">$500</span>
                         </div>
@@ -1275,8 +1292,7 @@
                 <div class="studio-card p-5 rounded-xl border-t-2 border-t-periwinkle flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-center mb-2">
-                            <span
-                                class="text-periwinkle-dark dark:text-periwinkle text-xs font-semibold">2025</span>
+                            <span class="text-periwinkle-dark dark:text-periwinkle text-xs font-semibold">2025</span>
                             <span
                                 class="text-xs text-periwinkle-dark dark:text-periwinkle bg-periwinkle/10 dark:bg-periwinkle/15 border border-periwinkle/30 px-2 py-0.5 rounded font-bold">$2,000</span>
                         </div>
@@ -1402,27 +1418,23 @@
                     </h3>
                     <ul class="space-y-2.5 text-xs text-gray-700 dark:text-gray-300">
                         <li class="border-b border-paper-300 dark:border-ink-800 pb-2">
-                            <span
-                                class="text-periwinkle-dark dark:text-periwinkle text-[10px] block font-medium">ASCE
+                            <span class="text-periwinkle-dark dark:text-periwinkle text-[10px] block font-medium">ASCE
                                 IRD 2026 &middot; San Antonio, TX</span>
                             Transportation Resilience: Trends in Education and Development of a Teaching-and-Learning
                             Module for Graduate Courses
                         </li>
                         <li class="border-b border-paper-300 dark:border-ink-800 pb-2">
-                            <span
-                                class="text-periwinkle-dark dark:text-periwinkle text-[10px] block font-medium">ASEE
+                            <span class="text-periwinkle-dark dark:text-periwinkle text-[10px] block font-medium">ASEE
                                 2026 &middot; Charlotte, NC</span>
                             Infrastructure Asset Management Educational Needs and Workforce Competencies
                         </li>
                         <li class="border-b border-paper-300 dark:border-ink-800 pb-2">
-                            <span
-                                class="text-periwinkle-dark dark:text-periwinkle text-[10px] block font-medium">VISIM
+                            <span class="text-periwinkle-dark dark:text-periwinkle text-[10px] block font-medium">VISIM
                                 2025 &middot; Online</span>
                             Approaches to Assess Rail System Resilience: A Multi-Capability Perspective
                         </li>
                         <li class="border-b border-paper-300 dark:border-ink-800 pb-2">
-                            <span
-                                class="text-periwinkle-dark dark:text-periwinkle text-[10px] block font-medium">TRB
+                            <span class="text-periwinkle-dark dark:text-periwinkle text-[10px] block font-medium">TRB
                                 Annual Meeting 2025 &middot; Washington, DC</span>
                             Multi-Capability Resilience Assessment Approach for Improved Rail Network Performance
                             Monitoring
@@ -1484,14 +1496,12 @@
                     </h3>
                     <ul class="space-y-2.5 text-xs text-gray-700 dark:text-gray-300">
                         <li class="border-b border-paper-300 dark:border-ink-800 pb-2">
-                            <span
-                                class="text-mauve-dark dark:text-mauve text-[10px] block font-medium">Transportation
+                            <span class="text-mauve-dark dark:text-mauve text-[10px] block font-medium">Transportation
                                 Forum 2026 &middot; Atlanta, GA (August 2026)</span>
                             Performance Management and Measurement
                         </li>
                         <li class="border-b border-paper-300 dark:border-ink-800 pb-2">
-                            <span
-                                class="text-mauve-dark dark:text-mauve text-[10px] block font-medium">Georgia
+                            <span class="text-mauve-dark dark:text-mauve text-[10px] block font-medium">Georgia
                                 Tech 2025 &middot; Virtual (July 2025)</span>
                             Infrastructure Asset Management Education and Workforce Development Needs Workshop
                         </li>
@@ -1502,8 +1512,7 @@
                             Assessment Tool (Asset Risk & Resilience Workshop)
                         </li>
                         <li>
-                            <span
-                                class="text-mauve-dark dark:text-mauve text-[10px] block font-medium">Georgia
+                            <span class="text-mauve-dark dark:text-mauve text-[10px] block font-medium">Georgia
                                 Adaptation Workshop 2023 &middot; Atlanta, GA (July 2023)</span>
                             Workshop on Transportation Adaptation to Flooding, Extreme Heat, and Tornadoes in Georgia
                         </li>
@@ -1851,7 +1860,7 @@
             updateScrollProgress();
         })();
 
-        // Ambient Transit Background Canvas: Simplified ATL Trains Regional Rail Network (atltrains.com)
+        // Ambient Transit Background Canvas: Clean Static Schematic Network
         (function initStaticTransitCanvas() {
             const canvas = document.getElementById('transit-network-canvas');
             if (!canvas) return;
@@ -1864,98 +1873,47 @@
 
                 ctx.clearRect(0, 0, width, height);
 
-                // ATL Trains Regional Rail Schematic (Centered on Downtown Atlanta MMPT / The Gulch)
+                // Elegant Schematic Stations
                 const stations = {
-                    // Central Core Hubs
-                    'MMPT':      { x: 0.48, y: 0.50, isCore: true },
-                    'MIDTOWN':   { x: 0.48, y: 0.42, isCore: true },
-                    'AIRPORT':   { x: 0.48, y: 0.64, isCore: true },
-
-                    // Northwest Corridor (Marietta / Kennesaw / Cartersville)
-                    'W_MIDTOWN': { x: 0.42, y: 0.42, isCore: false },
-                    'VININGS':   { x: 0.36, y: 0.36, isCore: false },
-                    'MARIETTA':  { x: 0.30, y: 0.28, isCore: true },
-                    'KENNESAW':  { x: 0.25, y: 0.20, isCore: false },
-                    'CARTERS':   { x: 0.19, y: 0.12, isCore: true },
-
-                    // Northeast Corridor (Chamblee / Doraville / Norcross / Gainesville)
-                    'PEACHTREE': { x: 0.53, y: 0.36, isCore: false },
-                    'CHAMBLEE':  { x: 0.59, y: 0.30, isCore: false },
-                    'DORAVILLE': { x: 0.65, y: 0.25, isCore: true },
-                    'NORCROSS':  { x: 0.71, y: 0.20, isCore: false },
-                    'SUWANEE':   { x: 0.77, y: 0.15, isCore: false },
-                    'GAINESV':   { x: 0.84, y: 0.08, isCore: true },
-
-                    // East Corridor (Decatur / Stone Mtn / Conyers / Covington / Athens)
-                    'INMAN':     { x: 0.54, y: 0.50, isCore: false },
-                    'DECATUR':   { x: 0.62, y: 0.50, isCore: true },
-                    'STONE_MTN': { x: 0.70, y: 0.47, isCore: false },
-                    'CONYERS':   { x: 0.78, y: 0.53, isCore: false },
-                    'COVINGTON': { x: 0.85, y: 0.58, isCore: true },
-                    'ATHENS':    { x: 0.92, y: 0.40, isCore: true },
-
-                    // South Corridor (Clayton / Henry / Griffin / Macon)
-                    'EAST_POINT':{ x: 0.48, y: 0.58, isCore: false },
-                    'FOREST_PK': { x: 0.52, y: 0.68, isCore: false },
-                    'JONESBORO': { x: 0.54, y: 0.76, isCore: true },
-                    'LOVEJOY':   { x: 0.56, y: 0.83, isCore: false },
-                    'GRIFFIN':   { x: 0.58, y: 0.90, isCore: false },
-                    'MACON':     { x: 0.62, y: 0.96, isCore: true },
-
-                    // Southwest Corridor (Newnan / LaGrange)
-                    'COLLEGE_PK':{ x: 0.44, y: 0.66, isCore: false },
-                    'FAIRBURN':  { x: 0.38, y: 0.73, isCore: false },
-                    'NEWNAN':    { x: 0.32, y: 0.80, isCore: true },
-                    'LAGRANGE':  { x: 0.24, y: 0.90, isCore: true },
-
-                    // West Corridor (Bankhead / Austell / Douglasville / Bremen)
-                    'BANKHEAD':  { x: 0.41, y: 0.50, isCore: false },
-                    'MABLETON':  { x: 0.33, y: 0.50, isCore: false },
-                    'AUSTELL':   { x: 0.25, y: 0.48, isCore: true },
-                    'DOUGLASV':  { x: 0.17, y: 0.52, isCore: true },
-                    'BREMEN':    { x: 0.08, y: 0.54, isCore: true },
-
-                    // BeltLine Ring
-                    'BELT_W':    { x: 0.40, y: 0.46, isCore: false },
-                    'BELT_N':    { x: 0.48, y: 0.38, isCore: false },
-                    'BELT_E':    { x: 0.56, y: 0.46, isCore: false },
-                    'BELT_S':    { x: 0.48, y: 0.55, isCore: false }
+                    'C_CAM':   { x: 0.44, y: 0.20, isHub: true },
+                    'AV_AM':   { x: 0.68, y: 0.28, isHub: true },
+                    'GOYA':    { x: 0.70, y: 0.50, isHub: true },
+                    'PACIF':   { x: 0.62, y: 0.72, isHub: true },
+                    'LEGZP':   { x: 0.44, y: 0.80, isHub: true },
+                    'P_PIO':   { x: 0.26, y: 0.62, isHub: true },
+                    'MONCL':   { x: 0.26, y: 0.35, isHub: true },
+                    'PL_CAST': { x: 0.44, y: 0.08, isHub: true },
+                    'TRIB':    { x: 0.44, y: 0.38, isHub: true },
+                    'SOL':     { x: 0.48, y: 0.50, isHub: true },
+                    'ATOCHA':  { x: 0.54, y: 0.62, isHub: true },
+                    'VALDEC':  { x: 0.62, y: 0.92, isHub: false },
+                    'OPERA':   { x: 0.35, y: 0.50, isHub: true },
+                    'VENTAS':  { x: 0.86, y: 0.50, isHub: false }
                 };
 
-                // Regional Corridors
-                const corridors = [
-                    // Spine: Midtown - MMPT - Airport
-                    ['MIDTOWN', 'MMPT', 'EAST_POINT', 'AIRPORT'],
-                    // Northwest: MMPT -> Cartersville
-                    ['MMPT', 'W_MIDTOWN', 'VININGS', 'MARIETTA', 'KENNESAW', 'CARTERS'],
-                    // Northeast: Midtown -> Gainesville
-                    ['MIDTOWN', 'PEACHTREE', 'CHAMBLEE', 'DORAVILLE', 'NORCROSS', 'SUWANEE', 'GAINESV'],
-                    // East: MMPT -> Decatur -> Covington & Athens
-                    ['MMPT', 'INMAN', 'DECATUR', 'STONE_MTN', 'CONYERS', 'COVINGTON'],
-                    ['STONE_MTN', 'ATHENS'],
-                    // South: Airport -> Macon
-                    ['AIRPORT', 'FOREST_PK', 'JONESBORO', 'LOVEJOY', 'GRIFFIN', 'MACON'],
-                    // Southwest: Airport -> LaGrange
-                    ['AIRPORT', 'COLLEGE_PK', 'FAIRBURN', 'NEWNAN', 'LAGRANGE'],
-                    // West: MMPT -> Bremen
-                    ['MMPT', 'BANKHEAD', 'MABLETON', 'AUSTELL', 'DOUGLASV', 'BREMEN'],
-                    // BeltLine Loop
-                    ['BELT_W', 'BELT_N', 'BELT_E', 'BELT_S', 'BELT_W']
+                // Transit Route Segments
+                const routes = [
+                    // Line 6 Circular Belt
+                    ['C_CAM', 'AV_AM', 'GOYA', 'PACIF', 'LEGZP', 'P_PIO', 'MONCL', 'C_CAM'],
+                    // Line 1 Spine
+                    ['PL_CAST', 'C_CAM', 'TRIB', 'SOL', 'ATOCHA', 'PACIF', 'VALDEC'],
+                    // Line 2 Cross
+                    ['C_CAM', 'OPERA', 'SOL', 'GOYA', 'VENTAS']
                 ];
 
-                // 1. Draw Regional Rail Track Corridors
-                corridors.forEach(line => {
+                // 1. Draw Clean Transit Track Lines
+                routes.forEach(route => {
                     ctx.beginPath();
-                    ctx.strokeStyle = isLight ? 'rgba(81, 98, 199, 0.16)' : 'rgba(129, 144, 220, 0.20)';
-                    ctx.lineWidth = 2.4;
+                    ctx.strokeStyle = isLight ? 'rgba(81, 98, 199, 0.16)' : 'rgba(129, 144, 220, 0.18)';
+                    ctx.lineWidth = 2.5;
                     ctx.lineCap = 'round';
                     ctx.lineJoin = 'round';
 
-                    line.forEach((stId, idx) => {
+                    route.forEach((stId, i) => {
                         const st = stations[stId];
                         const px = st.x * width;
                         const py = st.y * height;
-                        if (idx === 0) ctx.moveTo(px, py);
+                        if (i === 0) ctx.moveTo(px, py);
                         else ctx.lineTo(px, py);
                     });
                     ctx.stroke();
@@ -1966,7 +1924,7 @@
                     const sx = st.x * width;
                     const sy = st.y * height;
 
-                    if (st.isCore) {
+                    if (st.isHub) {
                         ctx.beginPath();
                         ctx.arc(sx, sy, 5.5, 0, Math.PI * 2);
                         ctx.fillStyle = isLight ? '#ffffff' : '#0c0d14';
@@ -1974,24 +1932,24 @@
 
                         ctx.strokeStyle = isLight ? '#5162c7' : '#8190dc';
                         ctx.lineWidth = 1.8;
-                        ctx.globalAlpha = 0.55;
+                        ctx.globalAlpha = 0.5;
                         ctx.stroke();
 
                         ctx.beginPath();
-                        ctx.arc(sx, sy, 2.2, 0, Math.PI * 2);
+                        ctx.arc(sx, sy, 2, 0, Math.PI * 2);
                         ctx.fillStyle = isLight ? '#5162c7' : '#8190dc';
-                        ctx.globalAlpha = 0.85;
+                        ctx.globalAlpha = 0.8;
                         ctx.fill();
                         ctx.globalAlpha = 1;
                     } else {
                         ctx.beginPath();
-                        ctx.arc(sx, sy, 3.2, 0, Math.PI * 2);
+                        ctx.arc(sx, sy, 3.5, 0, Math.PI * 2);
                         ctx.fillStyle = isLight ? '#ffffff' : '#0c0d14';
                         ctx.fill();
 
                         ctx.strokeStyle = isLight ? '#94a3b8' : '#475569';
                         ctx.lineWidth = 1.2;
-                        ctx.globalAlpha = 0.55;
+                        ctx.globalAlpha = 0.6;
                         ctx.stroke();
                         ctx.globalAlpha = 1;
                     }
