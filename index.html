@@ -1369,7 +1369,7 @@
                             <span class="text-mauve-dark dark:text-mauve text-xs font-semibold">2021, 2022,
                                 2023, 2026</span>
                             <span
-                                class="text-xs text-mauve-dark dark:text-mauve bg-mauve/10 dark:bg-mauve/15 border border-mauve/30 px-2 py-0.5 rounded font-bold">$2,500
+                                class="text-xs text-mauve-dark dark:text-mauve bg-mauve/10 dark:bg-mauve/15 border border-mauve/30 px-2 py-0.5 rounded font-bold">$2,000
                                 / yr</span>
                         </div>
                         <h3 class="text-base font-bold text-ink-950 dark:text-white mb-1">GEF Scholarships</h3>
@@ -1860,7 +1860,7 @@
             updateScrollProgress();
         })();
 
-        // Ambient Transit Background Canvas: Clean Static Schematic Network
+        // Ambient Transit Background Canvas: Atlanta MARTA & BeltLine Research Network
         (function initStaticTransitCanvas() {
             const canvas = document.getElementById('transit-network-canvas');
             if (!canvas) return;
@@ -1873,47 +1873,102 @@
 
                 ctx.clearRect(0, 0, width, height);
 
-                // Elegant Schematic Stations
+                // Atlanta Transit System (MARTA Heavy Rail + BeltLine Loop)
                 const stations = {
-                    'C_CAM': { x: 0.44, y: 0.20, isHub: true },
-                    'AV_AM': { x: 0.68, y: 0.28, isHub: true },
-                    'GOYA': { x: 0.70, y: 0.50, isHub: true },
-                    'PACIF': { x: 0.62, y: 0.72, isHub: true },
-                    'LEGZP': { x: 0.44, y: 0.80, isHub: true },
-                    'P_PIO': { x: 0.26, y: 0.62, isHub: true },
-                    'MONCL': { x: 0.26, y: 0.35, isHub: true },
-                    'PL_CAST': { x: 0.44, y: 0.08, isHub: true },
-                    'TRIB': { x: 0.44, y: 0.38, isHub: true },
-                    'SOL': { x: 0.48, y: 0.50, isHub: true },
-                    'ATOCHA': { x: 0.54, y: 0.62, isHub: true },
-                    'VALDEC': { x: 0.62, y: 0.92, isHub: false },
-                    'OPERA': { x: 0.35, y: 0.50, isHub: true },
-                    'VENTAS': { x: 0.86, y: 0.50, isHub: false }
+                    // --- NORTH CORRIDORS ---
+                    'DUNWOODY':    { x: 0.51, y: 0.05, isHub: true },
+                    'SANDY_SPR':   { x: 0.53, y: 0.12, isHub: false },
+                    'NORTH_SPR':   { x: 0.52, y: 0.18, isHub: false },
+                    'MED_CTR':     { x: 0.50, y: 0.35, isHub: false },
+
+                    // Northeast Gold Line
+                    'CHAMBLEE':    { x: 0.76, y: 0.19, isHub: true },
+                    'PEACHTREE_AP':{ x: 0.68, y: 0.24, isHub: false },
+                    'BROOKHAVEN':  { x: 0.59, y: 0.31, isHub: false },
+                    'LENOX':       { x: 0.53, y: 0.36, isHub: false },
+
+                    // North Junction
+                    'LINDBERGH':   { x: 0.48, y: 0.44, isHub: true },
+
+                    // --- CENTRAL SPINE (MARTA North-South Trunk) ---
+                    'ARTS_CTR':    { x: 0.48, y: 0.51, isHub: false },
+                    'MIDTOWN':     { x: 0.48, y: 0.56, isHub: false },
+                    'PEACHTREE_CT':{ x: 0.48, y: 0.60, isHub: false },
+                    'FIVE_POINTS': { x: 0.48, y: 0.64, isHub: true },
+                    'GARNETT':     { x: 0.48, y: 0.67, isHub: false },
+
+                    // --- SOUTH CORRIDOR ---
+                    'WEST_END_S':  { x: 0.41, y: 0.72, isHub: true },
+                    'OAKLAND_CITY':{ x: 0.38, y: 0.76, isHub: false },
+                    'LAKEWOOD':    { x: 0.35, y: 0.81, isHub: false },
+                    'EAST_POINT':  { x: 0.31, y: 0.88, isHub: false },
+                    'COLLEGE_PARK':{ x: 0.29, y: 0.94, isHub: false },
+                    'AIRPORT':     { x: 0.29, y: 0.98, isHub: true },
+
+                    // --- EAST CORRIDOR ---
+                    'GEORGIA_STATE':{ x: 0.52, y: 0.64, isHub: false },
+                    'KING_MEM':    { x: 0.55, y: 0.63, isHub: false },
+                    'INMAN_PARK':  { x: 0.59, y: 0.63, isHub: true },
+                    'EDGWOOD':     { x: 0.64, y: 0.62, isHub: false },
+                    'EAST_LAKE':   { x: 0.70, y: 0.60, isHub: false },
+                    'DECATUR':     { x: 0.78, y: 0.57, isHub: false },
+                    'AVONDALE':    { x: 0.86, y: 0.58, isHub: true },
+                    'INDIAN_CRK':  { x: 0.93, y: 0.59, isHub: true },
+
+                    // --- WEST CORRIDOR ---
+                    'DOME_GWCC':   { x: 0.44, y: 0.64, isHub: false },
+                    'VINE_CITY':   { x: 0.40, y: 0.64, isHub: false },
+                    'ASHOY':       { x: 0.36, y: 0.64, isHub: true },
+                    'WEST_LAKE':   { x: 0.27, y: 0.65, isHub: false },
+                    'HE_HOLMES':   { x: 0.17, y: 0.65, isHub: true },
+
+                    // --- BELTLINE LOOP ---
+                    'BL_BUCKHEAD_W':{ x: 0.41, y: 0.45, isHub: false },
+                    'BL_NORTHWEST': { x: 0.36, y: 0.50, isHub: false },
+                    'BL_HOWELL_MILL':{x: 0.32, y: 0.54, isHub: false },
+                    'BL_BANKHEAD':  { x: 0.35, y: 0.59, isHub: true },
+                    'BL_WESTVIEW':  { x: 0.33, y: 0.69, isHub: false },
+                    'BL_SW_JUNCT':  { x: 0.37, y: 0.75, isHub: false },
+                    'BL_PITTSBURGH':{ x: 0.43, y: 0.76, isHub: false },
+                    'BL_CHOSEWOOD': { x: 0.50, y: 0.75, isHub: false },
+                    'BL_PEOPLES':   { x: 0.54, y: 0.74, isHub: false },
+                    'BL_SOUTHEAST': { x: 0.57, y: 0.69, isHub: false },
+                    'BL_REYNOLDSTOWN':{x: 0.59, y: 0.63, isHub: true },
+                    'BL_OLD_FOURTH':{ x: 0.58, y: 0.58, isHub: false },
+                    'BL_INMAN_N':   { x: 0.55, y: 0.53, isHub: false },
+                    'BL_PONCE':     { x: 0.53, y: 0.49, isHub: false },
+                    'BL_ANSLEY':    { x: 0.49, y: 0.47, isHub: false }
                 };
 
-                // Transit Route Segments
                 const routes = [
-                    // Line 6 Circular Belt
-                    ['C_CAM', 'AV_AM', 'GOYA', 'PACIF', 'LEGZP', 'P_PIO', 'MONCL', 'C_CAM'],
-                    // Line 1 Spine
-                    ['PL_CAST', 'C_CAM', 'TRIB', 'SOL', 'ATOCHA', 'PACIF', 'VALDEC'],
-                    // Line 2 Cross
-                    ['C_CAM', 'OPERA', 'SOL', 'GOYA', 'VENTAS']
+                    // GA 400 North Line
+                    ['DUNWOODY', 'SANDY_SPR', 'NORTH_SPR', 'MED_CTR', 'LINDBERGH'],
+                    // Northeast Gold Line
+                    ['CHAMBLEE', 'PEACHTREE_AP', 'BROOKHAVEN', 'LENOX', 'LINDBERGH'],
+                    // Central Spine
+                    ['LINDBERGH', 'ARTS_CTR', 'MIDTOWN', 'PEACHTREE_CT', 'FIVE_POINTS', 'GARNETT'],
+                    // South Line
+                    ['GARNETT', 'WEST_END_S', 'OAKLAND_CITY', 'LAKEWOOD', 'EAST_POINT', 'COLLEGE_PARK', 'AIRPORT'],
+                    // East-West Line
+                    ['HE_HOLMES', 'WEST_LAKE', 'ASHOY', 'VINE_CITY', 'DOME_GWCC', 'FIVE_POINTS', 'GEORGIA_STATE', 'KING_MEM', 'INMAN_PARK', 'EDGWOOD', 'EAST_LAKE', 'DECATUR', 'AVONDALE', 'INDIAN_CRK'],
+                    // BeltLine Loop
+                    ['LINDBERGH', 'BL_BUCKHEAD_W', 'BL_NORTHWEST', 'BL_HOWELL_MILL', 'BL_BANKHEAD', 'ASHOY', 'BL_WESTVIEW', 'BL_SW_JUNCT', 'BL_PITTSBURGH', 'BL_CHOSEWOOD', 'BL_PEOPLES', 'BL_SOUTHEAST', 'BL_REYNOLDSTOWN', 'BL_OLD_FOURTH', 'BL_INMAN_N', 'BL_PONCE', 'BL_ANSLEY', 'LINDBERGH']
                 ];
 
-                // 1. Draw Clean Transit Track Lines
+                // 1. Draw Network Track Lines
                 routes.forEach(route => {
                     ctx.beginPath();
                     ctx.strokeStyle = isLight ? 'rgba(81, 98, 199, 0.16)' : 'rgba(129, 144, 220, 0.18)';
-                    ctx.lineWidth = 2.5;
+                    ctx.lineWidth = 2.4;
                     ctx.lineCap = 'round';
                     ctx.lineJoin = 'round';
 
-                    route.forEach((stId, i) => {
+                    route.forEach((stId, idx) => {
                         const st = stations[stId];
+                        if (!st) return;
                         const px = st.x * width;
                         const py = st.y * height;
-                        if (i === 0) ctx.moveTo(px, py);
+                        if (idx === 0) ctx.moveTo(px, py);
                         else ctx.lineTo(px, py);
                     });
                     ctx.stroke();
@@ -1932,24 +1987,24 @@
 
                         ctx.strokeStyle = isLight ? '#5162c7' : '#8190dc';
                         ctx.lineWidth = 1.8;
-                        ctx.globalAlpha = 0.5;
+                        ctx.globalAlpha = 0.55;
                         ctx.stroke();
 
                         ctx.beginPath();
-                        ctx.arc(sx, sy, 2, 0, Math.PI * 2);
+                        ctx.arc(sx, sy, 2.2, 0, Math.PI * 2);
                         ctx.fillStyle = isLight ? '#5162c7' : '#8190dc';
-                        ctx.globalAlpha = 0.8;
+                        ctx.globalAlpha = 0.85;
                         ctx.fill();
                         ctx.globalAlpha = 1;
                     } else {
                         ctx.beginPath();
-                        ctx.arc(sx, sy, 3.5, 0, Math.PI * 2);
+                        ctx.arc(sx, sy, 3.2, 0, Math.PI * 2);
                         ctx.fillStyle = isLight ? '#ffffff' : '#0c0d14';
                         ctx.fill();
 
                         ctx.strokeStyle = isLight ? '#94a3b8' : '#475569';
                         ctx.lineWidth = 1.2;
-                        ctx.globalAlpha = 0.6;
+                        ctx.globalAlpha = 0.55;
                         ctx.stroke();
                         ctx.globalAlpha = 1;
                     }
