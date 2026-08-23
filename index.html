@@ -445,15 +445,24 @@
                 <div
                     class="lg:col-span-7 space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed text-sm sm:text-base">
                     <p>
-                        Rail and transit systems form the backbone of sustainable urban mobility, yet they face
+                        Welcome to my online CV! This page is to share my research interests, past and ongoing projects,
+                        and provide a place for folks to reach out. If you have any questions or want to chat, please
+                        feel free to
+                        email me at adairgarrett@gatech.edu.
+                    </p>
+                    <p>
+                        My research focuses on enhancing systems-level objectives for rail and transit networks. Rail
+                        and transit systems are the backbone of sustainable urban mobility, yet they face
                         increasing challenges from extreme weather events, aging infrastructure, and shifting demand
                         patterns. My dissertation work, <em>"Advances in Assessing and Building Resilience Capabilities
                             for Rail Systems"</em>, characterizes multi-dimensional adaptive capacity across physical
                         rail assets, transit operating agencies, and riders.
                     </p>
                     <p>
-                        By combining qualitative stakeholder engagement with quantitative modeling, structural equation
-                        modeling (SEM), and spatial vulnerability assessments, my work provides actionable frameworks
+                        By combining insights from engagement with practitioners with quantitative modeling, structural
+                        equation
+                        modeling (SEM), and spatial vulnerability and resilience assessments, my work provides an
+                        actionable pathway
                         for transit agencies and DOTs to prioritize infrastructure investments.
                     </p>
                 </div>
@@ -1619,9 +1628,15 @@
                             </div>
                             <div
                                 class="p-3 rounded-lg bg-paper-100 dark:bg-ink-850 border border-paper-300 dark:border-ink-750">
+                                <div class="font-semibold text-ink-950 dark:text-white text-sm">Caroline Delcroix</div>
+                                <div class="text-[11px] text-periwinkle-dark dark:text-periwinkle font-medium mt-0.5">
+                                    Undergrad Researcher &rarr; Resulted in journal paper (in preparation) </div>
+                            </div>
+                            <div
+                                class="p-3 rounded-lg bg-paper-100 dark:bg-ink-850 border border-paper-300 dark:border-ink-750">
                                 <div class="font-semibold text-ink-950 dark:text-white text-sm">Grace Jiang</div>
                                 <div class="text-[11px] text-periwinkle-dark dark:text-periwinkle font-medium mt-0.5">
-                                    Undergrad Researcher &rarr; Asset Management Workshop (2025)</div>
+                                    Undergrad Researcher &rarr; Resulted in journal paper (in preparation) </div>
                             </div>
                             <div
                                 class="p-3 rounded-lg bg-paper-100 dark:bg-ink-850 border border-paper-300 dark:border-ink-750">
@@ -1876,68 +1891,68 @@
                 // Atlanta Transit System (MARTA Heavy Rail + BeltLine Loop)
                 const stations = {
                     // --- NORTH CORRIDORS ---
-                    'DUNWOODY':    { x: 0.51, y: 0.05, isHub: true },
-                    'SANDY_SPR':   { x: 0.53, y: 0.12, isHub: false },
-                    'NORTH_SPR':   { x: 0.52, y: 0.18, isHub: false },
-                    'MED_CTR':     { x: 0.50, y: 0.35, isHub: false },
+                    'DUNWOODY': { x: 0.51, y: 0.05, isHub: true },
+                    'SANDY_SPR': { x: 0.53, y: 0.12, isHub: false },
+                    'NORTH_SPR': { x: 0.52, y: 0.18, isHub: false },
+                    'MED_CTR': { x: 0.50, y: 0.35, isHub: false },
 
                     // Northeast Gold Line
-                    'CHAMBLEE':    { x: 0.76, y: 0.19, isHub: true },
-                    'PEACHTREE_AP':{ x: 0.68, y: 0.24, isHub: false },
-                    'BROOKHAVEN':  { x: 0.59, y: 0.31, isHub: false },
-                    'LENOX':       { x: 0.53, y: 0.36, isHub: false },
+                    'CHAMBLEE': { x: 0.76, y: 0.19, isHub: true },
+                    'PEACHTREE_AP': { x: 0.68, y: 0.24, isHub: false },
+                    'BROOKHAVEN': { x: 0.59, y: 0.31, isHub: false },
+                    'LENOX': { x: 0.53, y: 0.36, isHub: false },
 
                     // North Junction
-                    'LINDBERGH':   { x: 0.48, y: 0.44, isHub: true },
+                    'LINDBERGH': { x: 0.48, y: 0.44, isHub: true },
 
                     // --- CENTRAL SPINE (MARTA North-South Trunk) ---
-                    'ARTS_CTR':    { x: 0.48, y: 0.51, isHub: false },
-                    'MIDTOWN':     { x: 0.48, y: 0.56, isHub: false },
-                    'PEACHTREE_CT':{ x: 0.48, y: 0.60, isHub: false },
+                    'ARTS_CTR': { x: 0.48, y: 0.51, isHub: false },
+                    'MIDTOWN': { x: 0.48, y: 0.56, isHub: false },
+                    'PEACHTREE_CT': { x: 0.48, y: 0.60, isHub: false },
                     'FIVE_POINTS': { x: 0.48, y: 0.64, isHub: true },
-                    'GARNETT':     { x: 0.48, y: 0.67, isHub: false },
+                    'GARNETT': { x: 0.48, y: 0.67, isHub: false },
 
                     // --- SOUTH CORRIDOR ---
-                    'WEST_END_S':  { x: 0.41, y: 0.72, isHub: true },
-                    'OAKLAND_CITY':{ x: 0.38, y: 0.76, isHub: false },
-                    'LAKEWOOD':    { x: 0.35, y: 0.81, isHub: false },
-                    'EAST_POINT':  { x: 0.31, y: 0.88, isHub: false },
-                    'COLLEGE_PARK':{ x: 0.29, y: 0.94, isHub: false },
-                    'AIRPORT':     { x: 0.29, y: 0.98, isHub: true },
+                    'WEST_END_S': { x: 0.41, y: 0.72, isHub: true },
+                    'OAKLAND_CITY': { x: 0.38, y: 0.76, isHub: false },
+                    'LAKEWOOD': { x: 0.35, y: 0.81, isHub: false },
+                    'EAST_POINT': { x: 0.31, y: 0.88, isHub: false },
+                    'COLLEGE_PARK': { x: 0.29, y: 0.94, isHub: false },
+                    'AIRPORT': { x: 0.29, y: 0.98, isHub: true },
 
                     // --- EAST CORRIDOR ---
-                    'GEORGIA_STATE':{ x: 0.52, y: 0.64, isHub: false },
-                    'KING_MEM':    { x: 0.55, y: 0.63, isHub: false },
-                    'INMAN_PARK':  { x: 0.59, y: 0.63, isHub: true },
-                    'EDGWOOD':     { x: 0.64, y: 0.62, isHub: false },
-                    'EAST_LAKE':   { x: 0.70, y: 0.60, isHub: false },
-                    'DECATUR':     { x: 0.78, y: 0.57, isHub: false },
-                    'AVONDALE':    { x: 0.86, y: 0.58, isHub: true },
-                    'INDIAN_CRK':  { x: 0.93, y: 0.59, isHub: true },
+                    'GEORGIA_STATE': { x: 0.52, y: 0.64, isHub: false },
+                    'KING_MEM': { x: 0.55, y: 0.63, isHub: false },
+                    'INMAN_PARK': { x: 0.59, y: 0.63, isHub: true },
+                    'EDGWOOD': { x: 0.64, y: 0.62, isHub: false },
+                    'EAST_LAKE': { x: 0.70, y: 0.60, isHub: false },
+                    'DECATUR': { x: 0.78, y: 0.57, isHub: false },
+                    'AVONDALE': { x: 0.86, y: 0.58, isHub: true },
+                    'INDIAN_CRK': { x: 0.93, y: 0.59, isHub: true },
 
                     // --- WEST CORRIDOR ---
-                    'DOME_GWCC':   { x: 0.44, y: 0.64, isHub: false },
-                    'VINE_CITY':   { x: 0.40, y: 0.64, isHub: false },
-                    'ASHOY':       { x: 0.36, y: 0.64, isHub: true },
-                    'WEST_LAKE':   { x: 0.27, y: 0.65, isHub: false },
-                    'HE_HOLMES':   { x: 0.17, y: 0.65, isHub: true },
+                    'DOME_GWCC': { x: 0.44, y: 0.64, isHub: false },
+                    'VINE_CITY': { x: 0.40, y: 0.64, isHub: false },
+                    'ASHOY': { x: 0.36, y: 0.64, isHub: true },
+                    'WEST_LAKE': { x: 0.27, y: 0.65, isHub: false },
+                    'HE_HOLMES': { x: 0.17, y: 0.65, isHub: true },
 
                     // --- BELTLINE LOOP ---
-                    'BL_BUCKHEAD_W':{ x: 0.41, y: 0.45, isHub: false },
+                    'BL_BUCKHEAD_W': { x: 0.41, y: 0.45, isHub: false },
                     'BL_NORTHWEST': { x: 0.36, y: 0.50, isHub: false },
-                    'BL_HOWELL_MILL':{x: 0.32, y: 0.54, isHub: false },
-                    'BL_BANKHEAD':  { x: 0.35, y: 0.59, isHub: true },
-                    'BL_WESTVIEW':  { x: 0.33, y: 0.69, isHub: false },
-                    'BL_SW_JUNCT':  { x: 0.37, y: 0.75, isHub: false },
-                    'BL_PITTSBURGH':{ x: 0.43, y: 0.76, isHub: false },
+                    'BL_HOWELL_MILL': { x: 0.32, y: 0.54, isHub: false },
+                    'BL_BANKHEAD': { x: 0.35, y: 0.59, isHub: true },
+                    'BL_WESTVIEW': { x: 0.33, y: 0.69, isHub: false },
+                    'BL_SW_JUNCT': { x: 0.37, y: 0.75, isHub: false },
+                    'BL_PITTSBURGH': { x: 0.43, y: 0.76, isHub: false },
                     'BL_CHOSEWOOD': { x: 0.50, y: 0.75, isHub: false },
-                    'BL_PEOPLES':   { x: 0.54, y: 0.74, isHub: false },
+                    'BL_PEOPLES': { x: 0.54, y: 0.74, isHub: false },
                     'BL_SOUTHEAST': { x: 0.57, y: 0.69, isHub: false },
-                    'BL_REYNOLDSTOWN':{x: 0.59, y: 0.63, isHub: true },
-                    'BL_OLD_FOURTH':{ x: 0.58, y: 0.58, isHub: false },
-                    'BL_INMAN_N':   { x: 0.55, y: 0.53, isHub: false },
-                    'BL_PONCE':     { x: 0.53, y: 0.49, isHub: false },
-                    'BL_ANSLEY':    { x: 0.49, y: 0.47, isHub: false }
+                    'BL_REYNOLDSTOWN': { x: 0.59, y: 0.63, isHub: true },
+                    'BL_OLD_FOURTH': { x: 0.58, y: 0.58, isHub: false },
+                    'BL_INMAN_N': { x: 0.55, y: 0.53, isHub: false },
+                    'BL_PONCE': { x: 0.53, y: 0.49, isHub: false },
+                    'BL_ANSLEY': { x: 0.49, y: 0.47, isHub: false }
                 };
 
                 const routes = [
